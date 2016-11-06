@@ -9,66 +9,30 @@ $this->breadcrumbs=array(
   );
   ?>
 
-  <section id="inner-banner">
-    <div class="container">
-      <h1>DINAS TENAGA KERJA</h1>
-    </div>
-  </section>
+  <div class="center-content">
+    <div class="row">
+      <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+        <section class="panel panel-default">
+          <header class="panel-heading">Sign in</header>
+          <div class="bg-white user pd-md">
+            <?php $form=$this->beginWidget('CActiveForm', array(
+              'id'=>'login-form',
+              'enableAjaxValidation'=>false,
+              'enableClientValidation' => true,
+              'clientOptions' => array(
+                'validateOnSubmit' => true,
+                ),
+              'errorMessageCssClass' => 'label label-success',
+              'htmlOptions' => array('class' => 'form-horizontal', 'role' => 'form')
+              )); ?>
 
-
-  <div id="main">
-
-    <section class="signup-section">
-      <div class="container">
-        <div class="holder">
-          <div><img src="images/kab_bandung.png" alt="img" style="width: 200px"></div>
-          <BR>
-          <BR>
-          <BR>
-          <?php $form=$this->beginWidget('CActiveForm', array(
-            'id'=>'login-form',
-            'enableAjaxValidation'=>false,
-            'enableClientValidation' => true,
-            'clientOptions' => array(
-              'validateOnSubmit' => true,
-              ),
-            'errorMessageCssClass' => 'label label-success',
-            'htmlOptions' => array('class' => 'form-horizontal', 'role' => 'form')
-            )); ?>
-
-              <?php echo $form->error($model,'username'); ?>
-             <div class="input-box"> <i class="fa fa-user"></i>
-              <?php echo $form->textField($model,'username', array('class' => 'form-control', 'placeholder'=>'Username')); ?>
-            </div>
-
-             <?php echo $form->error($model,'password'); ?>
-            <div class="input-box"><i class="fa fa-lock"></i>
-             <?php echo $form->passwordField($model,'password', array('class' => 'form-control','placeholder'=>'Password')); ?>
-           </div>
-
-           <input type="submit" class="btn btn-block btn-info" value="Masuk">
-
-           <?php $this->endWidget(); ?>  
-
-         </div>
-       </div>
-     </section>
-
-   </div>
-
-
-<SCRIPT>
-jQuery(document).ready(function(){
-  jQuery("#LoginForm_username").keyup(function(event){
-    if(event.keyCode == 13){
-      jQuery("#LoginForm_password").focus();
-    }
-  });
-  
-  jQuery("#LoginForm_password").keyup(function(event){   
-    if(event.keyCode == 13){      
-      jQuery('#frm').submit();
-    }
-  });
-});
-</script>
+              <?php echo $form->textField($model,'username', array('class' => 'form-control mg-b-sm', 'placeholder'=>'Username','autofocus'=>true)); ?>
+              <?php echo $form->passwordField($model,'password', array('class' => 'form-control','placeholder'=>'Password')); ?>
+              <HR>
+                <button class="btn btn-info btn-block" type="submit">Sign in</button>
+                <?php $this->endWidget(); ?>  
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>

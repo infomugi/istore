@@ -27,7 +27,14 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
+			$this->layout = "front_page";
 			$this->render('index');
+	}
+
+	public function actionDashboard()
+	{
+			$this->layout = "back_page";
+			$this->render('dashboard');
 	}
 
 	/**
@@ -75,7 +82,7 @@ class SiteController extends Controller
 	 */
 	public function actionLogin()
 	{
-		$this->layout="frontend";		
+		$this->layout="signin";		
 		$model=new LoginForm;
 
 		// if it is ajax validation request
@@ -96,9 +103,11 @@ class SiteController extends Controller
 			if(Yii::app()->user->getLevel()==1){
 				Yii::app()->user->setFlash('Success', 'Berhasil login dari IP '.Yii::app()->request->getUserHostAddress().'');
 				$this->redirect(Yii::app()->user->returnUrl);
-			}else{
+			}else if(Yii::app()->user->getLevel()==2){
 				Yii::app()->user->setFlash('success', 'Berhasil login dari IP '.Yii::app()->request->getUserHostAddress().'. - Login Terakhir : '.YII::app()->user->record->last_login);
 				$this->redirect('index.php?r=user/view&id='.YII::app()->user->id);
+			}else{
+				$this->redirect('index.php?r=site/login');
 			}
 		}
 		// display the login form

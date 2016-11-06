@@ -22,7 +22,7 @@ class UserIdentity extends CUserIdentity
 		    $this->_id = $user->id_user;
 		    $this->setState('record', $user);
 		    $this->setState('profile', $user->level);
-		    $this->setState('profile', $user->bagian);
+		    $this->setState('profile', $user->division);
 		    $this->setState('profile', $user->id_user);
 		    $this->username = $user->username;
 		    $this->errorCode = self::ERROR_NONE;
