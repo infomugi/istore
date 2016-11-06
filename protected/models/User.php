@@ -5,19 +5,21 @@
  *
  * The followings are the available columns in table 'user':
  * @property integer $id_user
- * @property string $created_date
- * @property string $update_date
- * @property string $last_login
+ * @property string $create_time
+ * @property string $update_time
+ * @property string $visit_time
+ * @property string $fullname
+ * @property string $gender
+ * @property string $birth
+ * @property string $email
  * @property string $username
  * @property string $password
- * @property string $email
- * @property string $namalengkap
- * @property string $tanggallahir
- * @property string $handphone
- * @property string $alamat
- * @property integer $bagian
  * @property integer $level
+ * @property integer $division
  * @property string $image
+ * @property string $ipaddress
+ * @property integer $active
+ * @property integer $status
  */
 class User extends CActiveRecord
 {
@@ -37,17 +39,16 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('created_date, update_date, last_login, username, password, email, namalengkap, tanggallahir, handphone, alamat, bagian, level, image', 'required','on'=>'create'),
-			array('username, password, email, namalengkap, tanggallahir, handphone, alamat, bagian, level', 'required','on'=>'update'),
-			array('bagian, level', 'numerical', 'integerOnly'=>true),
-			array('username, password, email', 'length', 'max'=>250),
-			array('namalengkap', 'length', 'max'=>25),
-			array('handphone', 'length', 'max'=>15),
-			array('image', 'length', 'max'=>255),
+			array('visit_time, fullname, gender, birth, email, username, password, division, ipaddress, active', 'required'),
+			array('level, division, active, status', 'numerical', 'integerOnly'=>true),
+			array('fullname, email, username, password, image', 'length', 'max'=>255),
+			array('gender', 'length', 'max'=>2),
+			array('ipaddress', 'length', 'max'=>25),
+			array('create_time, update_time', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_user, created_date, update_date, last_login, username, password, email, namalengkap, tanggallahir, handphone, alamat, bagian, level, image', 'safe', 'on'=>'search'),
-			);
+			array('id_user, create_time, update_time, visit_time, fullname, gender, birth, email, username, password, level, division, image, ipaddress, active, status', 'safe', 'on'=>'search'),
+		);
 	}
 
 	/**
@@ -58,8 +59,7 @@ class User extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'Kecamatan'=>array(self::BELONGS_TO,'Kecamatan','bagian'),
-			);
+		);
 	}
 
 	/**
@@ -69,20 +69,22 @@ class User extends CActiveRecord
 	{
 		return array(
 			'id_user' => 'Id User',
-			'created_date' => 'Created Date',
-			'update_date' => 'Update Date',
-			'last_login' => 'Last Login',
+			'create_time' => 'Create Time',
+			'update_time' => 'Update Time',
+			'visit_time' => 'Visit Time',
+			'fullname' => 'Fullname',
+			'gender' => 'Gender',
+			'birth' => 'Birth',
+			'email' => 'Email',
 			'username' => 'Username',
 			'password' => 'Password',
-			'email' => 'Email',
-			'namalengkap' => 'Nama Lengkap',
-			'tanggallahir' => 'Tanggal Lahir',
-			'handphone' => 'Handphone',
-			'alamat' => 'Alamat',
-			'bagian' => 'Bagian',
 			'level' => 'Level',
+			'division' => 'Division',
 			'image' => 'Image',
-			);
+			'ipaddress' => 'Ipaddress',
+			'active' => 'Active',
+			'status' => 'Status',
+		);
 	}
 
 	/**
@@ -104,23 +106,25 @@ class User extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id_user',$this->id_user);
-		$criteria->compare('created_date',$this->created_date,true);
-		$criteria->compare('update_date',$this->update_date,true);
-		$criteria->compare('last_login',$this->last_login,true);
+		$criteria->compare('create_time',$this->create_time,true);
+		$criteria->compare('update_time',$this->update_time,true);
+		$criteria->compare('visit_time',$this->visit_time,true);
+		$criteria->compare('fullname',$this->fullname,true);
+		$criteria->compare('gender',$this->gender,true);
+		$criteria->compare('birth',$this->birth,true);
+		$criteria->compare('email',$this->email,true);
 		$criteria->compare('username',$this->username,true);
 		$criteria->compare('password',$this->password,true);
-		$criteria->compare('email',$this->email,true);
-		$criteria->compare('namalengkap',$this->namalengkap,true);
-		$criteria->compare('tanggallahir',$this->tanggallahir,true);
-		$criteria->compare('handphone',$this->handphone,true);
-		$criteria->compare('alamat',$this->alamat,true);
-		$criteria->compare('bagian',$this->bagian);
 		$criteria->compare('level',$this->level);
+		$criteria->compare('division',$this->division);
 		$criteria->compare('image',$this->image,true);
+		$criteria->compare('ipaddress',$this->ipaddress,true);
+		$criteria->compare('active',$this->active);
+		$criteria->compare('status',$this->status);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
-			));
+		));
 	}
 
 	/**
@@ -133,11 +137,4 @@ class User extends CActiveRecord
 	{
 		return parent::model($className);
 	}
-
-	public function kecamatan($data){
-		$model=Kecamatan::model()->findByPk($data);
-		return $model->nama;
-	}
-
-
 }

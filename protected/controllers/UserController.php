@@ -16,7 +16,7 @@ class UserController extends Controller
 		return array(
 			'accessControl', // perform access control for CRUD operations
 			// 'postOnly + delete', // we only allow deletion via POST request
-			);
+		);
 	}
 
 	/**
@@ -28,17 +28,24 @@ class UserController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('tambah','update','view','delete','kelola','daftar','password','top','activity','image'),
+				'actions'=>array('view','index'),
 				'users'=>array('@'),
-				'expression'=>'Yii::app()->user->getLevel()==1',
+				'expression'=>'Yii::app()->user->record->level==3',
 				),
 			array('allow',
-				'actions'=>array('update','view','password','image'),
+				'actions'=>array('create','update','view','delete'),
 				'users'=>array('@'),
-				'expression'=>'Yii::app()->user->getLevel()==2',
+				'expression'=>'Yii::app()->user->record->level==2',
 				),			
+			array('allow',
+				'actions'=>array('create','update','view','delete','admin'),
+				'users'=>array('@'),
+				'expression'=>'Yii::app()->user->record->level==1',
+				),
 			array('deny',
-				'users'=>array('*'),
+				'actions'=>array('create','update','view','delete','admin'),
+				'users'=>array('@'),
+				'expression'=>'!Yii::app()->user->record->level==1',
 				),
 			);
 	}
@@ -49,24 +56,18 @@ class UserController extends Controller
 	 */
 	public function actionView($id)
 	{
-		$model=User::model()->findByPk($id);
-		if($model->id_user!==YII::app()->user->id){
-		//$userid,$description,$activityid,$type,$point,$status
-			Activities::model()->my(YII::app()->user->id,"Melihat Profile : ".$model->username,21,10,0,0);			
-		}
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
-			));
+		));
 	}
 
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionTambah()
+	public function actionCreate()
 	{
 		$model=new User;
-		$model->setScenario('create');
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -74,18 +75,13 @@ class UserController extends Controller
 		if(isset($_POST['User']))
 		{
 			$model->attributes=$_POST['User'];
-			$model->password = md5($model->password);
-			$model->last_login = date('Y-m-d');
-			$model->created_date = date('Y-m-d');
-			$model->update_date = date('Y-m-d');
-			$model->image = "avatar.png";
 			if($model->save())
-			$this->redirect(array('view','id'=>$model->id_user));
+				$this->redirect(array('view','id'=>$model->id_user));
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
-			));
+		));
 	}
 
 	/**
@@ -96,7 +92,6 @@ class UserController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-		$model->setScenario('update');
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -104,48 +99,14 @@ class UserController extends Controller
 		if(isset($_POST['User']))
 		{
 			$model->attributes=$_POST['User'];
-			$model->update_date = date('Y-m-d');
-
 			if($model->save())
-				//$userid,$description,$activityid,$type,$point,$status
-				// Activities::model()->my(YII::app()->user->id,"Merubah Data Profile : ".$model->username,24,10,1,0);				
-			$this->redirect(array('view','id'=>$model->id_user));
+				$this->redirect(array('view','id'=>$model->id_user));
 		}
 
 		$this->render('update',array(
 			'model'=>$model,
-			));
+		));
 	}
-
-	public function actionImage($id)
-	{
-		$model=$this->loadModel($id);
-		$model->setScenario('image');
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-			if(isset($_POST['User']))
-			{
-				$model->attributes=$_POST['User'];
-				$tmp;
-				if(strlen(trim(CUploadedFile::getInstance($model,'image'))) > 0) 
-				{ 
-					$tmp=CUploadedFile::getInstance($model,'image'); 
-					$model->image=$model->username.'.'.$tmp->extensionName; 
-				}
-
-				if($model->save()){
-					if(strlen(trim($model->image)) > 0) 
-						$tmp->saveAs(Yii::getPathOfAlias('webroot').'/images/'.$model->image);
-					$this->redirect(array('view','id'=>$model->id_user));
-				}
-			}
-
-			$this->render('image',array(
-				'model'=>$model,
-				));
-		}	
 
 	/**
 	 * Deletes a particular model.
@@ -154,39 +115,30 @@ class UserController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$data=Activities::model()->findByAttributes(array('user_id'=>$id));
-		if($data==NULL){
-			$this->loadModel($id)->delete();
-		}
-		$data=Activities::model()->findByAttributes(array('user_id'=>$id));
-		$data->delete();
 		$this->loadModel($id)->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('kelola'));
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}
 
 	/**
 	 * Lists all models.
 	 */
-	public function actionDaftar()
+	public function actionIndex()
 	{
-		//$userid,$description,$activityid,$type,$point,$status
-		// Activities::model()->my(YII::app()->user->id,"Melihat Daftar Pengguna SISNAKER",21,10,0,0);				
+		$this->layout ="back";
 		$dataProvider=new CActiveDataProvider('User');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
-			));
+		));
 	}
 
 	/**
 	 * Manages all models.
 	 */
-	public function actionKelola()
+	public function actionAdmin()
 	{
-		//$userid,$description,$activityid,$type,$point,$status
-		Activities::model()->my(YII::app()->user->id,"Melihat Menu Kelola Pengguna SISNAKER",21,10,0,0);			
 		$model=new User('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['User']))
@@ -194,7 +146,7 @@ class UserController extends Controller
 
 		$this->render('admin',array(
 			'model'=>$model,
-			));
+		));
 	}
 
 	/**
@@ -207,38 +159,10 @@ class UserController extends Controller
 	public function loadModel($id)
 	{
 		$model=User::model()->findByPk($id);
-		if(Yii::app()->user->getLevel()==1){
-
-			if($model===null)
-				throw new CHttpException(404,'Data yang anda cari kemungkinan telah dihapus.');
-			return $model;
-
-		}else{
-
-			if(YII::app()->user->id==$model->id_user){
-
-				if($model===null)
-					throw new CHttpException(404,'Data yang anda cari kemungkinan telah dihapus.');
-				return $model;
-
-			}else{
-
-				throw new CHttpException(403,'Anda tidak diijikan untuk melakukan aksi ini.');
-			}
-
-		}
-
-
-	}
-
-	public function loadActivity($id)
-	{
-		$model=Activities::model()->findByPk($id);
-
 		if($model===null)
-			throw new CHttpException(404,'Data yang anda cari kemungkinan telah dihapus.');
+			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
-	}	
+	}
 
 	/**
 	 * Performs the AJAX validation.
@@ -252,49 +176,4 @@ class UserController extends Controller
 			Yii::app()->end();
 		}
 	}
-
-	public function actionPassword($id)
-	{
-		$model=$this->loadModel($id);
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['User']))
-		{
-			$model->attributes=$_POST['User'];
-			$model->password = md5($model->password);
-			if($model->save())
-				//$userid,$description,$activityid,$type,$point,$status
-				Activities::model()->my(YII::app()->user->id,"Merubah Password : ".$model->username,24,10,1,0);	
-			$this->redirect(array('view','id'=>$model->id_user));
-		}
-
-		$this->render('password',array(
-			'model'=>$model,
-			));
-	}	
-
-	public function actionTop()
-	{
-		//$userid,$description,$activityid,$type,$point,$status
-		Activities::model()->my(YII::app()->user->id,"Melihat Menu Pengguna Paling Aktif di SISNAKER",21,10,0,0);			
-		$model=new User('search');
-		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['User']))
-			$model->attributes=$_GET['User'];
-
-		$this->render('top',array(
-			'model'=>$model,
-			));
-	}
-
-	public function actionActivity()
-	{
-		$dataProvider=new CActiveDataProvider('Activities');
-		$this->render('activity',array(
-			'dataProvider'=>$dataProvider,
-			));
-	}	
-
 }

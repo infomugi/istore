@@ -5,10 +5,10 @@
 $this->breadcrumbs=array(
 	'Users'=>array('index'),
 	$model->id_user=>array('view','id'=>$model->id_user),
-	'Update',
+	'Edit',
 	);
 
 	$this->pageTitle='Edit User';
 	?>
 
-	<?php echo $this->renderPartial('_form_update', array('model'=>$model)); ?>
+	<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

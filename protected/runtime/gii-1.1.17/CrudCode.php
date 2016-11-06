@@ -1,5 +1,5 @@
 <?php
 return array (
-  'template' => 'sisnaker',
+  'template' => 'limitless',
   'baseControllerClass' => 'Controller',
 );

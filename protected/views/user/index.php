@@ -6,25 +6,22 @@ $this->breadcrumbs=array(
 	'Users',
 	);
 
-	$this->pageTitle='Daftar User';
+$this->pageTitle='List User';
+?>
+
+
+<?php echo CHtml::link('Add User',
+	array('create'),
+	array('class' => 'btn btn-success'));
 	?>
-
-	<section class="col-xs-12">
-
-		<?php echo CHtml::link('Tambah User',
- array('tambah'),
- array('class' => 'btn btn-success btn-flat'));
- ?>
-		<?php echo CHtml::link('Kelola User',
- array('kelola'),
- array('class' => 'btn btn-success btn-flat'));
- ?>
+	<?php echo CHtml::link('Manage User',
+		array('admin'),
+		array('class' => 'btn btn-success'));
+		?>
 
 		<HR>
 
 			<?php $this->widget('zii.widgets.CListView', array(
-			'dataProvider'=>$dataProvider,
-			'itemView'=>'_view',
-			)); ?>
-
-		</section>
+				'dataProvider'=>$dataProvider,
+				'itemView'=>'_view',
+				)); ?>

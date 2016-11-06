@@ -4,10 +4,10 @@
 
 $this->breadcrumbs=array(
 	'Users'=>array('index'),
-	'Tambah',
+	'Add',
 	);
 
-	$this->pageTitle='Tambah User';
+	$this->pageTitle='Add User';
 	?>
 
 	<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

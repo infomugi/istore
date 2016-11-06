@@ -4,21 +4,20 @@
 
 $this->breadcrumbs=array(
 	'Users'=>array('index'),
-	'Kelola',
+	'Manage',
 	);
 
-$this->pageTitle='Kelola User';
+$this->pageTitle='Manage User';
 ?>
 
-<section class="col-xs-12">
 
-	<?php echo CHtml::link('Buat Akun',
-		array('tambah'),
-		array('class' => 'btn btn-success btn-flat'));
+	<?php echo CHtml::link('Add User',
+		array('create'),
+		array('class' => 'btn btn-success'));
 		?>
-		<?php echo CHtml::link('Daftar User',
-			array('daftar'),
-			array('class' => 'btn btn-success btn-flat'));
+		<?php echo CHtml::link('List User',
+			array('index'),
+			array('class' => 'btn btn-success'));
 			?>
 
 			<HR>
@@ -27,7 +26,7 @@ $this->pageTitle='Kelola User';
 					'id'=>'user-grid',
 					'dataProvider'=>$model->search(),
 					'filter'=>$model,
-					'itemsCssClass' => 'table dataTable table-hover',
+					'itemsCssClass' => 'table-responsive table table-striped table-hover table-vcenter',
 					'columns'=>array(
 
 						array(
@@ -36,18 +35,30 @@ $this->pageTitle='Kelola User';
 							'htmlOptions'=>array('width'=>'10px', 
 								'style' => 'text-align: center;')),
 
-						'username',
-						array('name'=>'bagian','value'=>'$data->Kecamatan->nama'),
-						'handphone',
-						'email',
+						'id_user',
+						'create_time',
+						'update_time',
+						'visit_time',
+						'fullname',
+						'gender',
+		/*
+		'birth',
+		'email',
+		'username',
+		'password',
+		'level',
+		'division',
+		'image',
+		'ipaddress',
+		'active',
+		'status',
+		*/
+		array(
+			'header'=>'Action',
+			'class'=>'CButtonColumn',
+			'htmlOptions'=>array('width'=>'100px', 
+				'style' => 'text-align: center;'),
+			),
+		),
+		)); ?>
 
-						array(
-							'header'=>'Action',
-							'class'=>'CButtonColumn',
-							'htmlOptions'=>array('width'=>'100px', 
-								'style' => 'text-align: center;'),
-							),
-						),
-						)); ?>
-						
-					</section>
