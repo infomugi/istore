@@ -24,7 +24,11 @@
 
 						<div class="col-lg-8 col-md-9 col-xs-12">
 							<?php echo $form->error($model,'code'); ?>
-							<?php echo $form->textField($model,'code',array('class'=>'form-control')); ?>
+							<?php echo $form->textField($model,'code',array(
+							'class'=>'form-control',
+							'value' => (($model->isNewRecord) ? $model->generateB() : $model->code),
+							'readOnly'=>true
+							)); ?>
 						</div>
 		
 				</div>  
@@ -66,7 +70,19 @@
 
 						<div class="col-lg-8 col-md-9 col-xs-12">
 							<?php echo $form->error($model,'category_id'); ?>
-							<?php echo $form->textField($model,'category_id',array('class'=>'form-control')); ?>
+							<?php echo $form->dropDownList($model,'category_id',
+								CHtml::listData(Category::model()->findAll(array('condition'=>'',
+								'order'=>'name ASC')),'id_category', 'name'),
+								array(
+									'prompt'=>'-- Category --.',
+									'class'=>'form-control selectz',
+									'ajax' => array(
+										'type'=>'POST', 
+										'url'=>Yii::app()->createUrl('tag/data'), 
+										'update'=>'#Product_sub_category_id', 
+										'data'=>array('category_id'=>'js:this.value'),
+									))							
+							); ?>						
 						</div>
 		
 				</div>  
@@ -80,7 +96,10 @@
 
 						<div class="col-lg-8 col-md-9 col-xs-12">
 							<?php echo $form->error($model,'sub_category_id'); ?>
-							<?php echo $form->textField($model,'sub_category_id',array('class'=>'form-control')); ?>
+							<?php echo $form->dropDownList($model, "sub_category_id",
+										array(),
+										array("empty"=>"-- Tag --", 'class'=>'form-control')
+										); ?> 
 						</div>
 		
 				</div>  
@@ -108,12 +127,21 @@
 
 						<div class="col-lg-8 col-md-9 col-xs-12">
 							<?php echo $form->error($model,'status'); ?>
+							<?php echo $form->radioButtonList($model, 'status', array(1 => 'Active', 0 => 'Deactive'), array('separator' => ' | ')); ?>							
 							<?php echo $form->textField($model,'status',array('class'=>'form-control')); ?>
 						</div>
 		
 				</div>  
 
-				
+				<script language='javascript'>
+					function validAngka(a)
+					{
+						if(!/^[0-9.]+$/.test(a.value))
+						{
+						a.value = a.value.substring(0,a.value.length-1000);
+						}
+					}
+				</script>				
 				<div class="form-group">
 	
 						<div class="col-lg-4 col-md-3 col-xs-12 control-label">
@@ -122,7 +150,7 @@
 
 						<div class="col-lg-8 col-md-9 col-xs-12">
 							<?php echo $form->error($model,'stock'); ?>
-							<?php echo $form->textField($model,'stock',array('class'=>'form-control')); ?>
+							<?php echo $form->textField($model,'stock',array('class'=>'form-control','onkeyup'=>"validAngka(this)")); ?>
 						</div>
 		
 				</div>  
@@ -170,7 +198,7 @@
 				</div>  
 
 				
-				<div class="form-group">
+				<!-- <div class="form-group">
 	
 						<div class="col-lg-4 col-md-3 col-xs-12 control-label">
 							<?php echo $form->labelEx($model,'views'); ?>
@@ -195,7 +223,7 @@
 							<?php echo $form->textField($model,'likes',array('class'=>'form-control')); ?>
 						</div>
 		
-				</div>  
+				</div>  --> 
 
 				
 				<div class="form-group">
@@ -203,16 +231,26 @@
 						<div class="col-lg-4 col-md-3 col-xs-12 control-label">
 							<?php echo $form->labelEx($model,'discount'); ?>
 						</div>   
+						<?php 
+							$Disc = array(
+								"0" => "None",
+								"10"	=> "10%",
+								"15"	=> "15%",
+								"30"	=> "30%",
 
+								);
+						?>
 						<div class="col-lg-8 col-md-9 col-xs-12">
 							<?php echo $form->error($model,'discount'); ?>
-							<?php echo $form->textField($model,'discount',array('class'=>'form-control')); ?>
+							<?php echo $form->dropDownList($model, "discount",$Disc,
+									array("promopt"=>"-- Discount --","class" => 'form-control',)
+									); ?>
 						</div>
 		
 				</div>  
 
 				
-				<div class="form-group">
+				<!-- <div class="form-group">
 	
 						<div class="col-lg-4 col-md-3 col-xs-12 control-label">
 							<?php echo $form->labelEx($model,'created_id'); ?>
@@ -237,10 +275,10 @@
 							<?php echo $form->textField($model,'update_id',array('class'=>'form-control')); ?>
 						</div>
 		
-				</div>  
+				</div>  --> 
 
 				
-				<div class="form-group">
+<!-- 				<div class="form-group">
 	
 						<div class="col-lg-4 col-md-3 col-xs-12 control-label">
 							<?php echo $form->labelEx($model,'created_date'); ?>
@@ -251,10 +289,10 @@
 							<?php echo $form->textField($model,'created_date',array('class'=>'form-control')); ?>
 						</div>
 		
-				</div>  
+				</div>   -->
 
 				
-				<div class="form-group">
+<!-- 				<div class="form-group">
 	
 						<div class="col-lg-4 col-md-3 col-xs-12 control-label">
 							<?php echo $form->labelEx($model,'update_date'); ?>
@@ -265,7 +303,7 @@
 							<?php echo $form->textField($model,'update_date',array('class'=>'form-control')); ?>
 						</div>
 		
-				</div>  
+				</div>   -->
 
 				
 				<div class="form-group">
@@ -296,7 +334,7 @@
 				</div>  
 
 				
-				<div class="form-group">
+				<!-- <div class="form-group">
 	
 						<div class="col-lg-4 col-md-3 col-xs-12 control-label">
 							<?php echo $form->labelEx($model,'sales'); ?>
@@ -321,7 +359,7 @@
 							<?php echo $form->textField($model,'rate',array('class'=>'form-control')); ?>
 						</div>
 		
-				</div>  
+				</div>  --> 
 
 							<div class="form-group">
 				<div class="col-md-12">  

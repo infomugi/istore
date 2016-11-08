@@ -225,7 +225,8 @@
       							<!-- top links -->
       							<div class="headerlinkmenu col-lg-8 col-md-7 col-sm-8 col-xs-12">
       								<div class="links">
-      									<div class="myaccount"><a title="My Account" href="<?php echo $baseUrl;?>/account_page.html"><i class="fa fa-user"></i><span class="hidden-xs">My Account</span></a></div>
+      									<div class="myaccount"><li> <?php echo CHtml::link('My Account',array('site/login')); ?></li>
+                                                            <i class="fa fa-user"></i><span class="hidden-xs"></span></div>
       									<div class="wishlist"><a title="My Wishlist" href="<?php echo $baseUrl;?>/wishlist.html"><i class="fa fa-heart"></i><span class="hidden-xs">Wishlist</span></a></div>
       									<div class="blog"><a title="Blog" href="<?php echo $baseUrl;?>/blog.html"><i class="fa fa-rss"></i><span class="hidden-xs">Blog</span></a></div>
       									<div class="login"><a href="<?php echo $baseUrl;?>/account_page.html"><i class="fa fa-unlock-alt"></i><span class="hidden-xs">Log In</span></a></div>
