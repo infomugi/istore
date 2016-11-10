@@ -24,11 +24,9 @@
 
 						<div class="col-lg-8 col-md-9 col-xs-12">
 							<?php echo $form->error($model,'category_id'); ?>
-							<?php echo $form->dropDownList($model,'category_id',
-								CHtml::listData(Category::model()->findAll(),'id_category','name'),
-								array('class'=>'form-control')
-							); ?>
-								</div>
+							<?php echo $form->textField($model,'category_id',array('class'=>'form-control')); ?>
+						</div>
+		
 				</div>  
 
 				

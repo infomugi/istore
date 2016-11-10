@@ -76,7 +76,7 @@
 					<h3 class="links-title">Service<a class="expander visible-xs" href="<?php echo $baseUrl;?>/index.html#TabBlock-4">+</a></h3>
 					<div class="tabBlock" id="TabBlock-4">
 						<ul class="list-links list-unstyled">
-							<li> <?php echo CHtml::link('My Account',array('site/login')); ?></li>
+							<li> <a href="<?php echo $baseUrl;?>/account_page.html">Account</a> </li>
 							<li> <a href="<?php echo $baseUrl;?>/wishlist.html">Wishlist</a> </li>
 							<li> <a href="<?php echo $baseUrl;?>/shopping_cart.html">Shopping Cart</a> </li>
 							<li> <a href="<?php echo $baseUrl;?>/index.html#">Return Policy</a> </li>

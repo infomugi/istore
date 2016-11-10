@@ -175,16 +175,4 @@ class TagController extends Controller
 			Yii::app()->end();
 		}
 	}
-
-	public function actionData()
-	{
-		$data=Tag::model()->findAll('category_id=:category_id', 
-			array(':category_id'=>(int) $_POST['category_id']));
-
-		$data=CHtml::listData($data,'id_category_sub','name');
-
-		echo "<option value=''>-- Pilih Tag --</option>";
-		foreach($data as $value=>$name)
-			echo CHtml::tag('option', array('value'=>$value),CHtml::encode($name),true);
-	}
 }

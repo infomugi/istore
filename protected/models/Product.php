@@ -46,7 +46,7 @@ class Product extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('code, name, description, category_id, sub_category_id, color, status, stock, spesification, weight, brand_id, views, likes, discount, keyword, abstrack', 'required'),
+			array('code, name, description, category_id, sub_category_id, color, status, stock, spesification, weight, brand_id, views, likes, discount, created_id, update_id, created_date, update_date, keyword, abstrack, sales, rate', 'required'),
 			array('category_id, sub_category_id, color, status, stock, weight, brand_id, views, likes, discount, created_id, update_id, created_date, update_date, sales, rate', 'numerical', 'integerOnly'=>true),
 			array('code', 'length', 'max'=>50),
 			array('name, abstrack', 'length', 'max'=>255),
@@ -156,30 +156,5 @@ class Product extends CActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
-	}
-
-	public function generateB(){
-		$_i = "KK-".date("Y")."-";
-		$_left = $_i;
-		$_first = "0001";
-		$_len = strlen($_left);
-		$no = $_left . $_first; 
-		
-		$last_po = $this->find( 
-				array(
-					"select"=>"code",
-					"condition" => "left(code, " . $_len . ") = :_left",
-					"params" => array(":_left" => $_left),
-					"order" => "code DESC"
-				));
-		
-		if($last_po != null){
-			$_no = substr($last_po->code, $_len);
-			$_no++;
-			$_no = substr("0000", strlen($_no)) . $_no;
-			$no = $_left . $_no;
-		}
-		
-		return $no;
 	}
 }
