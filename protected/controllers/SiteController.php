@@ -32,9 +32,13 @@ class SiteController extends Controller
 	}
 
 	public function actionDashboard()
-	{
+	{	
+		if(YII::app()->user->isGuest){
+			$this->actionLogin();
+		}else{
 			$this->layout = "back_page";
 			$this->render('dashboard');
+		}
 	}
 
 	/**
@@ -102,7 +106,8 @@ class SiteController extends Controller
 				Activities::model()->my(YII::app()->user->id,"Login dari IP : ".Yii::app()->request->getUserHostAddress(),1,1,3,0);
 			if(Yii::app()->user->getLevel()==1){
 				Yii::app()->user->setFlash('Success', 'Berhasil login dari IP '.Yii::app()->request->getUserHostAddress().'');
-				$this->redirect(Yii::app()->user->returnUrl);
+				$this->redirect('index.php?r=site/dashboard');
+				// $this->redirect(Yii::app()->user->returnUrl);
 			}else if(Yii::app()->user->getLevel()==2){
 				Yii::app()->user->setFlash('success', 'Berhasil login dari IP '.Yii::app()->request->getUserHostAddress().'. - Login Terakhir : '.YII::app()->user->record->last_login);
 				$this->redirect('index.php?r=user/view&id='.YII::app()->user->id);
@@ -119,12 +124,12 @@ class SiteController extends Controller
 	 */
 	public function actionLogout()
 	{
-		//$userid,$description,$activityid,$type,$point,$status
-		Activities::model()->my(YII::app()->user->id,"Logout dari IP : ".Yii::app()->request->getUserHostAddress(),0,0,0,0);
-		$model=User::model()->findByPk(YII::app()->user->id);
-		$model->last_login = date('Y-m-d h:i:s');
-		$model->update();
+		// //$userid,$description,$activityid,$type,$point,$status
+		// Activities::model()->my(YII::app()->user->id,"Logout dari IP : ".Yii::app()->request->getUserHostAddress(),0,0,0,0);
+		// $model=User::model()->findByPk(YII::app()->user->id);
+		// $model->visit_time = date('Y-m-d h:i:s');
+		// $model->update();
 		Yii::app()->user->logout();
-		$this->redirect(Yii::app()->homeUrl);
+		$this->redirect('index.php?r=site/login');
 	}
 }

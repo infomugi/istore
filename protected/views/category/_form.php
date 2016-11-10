@@ -58,18 +58,31 @@
 				</div>  
 
 				
-				<div class="form-group">
-	
-						<div class="col-lg-4 col-md-3 col-xs-12 control-label">
-							<?php echo $form->labelEx($model,'status'); ?>
-						</div>   
+			<?PHP if(!$model->isNewRecord): ?>
+			<div class="form-group">
 
-						<div class="col-lg-8 col-md-9 col-xs-12">
-							<?php echo $form->error($model,'status'); ?>
-							<?php echo $form->textField($model,'status',array('class'=>'form-control')); ?>
-						</div>
-		
+				<div class="col-lg-4 col-md-3 col-xs-12 control-label">
+					<?php echo $form->labelEx($model,'status'); ?>
+				</div>   
+
+				<div class="col-lg-8 col-md-9 col-xs-12">
+					<?php echo $form->error($model,'status'); ?>
+					<?php
+					echo $form->radioButtonList($model,'status',
+						array('1'=>'Enable','0'=>'Disable'),
+						array(
+							'template'=>'{input}{label}',
+							'separator'=>'',
+							'labelOptions'=>array(
+								'style'=>'padding-right:20px;margin-left:15px'),
+
+							)                              
+						);
+						?>
+					</div>
+
 				</div>  
+			<?php endif; ?>
 
 							<div class="form-group">
 				<div class="col-md-12">  

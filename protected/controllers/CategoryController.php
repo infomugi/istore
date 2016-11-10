@@ -44,8 +44,7 @@ class CategoryController extends Controller
 				),
 			array('deny',
 				'actions'=>array('create','update','view','delete','admin'),
-				'users'=>array('@'),
-				'expression'=>'!Yii::app()->user->record->level==1',
+				'users'=>array('*'),
 				),
 			);
 	}
@@ -75,6 +74,8 @@ class CategoryController extends Controller
 		if(isset($_POST['Category']))
 		{
 			$model->attributes=$_POST['Category'];
+			$model->status = 1;
+			$model->status;
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id_category));
 		}

@@ -44,8 +44,7 @@ class TagController extends Controller
 				),
 			array('deny',
 				'actions'=>array('create','update','view','delete','admin'),
-				'users'=>array('@'),
-				'expression'=>'!Yii::app()->user->record->level==1',
+				'users'=>array('*'),
 				),
 			);
 	}
@@ -65,7 +64,7 @@ class TagController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCreate($id)
 	{
 		$model=new Tag;
 
@@ -75,8 +74,10 @@ class TagController extends Controller
 		if(isset($_POST['Tag']))
 		{
 			$model->attributes=$_POST['Tag'];
+			$model->category_id = $id;
+			$model->status = 1;
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id_category_sub));
+				$this->redirect(array('category/view','id'=>$model->category_id));
 		}
 
 		$this->render('create',array(

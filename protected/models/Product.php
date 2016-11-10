@@ -10,6 +10,8 @@
  * @property string $description
  * @property integer $category_id
  * @property integer $sub_category_id
+ * @property integer $image
+ * @property integer $price 
  * @property integer $color
  * @property integer $status
  * @property integer $stock
@@ -49,7 +51,7 @@ class Product extends CActiveRecord
 			array('code, name, description, category_id, sub_category_id, color, status, stock, spesification, weight, brand_id, views, likes, discount, created_id, update_id, created_date, update_date, keyword, abstrack, sales, rate', 'required'),
 			array('category_id, sub_category_id, color, status, stock, weight, brand_id, views, likes, discount, created_id, update_id, created_date, update_date, sales, rate', 'numerical', 'integerOnly'=>true),
 			array('code', 'length', 'max'=>50),
-			array('name, abstrack', 'length', 'max'=>255),
+			array('name, abstrack, image', 'length', 'max'=>255),
 			array('keyword', 'length', 'max'=>150),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -157,4 +159,8 @@ class Product extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+	public function seo($title){
+		return preg_replace('/[^a-z0-9_-]/i', '', strtolower(str_replace(' ', '-', trim($title))));
+	}		
 }

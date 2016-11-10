@@ -7,50 +7,54 @@ $this->breadcrumbs=array(
 	$model->name,
 	);
 
-	$this->pageTitle='Detail Category';
-	?>
+$this->pageTitle='Detail Category';
+?>
 
 
-	<section class="col-xs-12">
+<section class="col-xs-12">
 
-		<?php echo CHtml::link('Add',
-	 array('create'),
- array('class' => 'btn btn-success','title'=>'Add Category'));
-		 ?>
+	<?php echo CHtml::link('Add',
+		array('create'),
+		array('class' => 'btn btn-success','title'=>'Add Category'));
+		?>
+	<?php echo CHtml::link('Add Tag',
+		array('tag/create', 'id'=>$model->id_category),
+		array('class' => 'btn btn-success','title'=>'Add Tag'));
+		?>		
 		<?php echo CHtml::link('List',
-	 array('index'),
- array('class' => 'btn btn-success', 'title'=>'List Category'));
-		 ?>
-		<?php echo CHtml::link('Manage',
-	 array('admin'),
- array('class' => 'btn btn-success','title'=>'Manage Category'));
-		 ?>
-		<?php echo CHtml::link('Edit', 
-	 array('update', 'id'=>$model->id_category,
-		), array('class' => 'btn btn-info', 'title'=>'Edit Category'));
- ?>
-		<?php echo CHtml::link('Delete', 
-	 array('delete', 'id'=>$model->id_category,
-		),  array('class' => 'btn btn-warning', 'title'=>'Hapus Category'));
- ?>
+			array('index'),
+			array('class' => 'btn btn-success', 'title'=>'List Category'));
+			?>
+			<?php echo CHtml::link('Manage',
+				array('admin'),
+				array('class' => 'btn btn-success','title'=>'Manage Category'));
+				?>
+				<?php echo CHtml::link('Edit', 
+					array('update', 'id'=>$model->id_category,
+						), array('class' => 'btn btn-info', 'title'=>'Edit Category'));
+						?>
+						<?php echo CHtml::link('Delete', 
+							array('delete', 'id'=>$model->id_category,
+								),  array('class' => 'btn btn-warning', 'title'=>'Hapus Category'));
+								?>
 
-		<HR>
+								<HR>
 
-			<?php $this->widget('zii.widgets.CDetailView', array(
-			'data'=>$model,
-			'htmlOptions'=>array("class"=>"table"),
-			'attributes'=>array(
-						'id_category',
-		'name',
-		'icon',
-		'image',
-		'status',
-				),
-				)); ?>
+									<?php $this->widget('zii.widgets.CDetailView', array(
+										'data'=>$model,
+										'htmlOptions'=>array("class"=>"table"),
+										'attributes'=>array(
+											// 'id_category',
+											'name',
+											'icon',
+											// 'image',
+											// 'status',
+											),
+											)); ?>
 
-			</section>
+										</section>
 
-			<STYLE>
-				th{width:150px;}
-			</STYLE>
+										<STYLE>
+											th{width:150px;}
+										</STYLE>
 

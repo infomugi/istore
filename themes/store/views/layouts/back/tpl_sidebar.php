@@ -9,7 +9,7 @@
                                 </a>
                             </li>
                             <li class="dropdown active show-on-hover">
-                                <a href="<?php echo $url;?>/backend/javascript:;" data-toggle="dropdown">
+                                <a href="#" data-toggle="dropdown">
                                     <i class="fa fa-ellipsis-h"></i>
                                     <span>Product</span>
                                 </a>
@@ -27,7 +27,7 @@
                                 </ul>
                             </li>
                             <li class="dropdown active show-on-hover">
-                                <a href="<?php echo $url;?>/backend/javascript:;" data-toggle="dropdown">
+                                <a href="#" data-toggle="dropdown">
                                     <i class="fa fa-tags"></i>
                                     <span>Category</span>
                                 </a>
@@ -45,7 +45,7 @@
                                 </ul>
                             </li>    
                             <li class="dropdown active show-on-hover">
-                                <a href="<?php echo $url;?>/backend/javascript:;" data-toggle="dropdown">
+                                <a href="#" data-toggle="dropdown">
                                     <i class="fa fa-ticket"></i>
                                     <span>Tag</span>
                                 </a>
@@ -64,7 +64,7 @@
                             </li> 
 
                             <li class="dropdown active show-on-hover">
-                                <a href="<?php echo $url;?>/backend/javascript:;" data-toggle="dropdown">
+                                <a href="#" data-toggle="dropdown">
                                     <i class="fa fa-dollar"></i>
                                     <span>Transaction</span>
                                 </a>
@@ -88,7 +88,7 @@
                             </li>  
 
                             <li class="dropdown active show-on-hover">
-                                <a href="<?php echo $url;?>/backend/javascript:;" data-toggle="dropdown">
+                                <a href="#" data-toggle="dropdown">
                                     <i class="fa fa-comments"></i>
                                     <span>Testimony</span>
                                 </a>
@@ -107,7 +107,7 @@
                             </li>      
 
                             <li class="dropdown active show-on-hover">
-                                <a href="<?php echo $url;?>/backend/javascript:;" data-toggle="dropdown">
+                                <a href="#" data-toggle="dropdown">
                                     <i class="fa fa-bold"></i>
                                     <span>Bank</span>
                                 </a>
@@ -126,7 +126,7 @@
                             </li>                                                       
 
                             <li class="dropdown active show-on-hover">
-                                <a href="<?php echo $url;?>/backend/javascript:;" data-toggle="dropdown">
+                                <a href="#" data-toggle="dropdown">
                                     <i class="fa fa-cog"></i>
                                     <span>Setting</span>
                                 </a>
@@ -145,7 +145,7 @@
                             </li>                                                          
 
                             <li class="dropdown active show-on-hover">
-                                <a href="<?php echo $url;?>/backend/javascript:;" data-toggle="dropdown">
+                                <a href="#" data-toggle="dropdown">
                                     <i class="fa fa-user"></i>
                                     <span>Account</span>
                                 </a>

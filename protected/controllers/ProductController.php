@@ -44,8 +44,7 @@ class ProductController extends Controller
 				),
 			array('deny',
 				'actions'=>array('create','update','view','delete','admin'),
-				'users'=>array('@'),
-				'expression'=>'!Yii::app()->user->record->level==1',
+				'users'=>array('*'),
 				),
 			);
 	}
@@ -84,13 +83,29 @@ class ProductController extends Controller
 		if(isset($_POST['Product']))
 		{
 			$model->attributes=$_POST['Product'];
+			$model->created_date = date('Y-m-d h:i:s');
+			$model->update_date = date('Y-m-d h:i:s');
 			$model->created_id=YII::app()->user->id;
-  			$model->image=CUploadedFile::getInstance($model,'image');
+			$model->rate = 0;
+			$model->sales = 0;
+			$model->views = 0;
+			$model->likes = 0;
+			$model->brand_id = 1;
+			$tmp;
+			if(strlen(trim(CUploadedFile::getInstance($model,'image'))) > 0) 
+			{ 
+				$tmp=CUploadedFile::getInstance($model,'image'); 
+				$model->image=Product::model()->seo($model->name).'.'.$tmp->extensionName; 
+			}
+
 			if($model->save())
-				{
-				$model->image->saveAs(Yii::getPathOfAlias('webroot').'/images/productimages/'.$model->image);
-				$this->redirect(array('view','id'=>$model->id_product));
+			{
+				if(strlen(trim($model->image)) > 0) {
+					$tmp->saveAs(Yii::getPathOfAlias('webroot').'/image/product/big/'.$model->image);
 				}
+
+				$this->redirect(array('view','id'=>$model->id_product));
+			}
 		}
 
 		$this->render('create',array(

@@ -311,7 +311,7 @@ input:focus {
 	background: inherit;
 }
 .newsletter-popup .close {
-	background: #fed700 none repeat scroll 0 0;
+	background: #f39c12 none repeat scroll 0 0;
 	cursor: pointer;
 	font-weight: bold;
 	line-height: 30px;
@@ -371,7 +371,7 @@ input:focus {
 	vertical-align: sub;
 }
 #newsletter-form .actions .button-subscribe {
-	background-color: #fed700;
+	background-color: #f39c12;
 	border: medium none;
 	color: #334141;
 	font-size: 1em;
@@ -1096,7 +1096,7 @@ ul#cart-sidebar {
 	padding-right: 8px
 }
 .mini-cart .actions .btn-checkout {
-	background: #fed700;
+	background: #f39c12;
 	color: #333e48;
 	font-size: 12px;
 	padding: 8px 16px;
@@ -1407,7 +1407,7 @@ ul#cart-sidebar {
 	font-size: 18px;
 	text-transform: uppercase;
 	font-weight: bold;
-	background-color: #fed700;
+	background-color: #f39c12;
 	display: inline-block;
 	width: 100%;
 	padding: 15px;
@@ -1503,7 +1503,7 @@ ul#cart-sidebar {
 }
 .jtv-banner-box .button {
 	margin-top: 25px;
-	background-color: #fed700;
+	background-color: #f39c12;
 	color: #333e48;
 	font-size: 12px;
 	font-weight: bold;
@@ -1655,7 +1655,7 @@ ul#cart-sidebar {
 	visibility: hidden
 }
 .add-to-cart-mt {
-	background: #fed700;
+	background: #f39c12;
 	border: 0 none;
 	bottom: 0;
 	font-size: 12px;
@@ -1983,9 +1983,9 @@ ul#cart-sidebar {
 }
 .slider-items-products .owl-buttons a:hover {
 	text-decoration: none;
-	background: #fed700;
+	background: #f39c12;
 	color: #333e48;
-	border: 1px #fed700 solid
+	border: 1px #f39c12 solid
 }
 .slider-items-products .owl-buttons .owl-prev a {
 	background-position: 0 100%;
@@ -2034,7 +2034,7 @@ ul#cart-sidebar {
 	margin: 0 auto 10px;
 	text-align: center;
 	position: relative;
-	color: #fed700;
+	color: #f39c12;
 	letter-spacing: 1px;
 }
 .home-testimonials strong.name:before {
@@ -2107,7 +2107,7 @@ ul#cart-sidebar {
 	color: #333e48
 }
 .our-clients {
-	background-color: #fed700;
+	background-color: #f39c12;
 	margin: 15px 0px;
 	padding: 18px;
 }
@@ -2364,8 +2364,8 @@ ul#cart-sidebar {
 }
 .bottom-banner-img:hover .shop-now-btn {
 	opacity: 1;
-	background-color: #fed700;
-	border-color: #fed700;
+	background-color: #f39c12;
+	border-color: #f39c12;
 	padding: 8px 20px;
 	text-transform: uppercase;
 	font-weight: 600;
@@ -2578,7 +2578,7 @@ img.secondary-img {
 	margin-right: 0;
 }
 .jtv-category-area .button-cart button {
-	border: 1px solid #fed700;
+	border: 1px solid #f39c12;
 	color: #333e48;
 	height: 35px;
 	line-height: 31px;
@@ -2587,7 +2587,7 @@ img.secondary-img {
 	text-align: center;
 	width: 35px;
 	border-radius: 50px;
-	background-color: #fed700;
+	background-color: #f39c12;
 	font-size: 14px;
 }
 .jtv-category-area .button-cart {
@@ -2633,7 +2633,7 @@ img.secondary-img {
 	text-transform: uppercase;
 }
 .cat-title::before {
-	background: #fed700;
+	background: #f39c12;
 	bottom: 0;
 	content: "";
 	height: 2px;
@@ -2680,7 +2680,7 @@ img.secondary-img {
 ******************************************/
 
 .totop {
-	background: none repeat scroll 0 0 #fed700;
+	background: none repeat scroll 0 0 #f39c12;
 	border-radius: 50px;
 	bottom: 40px;
 	color: #333e48;
@@ -2851,7 +2851,7 @@ footer .footer-links ul li a:hover {
 	width: 80%;
 }
 .footer-newsletter {
-	background: #fed700;
+	background: #f39c12;
 	padding: 20px 0px 16px;
 	text-align: left;
 	margin-bottom: 30px
@@ -3092,7 +3092,7 @@ nav {
 	position: relative;
 	margin: auto;
 	width: 100%;
-	background: #fed700
+	background: #f39c12
 }
 nav a {
 	color: #333e48
@@ -3803,7 +3803,7 @@ html {
 	width: 100%;
 }
 .mega-menu-title {
-	background-color: #333e48;
+	background-color: #3498db;
 	color: #fff;
 	cursor: pointer;
 }
@@ -3821,7 +3821,7 @@ html {
 .mega-menu-title h3:after {
 	content: "\f039";
 	display: inline-block;
-	background: #333e48;
+	background: #2980b9;
 	width: 52px;
 	height: 55px;
 	position: absolute;
@@ -3835,7 +3835,7 @@ html {
 	font-weight: normal;
 }
 .mega-menu-title:hover h3:after {
-	background: #000;
+	background: #2980b9;
 }
 .mega-menu-category {
 	border: 2px solid #d9d9d9;
@@ -3888,7 +3888,7 @@ html {
 	content: "\f0fe";
 }
 .mega-menu-category > .nav > li > a:hover, .mega-menu-category > .nav > li > a:focus, .mega-menu-category > .nav > li.active > a {
-	background-color: #fed700;
+	background-color: #f39c12;
 	color: #333e48;
 }
 .wrap-popup {
@@ -3971,7 +3971,7 @@ a.ads1 img {
 	margin: 0;
 }
 .box-banner .price-sale {
-	color: #fed700;
+	color: #f39c12;
 	font-size: 36px;
 	line-height: 40px;
 	font-weight: 900;
@@ -4131,7 +4131,7 @@ a.ads1 img {
 	padding-right: 0px
 }
 .view-mode li.active a {
-	color: #fed700
+	color: #f39c12
 }
 .shop .product-des .color ul li {
 	border: 0 none;
@@ -4256,10 +4256,10 @@ a.ads1 img {
 button.button {
 	display: inline-block;
 	border: 0;
-	background: #fed700;
+	background: #f39c12;
 	padding: 6px 16px;
 	font-size: 12px;
-	border: 2px solid #fed700;
+	border: 2px solid #f39c12;
 	font-weight: bold;
 	text-align: center;
 	white-space: nowrap;
@@ -4510,7 +4510,7 @@ button span {
 	margin: 0;
 	padding: 12px 14px;
 	text-transform: uppercase;
-	background-color: #fed700;
+	background-color: #f39c12;
 }
 .category-sidebar .sidebar-title h3 {
 	margin: auto;
@@ -4653,7 +4653,7 @@ button span {
 .sidebar-bar-title h3 {
 	font-size: 14px;
 	letter-spacing: 1px;
-	border-bottom: 2px #fed700 solid;
+	border-bottom: 2px #f39c12 solid;
 	display: inline-block;
 	margin-bottom: -1px;
 	padding-bottom: 10px;
@@ -4668,7 +4668,7 @@ button span {
 }
 .product-price-range .slider-range-price {
 	height: 7px;
-	background: #fed700;
+	background: #f39c12;
 	border: none;
 	border-radius: 50px
 }
@@ -5005,14 +5005,14 @@ button.button.button-clear {
 	margin-bottom: 5px;
 }
 .special-product a.link-all {
-	background: #fed700;
+	background: #f39c12;
 	color: #333e48;
 	font-size: 12px;
 	padding: 6px 16px;
 	border: none;
 	cursor: pointer;
 	display: inline-block;
-	border: 2px solid #fed700;
+	border: 2px solid #f39c12;
 	font-weight: 900;
 	border-radius: 50px;
 	text-transform: uppercase;
@@ -5081,7 +5081,7 @@ button.button.button-clear {
 	margin-top: 15px;
 }
 .category-description a.info:hover {
-	background: #fed700;
+	background: #f39c12;
 	color: #333e48;
 	border: 2px solid rgba(0,0,0,0.08);
 }
@@ -5446,7 +5446,7 @@ ul.products-list {
 }
 }
 .product-view-area .flexslider-thumb .flex-direction-nav a:hover {
-	background-color: #fed700;
+	background-color: #f39c12;
 	color: #333e48;
 	transition: color 300ms ease-in-out 0s, background-color 300ms ease-in-out 0s, background-position 300ms ease-in-out 0s
 }
@@ -5751,10 +5751,10 @@ ul.products-list {
 	float: left
 }
 button.button.pro-add-to-cart {
-	background: #fed700;
+	background: #f39c12;
 	color: #333e48;
 	padding: 7px 22px;
-	border: 2px #fed700 solid;
+	border: 2px #f39c12 solid;
 }
 button.button.pro-add-to-cart:hover {
 	background: #333e48;
@@ -5863,9 +5863,9 @@ button.button.pro-add-to-cart span i {
 	letter-spacing: 1px;
 }
 .product-tabs li.active a {
-	border: 2px solid #fed700;
+	border: 2px solid #f39c12;
 	border-radius: 50px;
-	background: #fed700;
+	background: #f39c12;
 	color: #333e48
 }
 #product-detail-tab.nav-tabs>li {
@@ -5889,8 +5889,8 @@ button.button.pro-add-to-cart span i {
 	background: #fff
 }
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
-	background: #fed700;
-	border: 2px solid #fed700;
+	background: #f39c12;
+	border: 2px solid #f39c12;
 	color: #333e48
 }
 .nav-tabs>li>a:hover {
@@ -6291,7 +6291,7 @@ p.note {
 	margin-top: 5px
 }
 .cart_summary .qty a:hover {
-	background: #fed700;
+	background: #f39c12;
 	color: #fff
 }
 .cart_summary .action {
@@ -6320,7 +6320,7 @@ p.note {
 	color: #EC4445;
 }
 .wishlist-item table .td-add-to-cart > a {
-	background: #fed700;
+	background: #f39c12;
 	color: #333e48;
 	display: inline-block;
 	font-weight: 700;
@@ -6340,7 +6340,7 @@ p.note {
 	margin-top: 18px;
 }
 .wishlist-item table .td-add-to-cart > a:hover, .wishlist-item .all-cart:hover {
-	background: #fed700;
+	background: #f39c12;
 	color: #333e48;
 }
 .wishlist-area .social-sharing {
@@ -6739,7 +6739,7 @@ a.button-back {
 	font-size: 16px;
 	padding: 15px 25px;
 	margin-top: 15px;
-	background: #fed700;
+	background: #f39c12;
 	color: #333e48;
 	font-weight: 600;
 }
@@ -6831,7 +6831,7 @@ a.button-back:hover {
 	font-size: 12px;
 }
 .about-page .text_color {
-	color: #fed700;
+	color: #f39c12;
 }
 label[for="rememberme"] {
 	margin-left: 0.75em;
@@ -7049,7 +7049,7 @@ label[for="rememberme"] {
 	-webkit-font-smoothing: antialiased;
 }
 .faq-page .box-icon-effect-1 .box-icon i {
-	background: #fed700;
+	background: #f39c12;
 	color: #333e48;
 	-webkit-transition: background 0.2s, color 0.2s;
 	-moz-transition: background 0.2s, color 0.2s;

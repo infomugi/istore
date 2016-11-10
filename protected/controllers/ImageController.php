@@ -44,8 +44,7 @@ class ImageController extends Controller
 				),
 			array('deny',
 				'actions'=>array('create','update','view','delete','admin'),
-				'users'=>array('@'),
-				'expression'=>'!Yii::app()->user->record->level==1',
+				'users'=>array('*'),
 				),
 			);
 	}
