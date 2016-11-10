@@ -33,7 +33,7 @@ class ProductController extends Controller
 				'expression'=>'Yii::app()->user->record->level==3',
 				),
 			array('allow',
-				'actions'=>array('create','update','view','delete'),
+				'actions'=>array('create','update','view','viewtmp','delete'),
 				'users'=>array('@'),
 				'expression'=>'Yii::app()->user->record->level==2',
 				),			
@@ -54,13 +54,22 @@ class ProductController extends Controller
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
+
+
 	public function actionView($id)
 	{
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));
 	}
-
+	
+	public function actionViewtmp($id)
+	{
+		$this->layout = "front_page";
+		$this->render('viewtmp',array(
+			'model'=>$this->loadModel($id),
+		));
+	}
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
@@ -75,8 +84,37 @@ class ProductController extends Controller
 		if(isset($_POST['Product']))
 		{
 			$model->attributes=$_POST['Product'];
+			$model->created_id=YII::app()->user->id;
+  			$model->image=CUploadedFile::getInstance($model,'image');
 			if($model->save())
+				{
+				$model->image->saveAs(Yii::getPathOfAlias('webroot').'/images/productimages/'.$model->image);
 				$this->redirect(array('view','id'=>$model->id_product));
+				}
+		}
+
+		$this->render('create',array(
+			'model'=>$model,
+		));
+	}
+
+	public function actionOrder($product_id)
+	{
+		$model=new Order;
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['Order']))
+		{
+			$model->attributes=$_POST['Order'];
+			$model->product_id=$product_id;
+			$model->
+  			$model->image=CUploadedFile::getInstance($model,'image');
+			if($model->save())
+				{
+				$this->redirect(array('view','id'=>$model->id_product));
+				}
 		}
 
 		$this->render('create',array(
@@ -99,10 +137,15 @@ class ProductController extends Controller
 		if(isset($_POST['Product']))
 		{
 			$model->attributes=$_POST['Product'];
+  			$model->image=CUploadedFile::getInstance($model,'image');
+  			$model->update_id=YII::app()->user->id;
+			$model->update_date=date('Y-m-d h:i:s');
 			if($model->save())
+				{	
+				$model->image->saveAs(Yii::getPathOfAlias('webroot').'/images/productimages/'.$model->image);
 				$this->redirect(array('view','id'=>$model->id_product));
+				}
 		}
-
 		$this->render('update',array(
 			'model'=>$model,
 		));
