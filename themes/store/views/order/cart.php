@@ -8,14 +8,19 @@ $this->breadcrumbs=array(
 
 $this->pageTitle='Cart';
 
+//HITUNG JUMLAH BELI PRODAK
 $jumlahbeli = Yii::app()->db->createCommand('
-  SELECT SUM(quantity) 
-  FROM transaction_detail 
-  WHERE STATUS = 0 
-  GROUP by customer_id
+SELECT COUNT(id_transaction_detail) FROM transaction_detail WHERE customer_id=2 GROUP BY product_id
+  ')->queryScalar();
+
+$total = Yii::app()->db->createCommand('
+SELECT SUM(orders.quantity*product.price) as Jumlah FROM transaction_detail as orders LEFT JOIN product ON orders.product_id=product.id_product WHERE orders.customer_id=2 AND product.id_product=4
   ')->queryScalar();
 
 ?>
+
+
+<?php echo $jumlahbeli; ?>
 
 <!-- Main Container -->
 <section class="main-container col1-layout">
@@ -57,7 +62,7 @@ $jumlahbeli = Yii::app()->db->createCommand('
 									</tr>
 									<tr>
 										<td colspan="3"><strong>Total</strong></td>
-										<td colspan="2"><strong>$<?php echo $jumlahbeli; ?> </strong></td>
+										<td colspan="2"><strong>RP. <?php echo $total; ?> </strong></td>
 									</tr>
 								</tfoot>
 							</table>

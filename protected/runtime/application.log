@@ -2222,3 +2222,22 @@ Stack trace:
 #14 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
 #15 C:\xampp\htdocs\kkstore\index.php(15): CWebApplication->run()
 REQUEST_URI=/kkstore/index.php?r=order/cart
+2016/11/11 17:22:50 [error] [php] Undefined variable: variable (C:\xampp\htdocs\kkstore\themes\store\views\order\cart.php:24)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CController.php(869): OrderController->renderFile()
+#1 C:\xampp\htdocs\yii\framework\web\CController.php(782): OrderController->renderPartial()
+#2 C:\xampp\htdocs\kkstore\protected\controllers\OrderController.php(97): OrderController->render()
+#3 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): OrderController->actionCart()
+#4 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#5 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): OrderController->runAction()
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#8 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): OrderController->filterAccessControl()
+#9 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#10 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(265): OrderController->runActionWithFilters()
+#12 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): OrderController->run()
+#13 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#14 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\kkstore\index.php(15): CWebApplication->run()
+REQUEST_URI=/kkstore/index.php?r=order/cart
