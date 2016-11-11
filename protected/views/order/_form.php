@@ -24,7 +24,7 @@
 
 						<div class="col-lg-8 col-md-9 col-xs-12">
 							<?php echo $form->error($model,'transaction_id'); ?>
-							<?php echo $form->textField($model,'transaction_id'),array('class'=>'form-control')); ?>
+							<?php echo $form->textField($model,'transaction_id',array('class'=>'form-control')); ?>
 						</div>
 		
 				</div>  
@@ -38,7 +38,7 @@
 
 						<div class="col-lg-8 col-md-9 col-xs-12">
 							<?php echo $form->error($model,'product_id'); ?>
-							<?php echo $form->textField($model,'product_id'),array('class'=>'form-control')); ?>
+							<?php echo $form->textField($model,'product_id',array('class'=>'form-control')); ?>
 						</div>
 		
 				</div>  
@@ -52,7 +52,7 @@
 
 						<div class="col-lg-8 col-md-9 col-xs-12">
 							<?php echo $form->error($model,'size'); ?>
-							<?php echo $form->textField($model,'size'),array('class'=>'form-control')); ?>
+							<?php echo $form->textField($model,'size',array('class'=>'form-control')); ?>
 						</div>
 		
 				</div>  
@@ -66,7 +66,7 @@
 
 						<div class="col-lg-8 col-md-9 col-xs-12">
 							<?php echo $form->error($model,'color'); ?>
-							<?php echo $form->textField($model,'color'),array('class'=>'form-control')); ?>
+							<?php echo $form->textField($model,'color',array('class'=>'form-control')); ?>
 						</div>
 		
 				</div>  
@@ -80,7 +80,7 @@
 
 						<div class="col-lg-8 col-md-9 col-xs-12">
 							<?php echo $form->error($model,'quantity'); ?>
-							<?php echo $form->textField($model,'quantity'),array('class'=>'form-control')); ?>
+							<?php echo $form->textField($model,'quantity',array('class'=>'form-control')); ?>
 						</div>
 		
 				</div>  
@@ -94,7 +94,7 @@
 
 						<div class="col-lg-8 col-md-9 col-xs-12">
 							<?php echo $form->error($model,'status'); ?>
-							<?php echo $form->textField($model,'status'),array('class'=>'form-control')); ?>
+							<?php echo $form->textField($model,'status',array('class'=>'form-control')); ?>
 						</div>
 		
 				</div>  

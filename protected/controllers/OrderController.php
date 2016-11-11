@@ -16,7 +16,7 @@ class OrderController extends Controller
 		return array(
 			'accessControl', // perform access control for CRUD operations
 			// 'postOnly + delete', // we only allow deletion via POST request
-		);
+			);
 	}
 
 	/**
@@ -38,7 +38,7 @@ class OrderController extends Controller
 				'expression'=>'Yii::app()->user->record->level==2',
 				),			
 			array('allow',
-				'actions'=>array('create','update','view','delete','admin'),
+				'actions'=>array('create','update','view','delete','admin','cart'),
 				'users'=>array('@'),
 				'expression'=>'Yii::app()->user->record->level==1',
 				),
@@ -57,31 +57,46 @@ class OrderController extends Controller
 	{
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
-		));
+			));
 	}
 
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCreate($product)
 	{
 		$model=new Order;
+		$model->customer_id = YII::app()->user->id;
+		$model->transaction_id = 1;
+		$model->product_id = $product;
+		$model->quantity = 1;
+		$model->color = 0;
+		$model->size = 0;
+		$model->status = 0;
+		$model->save();
+		$this->redirect(array('cart'));
+	}	
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+	public function actionCart()
+	{
+		$this->layout = "front_page";
+		
+		$criteria= new CDbCriteria();
+		$criteria->distinct = true;
+		$criteria->group = 'product_id';
+		$criteria->order = 'product_id';
+		$criteria->condition = 'customer_id='.YII::app()->user->id;
 
-		if(isset($_POST['Order']))
-		{
-			$model->attributes=$_POST['Order'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id_transaction_detail));
-		}
+		$dataProvider=new CActiveDataProvider('Order', array(
+			'criteria'=>$criteria,
+			'pagination'=>false,
+			));
 
-		$this->render('create',array(
-			'model'=>$model,
-		));
-	}
+		$this->render('cart',array(
+			'dataProvider'=>$dataProvider,
+			));
+	}	
 
 	/**
 	 * Updates a particular model.
@@ -104,7 +119,7 @@ class OrderController extends Controller
 
 		$this->render('update',array(
 			'model'=>$model,
-		));
+			));
 	}
 
 	/**
@@ -129,7 +144,7 @@ class OrderController extends Controller
 		$dataProvider=new CActiveDataProvider('Order');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
-		));
+			));
 	}
 
 	/**
@@ -144,7 +159,7 @@ class OrderController extends Controller
 
 		$this->render('admin',array(
 			'model'=>$model,
-		));
+			));
 	}
 
 	/**

@@ -85,7 +85,7 @@ $this->breadcrumbs=array(
                   </div>
 
                   <?php echo CHtml::link('<span><i class="fa fa-shopping-cart"></i> Add to Cart</span>',
-                    array('Order/create', 'product_id'=>$model->id_product),
+                    array('order/create', 'product'=>$model->id_product),
                     array('class' => 'btn btn-primary' ,'title'=>'Add Product', 'type'=>'button', 
                           'style'=>"padding-bottom: 8px; padding-top: 8px;"));
                    ?>  

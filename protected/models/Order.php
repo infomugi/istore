@@ -11,6 +11,7 @@
  * @property integer $color
  * @property integer $quantity
  * @property integer $status
+ * @property integer $customer_id
  */
 class Order extends CActiveRecord
 {
@@ -30,11 +31,11 @@ class Order extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('transaction_id, product_id, size, color, quantity, status', 'required'),
-			array('transaction_id, product_id, size, color, quantity, status', 'numerical', 'integerOnly'=>true),
+			array('transaction_id, product_id, size, color, quantity, status, customer_id', 'required'),
+			array('transaction_id, product_id, size, color, quantity, status, customer_id', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_transaction_detail, transaction_id, product_id, size, color, quantity, status', 'safe', 'on'=>'search'),
+			array('id_transaction_detail, transaction_id, product_id, size, color, quantity, status, customer_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -46,6 +47,8 @@ class Order extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'Product'=>array(self::BELONGS_TO,'Product','product_id'),
+			'Customer'=>array(self::BELONGS_TO,'User','customer_id'),
 		);
 	}
 
@@ -62,6 +65,7 @@ class Order extends CActiveRecord
 			'color' => 'Color',
 			'quantity' => 'Quantity',
 			'status' => 'Status',
+			'customer_id' => 'Costumer',
 		);
 	}
 
@@ -90,6 +94,7 @@ class Order extends CActiveRecord
 		$criteria->compare('color',$this->color);
 		$criteria->compare('quantity',$this->quantity);
 		$criteria->compare('status',$this->status);
+		$criteria->compare('customer_id',$this->customer_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
