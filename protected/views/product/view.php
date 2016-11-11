@@ -17,6 +17,10 @@ $this->pageTitle='Detail Product - '.$model->name;
 		array('create'),
 		array('class' => 'btn btn-success','title'=>'Add Product'));
 		?>
+	<?php echo CHtml::link('Add Image',
+		array('image/create', 'product'=>$model->id_product),
+		array('class' => 'btn btn-success','title'=>'Add Product'));
+		?>		
 		<?php echo CHtml::link('List',
 			array('index'),
 			array('class' => 'btn btn-success', 'title'=>'List Product'));
@@ -100,7 +104,7 @@ $this->pageTitle='Detail Product - '.$model->name;
 																						'data'=>$model,
 																						'htmlOptions'=>array("class"=>"table"),
 																						'attributes'=>array(
-											// 'id_product',
+																							// 'id_product',
 																							array('name'=>'created_id','value'=>$model->Created->fullname),
 																							array('name'=>'update_id','value'=>$model->Update->fullname),
 																							'created_date',

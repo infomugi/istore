@@ -74,12 +74,15 @@ class ImageController extends Controller
 		if(isset($_POST['Image']))
 		{
 			$model->attributes=$_POST['Image'];
+			$model->product_id = $product;
+			$model->status = 1;
+			$searchproduct=Product::model()->findByPk($product);
 
 			$tmp;
 			if(strlen(trim(CUploadedFile::getInstance($model,'image'))) > 0) 
 			{ 
 				$tmp=CUploadedFile::getInstance($model,'image'); 
-				$model->image=Product::model()->seo($model->name).'.'.$tmp->extensionName; 
+				$model->image=Product::model()->seo($searchproduct->name.rand(100,200)).'.'.$tmp->extensionName; 
 			}
 
 			if($model->save())
@@ -88,7 +91,7 @@ class ImageController extends Controller
 					$tmp->saveAs(Yii::getPathOfAlias('webroot').'/image/product/big/'.$model->image);
 				}
 
-				$this->redirect(array('view','id'=>$model->id_product_image));
+				$this->redirect(array('product/view','id'=>$product));
 			}
 						
 		}
