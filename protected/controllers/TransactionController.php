@@ -74,8 +74,24 @@ class TransactionController extends Controller
 		if(isset($_POST['Transaction']))
 		{
 			$model->attributes=$_POST['Transaction'];
-			if($model->save())
+			$model->code = "T".date('dmY');
+			$model->date_order = date('Y-m-d h:i:s');
+			$model->date_confirmation = date('Y-m-d h:i:s');
+			$model->date_verification = date('Y-m-d h:i:s');
+			$model->customer_id = YII::app()->user->id;
+			$model->confirmation_id = 0;
+			$model->verification_id = 0;
+			$model->status = 0;
+			$model->payment_method = 0;
+			$model->payment_total = 0;
+			$model->payment_file = 0;
+			$model->shipping_type = 0;
+			$model->shipping_brand = 0;
+			$model->shipping_code = 0;
+
+			if($model->save()){
 				$this->redirect(array('view','id'=>$model->id_transaction));
+			}
 		}
 
 		$this->render('create',array(
