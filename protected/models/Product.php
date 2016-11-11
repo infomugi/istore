@@ -48,8 +48,8 @@ class Product extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('code, name, description, category_id, sub_category_id, color, status, stock, spesification, weight, brand_id, views, likes, discount, created_id, update_id, created_date, update_date, keyword, abstrack, sales, rate', 'required'),
-			array('category_id, sub_category_id, color, status, stock, weight, brand_id, views, likes, discount, created_id, update_id, created_date, update_date, sales, rate', 'numerical', 'integerOnly'=>true),
+			array('code, name, description, category_id, sub_category_id, color, status, stock, spesification, weight, brand_id, views, likes, discount, created_id, update_id, created_date, update_date, keyword, abstrack, sales, rate, image', 'required'),
+			array('category_id, sub_category_id, color, status, stock, weight, brand_id, views, likes, discount, created_id, update_id, sales, rate', 'numerical', 'integerOnly'=>true),
 			array('code', 'length', 'max'=>50),
 			array('name, abstrack, image', 'length', 'max'=>255),
 			array('keyword', 'length', 'max'=>150),
@@ -67,6 +67,11 @@ class Product extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'Category'=>array(self::BELONGS_TO,'Category','category_id'),
+			'Tag'=>array(self::BELONGS_TO,'Tag','sub_category_id'),
+			'Created'=>array(self::BELONGS_TO,'User','created_id'),
+			'Update'=>array(self::BELONGS_TO,'User','update_id'),
+			'Brand'=>array(self::BELONGS_TO,'Brand','brand_id'),
 		);
 	}
 
@@ -163,4 +168,30 @@ class Product extends CActiveRecord
 	public function seo($title){
 		return preg_replace('/[^a-z0-9_-]/i', '', strtolower(str_replace(' ', '-', trim($title))));
 	}		
+
+	public function color($data){
+		if($data==1){
+			return "White";
+		}else if($data==2){
+			return "Red";
+		}else if($data==3){
+			return "Blue";
+		}else if($data==4){
+			return "Green";
+		}else if($data==5){
+			return "Yellow";
+		}else{
+			return "Brown";
+		}
+	}
+
+	public function status($data){
+		if($data==1){
+			return "New";
+		}else if($data==2){
+			return "Sale";
+		}else{
+			return "Sold";
+		}
+	}	
 }

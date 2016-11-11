@@ -16,7 +16,7 @@ class ProductController extends Controller
 		return array(
 			'accessControl', // perform access control for CRUD operations
 			// 'postOnly + delete', // we only allow deletion via POST request
-		);
+			);
 	}
 
 	/**
@@ -28,17 +28,16 @@ class ProductController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('view','index'),
-				'users'=>array('@'),
-				'expression'=>'Yii::app()->user->record->level==3',
+				'actions'=>array('detail','index'),
+				'users'=>array('*'),
 				),
 			array('allow',
-				'actions'=>array('create','update','view','viewtmp','delete'),
+				'actions'=>array('view','detail'),
 				'users'=>array('@'),
 				'expression'=>'Yii::app()->user->record->level==2',
 				),			
 			array('allow',
-				'actions'=>array('create','update','view','delete','admin'),
+				'actions'=>array('create','update','view','delete','admin','image'),
 				'users'=>array('@'),
 				'expression'=>'Yii::app()->user->record->level==1',
 				),
@@ -59,15 +58,15 @@ class ProductController extends Controller
 	{
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
-		));
+			));
 	}
 	
-	public function actionViewtmp($id)
+	public function actionDetail($id)
 	{
 		$this->layout = "front_page";
-		$this->render('viewtmp',array(
+		$this->render('detail',array(
 			'model'=>$this->loadModel($id),
-		));
+			));
 	}
 	/**
 	 * Creates a new model.
@@ -83,14 +82,17 @@ class ProductController extends Controller
 		if(isset($_POST['Product']))
 		{
 			$model->attributes=$_POST['Product'];
+
 			$model->created_date = date('Y-m-d h:i:s');
 			$model->update_date = date('Y-m-d h:i:s');
 			$model->created_id=YII::app()->user->id;
+			$model->update_id=YII::app()->user->id;
 			$model->rate = 0;
 			$model->sales = 0;
 			$model->views = 0;
 			$model->likes = 0;
 			$model->brand_id = 1;
+
 			$tmp;
 			if(strlen(trim(CUploadedFile::getInstance($model,'image'))) > 0) 
 			{ 
@@ -110,7 +112,7 @@ class ProductController extends Controller
 
 		$this->render('create',array(
 			'model'=>$model,
-		));
+			));
 	}
 
 	public function actionOrder($product_id)
@@ -125,16 +127,16 @@ class ProductController extends Controller
 			$model->attributes=$_POST['Order'];
 			$model->product_id=$product_id;
 			$model->
-  			$model->image=CUploadedFile::getInstance($model,'image');
+			$model->image=CUploadedFile::getInstance($model,'image');
 			if($model->save())
-				{
+			{
 				$this->redirect(array('view','id'=>$model->id_product));
-				}
+			}
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
-		));
+			));
 	}
 
 	/**
@@ -152,19 +154,52 @@ class ProductController extends Controller
 		if(isset($_POST['Product']))
 		{
 			$model->attributes=$_POST['Product'];
-  			$model->image=CUploadedFile::getInstance($model,'image');
-  			$model->update_id=YII::app()->user->id;
+			$model->update_id=YII::app()->user->id;
 			$model->update_date=date('Y-m-d h:i:s');
 			if($model->save())
-				{	
-				$model->image->saveAs(Yii::getPathOfAlias('webroot').'/images/productimages/'.$model->image);
+			{	
 				$this->redirect(array('view','id'=>$model->id_product));
-				}
+			}
 		}
 		$this->render('update',array(
 			'model'=>$model,
-		));
+			));
 	}
+
+
+	public function actionImage($id)
+	{
+		$model=$this->loadModel($id);
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['Product']))
+		{
+			$model->attributes=$_POST['Product'];
+			$model->update_date=date('Y-m-d h:i:s');
+			$model->update_id=YII::app()->user->id;
+
+			$tmp;
+			if(strlen(trim(CUploadedFile::getInstance($model,'image'))) > 0) 
+			{ 
+				$tmp=CUploadedFile::getInstance($model,'image'); 
+				$model->image=Product::model()->seo($model->name).'.'.$tmp->extensionName; 
+			}
+
+			if($model->save())
+			{	
+				if(strlen(trim($model->image)) > 0) {
+					$tmp->saveAs(Yii::getPathOfAlias('webroot').'/image/product/big/'.$model->image);
+				}
+				$this->redirect(array('view','id'=>$model->id_product));
+			}
+		}
+		$this->render('image',array(
+			'model'=>$model,
+			));
+	}
+
 
 	/**
 	 * Deletes a particular model.
@@ -188,7 +223,7 @@ class ProductController extends Controller
 		$dataProvider=new CActiveDataProvider('Product');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
-		));
+			));
 	}
 
 	/**
@@ -203,7 +238,7 @@ class ProductController extends Controller
 
 		$this->render('admin',array(
 			'model'=>$model,
-		));
+			));
 	}
 
 	/**

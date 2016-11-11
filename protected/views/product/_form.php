@@ -11,6 +11,12 @@
 		<?php $form=$this->beginWidget('CActiveForm', array(
 			'id'=>'product-form',
 			'enableAjaxValidation'=>false,
+			'enableClientValidation' => true,
+			'clientOptions' => array(
+				'validateOnSubmit' => true,
+				),
+			'errorMessageCssClass' => 'label label-info',
+			'htmlOptions' => array('enctype' => 'multipart/form-data','autocomplete'=>'off'),
 			)); ?>
 
 			<?php echo $form->errorSummary($model, null, null, array('class' => 'alert alert-warning')); ?>
@@ -24,7 +30,7 @@
 
 				<div class="col-lg-8 col-md-9 col-xs-12">
 					<?php echo $form->error($model,'code'); ?>
-					<?php echo $form->textField($model,'code',array('class'=>'form-control')); ?>
+					<?php echo $form->textField($model,'code',array('class'=>'form-control','value'=>'SKU'.rand(10000,50000))); ?>
 				</div>
 
 			</div>  
@@ -42,6 +48,20 @@
 				</div>
 
 			</div>  
+
+
+			<div class="form-group">
+
+				<div class="col-lg-4 col-md-3 col-xs-12 control-label">
+					<?php echo $form->labelEx($model,'image'); ?>
+				</div>   
+
+				<div class="col-lg-8 col-md-9 col-xs-12">
+					<?php echo $form->error($model,'image'); ?>
+					<?php echo $form->fileField($model,'image',array('class'=>'btn btn-info')); ?>
+				</div>
+
+			</div>  			
 
 
 			<div class="form-group">
@@ -110,7 +130,7 @@
 							<?php echo $form->error($model,'color'); ?>
 							<?php 
 							echo $form->dropDownList($model, "color",
-								array('Brown'=>'Brown','White'=>'White','Red'=>'Red','Blue'=>'Blue','Green'=>'Green','Yellow'=>'Yellow','Brown'=>'Brown'),
+								array('1'=>'White','2'=>'Red','3'=>'Blue','4'=>'Green','5'=>'Yellow','6'=>'Brown'),
 								array("empty"=>"-- Color --", 'class'=>'select2 form-control')
 								); 
 								?> 
@@ -129,7 +149,7 @@
 								<?php echo $form->error($model,'status'); ?>
 							<?php 
 							echo $form->dropDownList($model, "status",
-								array('New'=>'New','Sold'=>'Sold','Sale'=>'Sale'),
+								array('0'=>'Hide','1'=>'New','2'=>'Sold','3'=>'Sale'),
 								array("empty"=>"-- Status --", 'class'=>'select2 form-control')
 								); 
 								?> 

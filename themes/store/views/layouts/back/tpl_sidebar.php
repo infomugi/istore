@@ -3,7 +3,7 @@
                     <nav class="main-navigation">
                         <ul>
                             <li>
-                                <a href="<?php echo $url;?>site/">
+                                <a href="<?php echo $url;?>site/dashboard">
                                     <i class="fa fa-dashboard"></i>
                                     <span>Dashboard</span>
                                 </a>
