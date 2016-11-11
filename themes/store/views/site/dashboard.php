@@ -1,6 +1,10 @@
 <?php
 /* @var $this SiteController */
 $this->pageTitle='Dashboard';
+$customer = Yii::app()->db->createCommand('SELECT COUNT(id_user) FROM user WHERE status = 1')->queryScalar();
+$product = Yii::app()->db->createCommand('SELECT COUNT(id_product) FROM product WHERE status = 1')->queryScalar();
+$category = Yii::app()->db->createCommand('SELECT COUNT(id_category) FROM category WHERE status = 1')->queryScalar();
+$tag = Yii::app()->db->createCommand('SELECT COUNT(id_category_sub) FROM category_sub WHERE status = 1')->queryScalar();
 ?>
 
 	<div class="row">
@@ -8,10 +12,10 @@ $this->pageTitle='Dashboard';
 			<section class="panel">
 				<div class="panel-body">
 					<div class="circle-icon bg-success">
-						<i class="fa fa-microphone"></i>
+						<i class="fa fa-user"></i>
 					</div>
 					<div>
-						<h3 class="no-margin">5468</h3>
+						<h3 class="no-margin"><?php echo $customer; ?></h3>
 						Customer
 					</div>
 				</div>
@@ -21,10 +25,10 @@ $this->pageTitle='Dashboard';
 			<section class="panel">
 				<div class="panel-body">
 					<div class="circle-icon bg-danger">
-						<i class="fa fa-anchor"></i>
+						<i class="fa fa-archive"></i>
 					</div>
 					<div>
-						<h3 class="no-margin">2,300</h3>
+						<h3 class="no-margin"><?php echo $product; ?></h3>
 						Product
 					</div>
 				</div>
@@ -34,11 +38,11 @@ $this->pageTitle='Dashboard';
 			<section class="panel">
 				<div class="panel-body">
 					<div class="circle-icon bg-default">
-						<i class="fa fa-magnet"></i>
+						<i class="fa fa-tags"></i>
 					</div>
 					<div>
-						<h3 class="no-margin">3,823</h3>
-						Visitor
+						<h3 class="no-margin"><?php echo $category; ?></h3>
+						Category
 					</div>
 				</div>
 			</section>
@@ -50,8 +54,8 @@ $this->pageTitle='Dashboard';
 						<i class="fa fa-tasks"></i>
 					</div>
 					<div>
-						<h3 class="no-margin">3,823</h3>
-						Pageviews
+						<h3 class="no-margin"><?php echo $tag; ?></h3>
+						Tag
 					</div>
 				</div>
 			</section>

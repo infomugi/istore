@@ -2159,3 +2159,47 @@ Stack trace:
 REQUEST_URI=/kkstore/index.php?r=image/create&product=4
 HTTP_REFERER=http://localhost/kkstore/index.php?r=image/create&product=4
 ---
+2016/11/11 16:48:58 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() gagal: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dbproject_kupakupi.tag' doesn't exist. Statement SQL yang dijalankan: SELECT COUNT(id_sub_category) FROM tag WHERE status = 1.
+2016/11/11 16:48:58 [error] [exception.CDbException] CDbException: CDbCommand gagal menjalankan statementSQL: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'dbproject_kupakupi.tag' doesn't exist. The SQL statement executed was: SELECT COUNT(id_sub_category) FROM tag WHERE status = 1 in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(433): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 C:\xampp\htdocs\kkstore\themes\store\views\site\dashboard.php(7): CDbCommand->queryScalar()
+#2 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\\xampp\\htdocs...', NULL, true)
+#4 C:\xampp\htdocs\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\\xampp\\htdocs...', NULL, true)
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(782): CController->renderPartial('dashboard', NULL, true)
+#6 C:\xampp\htdocs\kkstore\protected\controllers\SiteController.php(40): CController->render('dashboard')
+#7 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 C:\xampp\htdocs\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#10 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('dashboard')
+#12 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('site/dashboard')
+#13 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\kkstore\index.php(15): CApplication->run()
+#15 {main}
+REQUEST_URI=/kkstore/index.php?r=site/dashboard
+HTTP_REFERER=http://localhost/kkstore/index.php?r=category/admin
+---
+2016/11/11 16:49:14 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() gagal: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id_sub_category' in 'field list'. Statement SQL yang dijalankan: SELECT COUNT(id_sub_category) FROM category_sub WHERE status = 1.
+2016/11/11 16:49:14 [error] [exception.CDbException] CDbException: CDbCommand gagal menjalankan statementSQL: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id_sub_category' in 'field list'. The SQL statement executed was: SELECT COUNT(id_sub_category) FROM category_sub WHERE status = 1 in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(433): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 C:\xampp\htdocs\kkstore\themes\store\views\site\dashboard.php(7): CDbCommand->queryScalar()
+#2 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\\xampp\\htdocs...', NULL, true)
+#4 C:\xampp\htdocs\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\\xampp\\htdocs...', NULL, true)
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(782): CController->renderPartial('dashboard', NULL, true)
+#6 C:\xampp\htdocs\kkstore\protected\controllers\SiteController.php(40): CController->render('dashboard')
+#7 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): SiteController->actionDashboard()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 C:\xampp\htdocs\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#10 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('dashboard')
+#12 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('site/dashboard')
+#13 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\kkstore\index.php(15): CApplication->run()
+#15 {main}
+REQUEST_URI=/kkstore/index.php?r=site/dashboard
+HTTP_REFERER=http://localhost/kkstore/index.php?r=category/admin
+---
