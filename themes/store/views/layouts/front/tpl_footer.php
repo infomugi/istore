@@ -84,14 +84,15 @@
 	<div class="footer-coppyright">
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-6 col-xs-12 coppyright"> Copyright © 2016 <a href="<?php echo $baseUrl;?>/index.html#"> MyStore </a>. All Rights Reserved. </div>
+				<div class="col-sm-6 col-xs-12 coppyright"> Copyright © 2016 <a href="<?php echo $baseUrl;?>/index.html#"> KupaKupiStore </a>. All Rights Reserved. </div>
 				<div class="col-sm-6 col-xs-12">
 					<div class="payment">
 						<ul>
-							<li><a href="<?php echo $baseUrl;?>/index.html#"><img title="Visa" alt="Visa" src="<?php echo $baseUrl;?>/frontend/images/visa.png"></a></li>
-							<li><a href="<?php echo $baseUrl;?>/index.html#"><img title="Paypal" alt="Paypal" src="<?php echo $baseUrl;?>/frontend/images/paypal.png"></a></li>
-							<li><a href="<?php echo $baseUrl;?>/index.html#"><img title="Discover" alt="Discover" src="<?php echo $baseUrl;?>/frontend/images/discover.png"></a></li>
-							<li><a href="<?php echo $baseUrl;?>/index.html#"><img title="Master Card" alt="Master Card" src="<?php echo $baseUrl;?>/frontend/images/master-card.png"></a></li>
+							We accept bank : 
+							<li><a href="<?php echo $baseUrl;?>/index.html#"><img title="Visa" alt="Visa" src="<?php echo $baseUrl;?>/frontend/images/bank/bri.png" width=50px></a></li>
+							<li><a href="<?php echo $baseUrl;?>/index.html#"><img title="Paypal" alt="Paypal" src="<?php echo $baseUrl;?>/frontend/images/bank/bni.png" width=50px></a></li>
+							<li><a href="<?php echo $baseUrl;?>/index.html#"><img title="Discover" alt="Discover" src="<?php echo $baseUrl;?>/frontend/images/bank/bca.png" width=50px></a></li>
+							<li><a href="<?php echo $baseUrl;?>/index.html#"><img title="Master Card" alt="Master Card" src="<?php echo $baseUrl;?>/frontend/images/bank/mandiri.png" width=50px></a></li>
 						</ul>
 					</div>
 				</div>
