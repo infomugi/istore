@@ -30,7 +30,7 @@
 
 				<div class="col-lg-8 col-md-9 col-xs-12">
 					<?php echo $form->error($model,'code'); ?>
-					<?php echo $form->textField($model,'code',array('class'=>'form-control','value'=>'SKU'.rand(10000,50000))); ?>
+					<?php echo $form->textField($model,'code',array('class'=>'form-control','value'=>'SKU'.rand(10000,50000),'readonly'=>true)); ?>
 				</div>
 
 			</div>  
@@ -58,7 +58,7 @@
 
 				<div class="col-lg-8 col-md-9 col-xs-12">
 					<?php echo $form->error($model,'image'); ?>
-					<?php echo $form->fileField($model,'image',array('class'=>'btn btn-info')); ?>
+					<?php echo $form->fileField($model,'image',array('class'=>'form-control')); ?>
 				</div>
 
 			</div>  			
@@ -88,10 +88,18 @@
 					<?php echo $form->error($model,'category_id'); ?>
 					<?php 
 					echo $form->dropDownList($model, "category_id",
-						CHtml::listData(Category::model()->findAll(array('condition'=>'status=1')),
-							'id_category', 'name'
-							),
-						array("empty"=>"-- Category --", 'class'=>'select2 form-control')
+						CHtml::listData(Category::model()->findAll(array('condition'=>'','order'=>'name ASC')),
+								'id_category', 'name'
+								),
+							array(
+								'prompt'=>'-- Category --.',
+								'class'=>'form-control selectz',
+								'ajax' => array(
+									'type'=>'POST', 
+									'url'=>Yii::app()->createUrl('tag/data'), 
+									'update'=>'#Product_sub_category_id', 
+									'data'=>array('category_id'=>'js:this.value'),
+									))
 						); 
 						?> 
 					</div>
@@ -107,18 +115,29 @@
 
 					<div class="col-lg-8 col-md-9 col-xs-12">
 						<?php echo $form->error($model,'sub_category_id'); ?>
-						<?php 
-						echo $form->dropDownList($model, "sub_category_id",
-							CHtml::listData(Tag::model()->findAll(array('condition'=>'status=1')),
-								'id_category_sub', 'name'
-								),
-							array("empty"=>"-- Tag --", 'class'=>'select2 form-control')
-							); 
-							?> 
+						<?php echo $form->dropDownList($model, "sub_category_id",
+										array(),
+										array("empty"=>"-- Tag --", 'class'=>'form-control')
+										); ?> 
 						</div>
 
 					</div>  
 
+					<div class="form-group">
+
+						<div class="col-lg-4 col-md-3 col-xs-12 control-label">
+							<?php echo $form->labelEx($model,'price'); ?>
+						</div>   
+
+						<div class="col-lg-8 col-md-9 col-xs-12">
+							<?php echo $form->error($model,'price'); ?>
+							<div class="input-group">
+				                 <span class="input-group-addon">Rp.</span>
+				                <?php echo $form->textField($model,'price',array('class'=>'form-control','onkeyup'=>"validAngka(this)",'maxlength'=>12)); ?>
+				            </div>    
+						</div>
+
+					</div>  
 
 					<div class="form-group">
 
@@ -166,7 +185,7 @@
 
 							<div class="col-lg-8 col-md-9 col-xs-12">
 								<?php echo $form->error($model,'stock'); ?>
-								<?php echo $form->textField($model,'stock',array('class'=>'form-control')); ?>
+								<?php echo $form->textField($model,'stock',array('class'=>'form-control','onkeyup'=>"validAngka(this)")); ?>
 							</div>
 
 						</div>  
@@ -194,7 +213,7 @@
 
 							<div class="col-lg-8 col-md-9 col-xs-12">
 								<?php echo $form->error($model,'weight'); ?>
-								<?php echo $form->textField($model,'weight',array('class'=>'form-control')); ?>
+								<?php echo $form->textField($model,'weight',array('class'=>'form-control','onkeyup'=>"validAngka(this)")); ?>
 							</div>
 
 						</div>  
@@ -208,7 +227,11 @@
 
 							<div class="col-lg-8 col-md-9 col-xs-12">
 								<?php echo $form->error($model,'discount'); ?>
-								<?php echo $form->textField($model,'discount',array('class'=>'form-control')); ?>
+							<div class="input-group">
+				                <?php echo $form->textField($model,'discount',array('class'=>'form-control','onkeyup'=>"validAngka(this)",'maxlength'=>3)); ?>
+				                <span class="input-group-addon">%</span>
+				            </div>	
+								
 							</div>
 
 						</div>  
@@ -252,3 +275,12 @@
 					<?php $this->endWidget(); ?>
 
 </div></div><!-- form -->
+								<script language='javascript'>
+								function validAngka(a)
+								{
+									if(!/^[0-9.]+$/.test(a.value))
+									{
+									a.value = a.value.substring(0,a.value.length-1000);
+									}
+								}
+								</script>

@@ -48,14 +48,14 @@ class Product extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('code, name, description, category_id, sub_category_id, color, status, stock, spesification, weight, brand_id, views, likes, discount, created_id, update_id, created_date, update_date, keyword, abstrack, sales, rate, image', 'required'),
+			array('code, name, description, category_id, sub_category_id, color, status, stock, spesification, weight, brand_id, views, likes, discount, created_id, price, update_id, created_date, update_date, keyword, abstrack, sales, rate, image', 'required'),
 			array('category_id, sub_category_id, color, status, stock, weight, brand_id, views, likes, discount, created_id, update_id, sales, rate', 'numerical', 'integerOnly'=>true),
 			array('code', 'length', 'max'=>50),
 			array('name, abstrack, image', 'length', 'max'=>255),
 			array('keyword', 'length', 'max'=>150),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_product, code, name, description, category_id, sub_category_id, color, status, stock, spesification, weight, brand_id, views, likes, discount, created_id, update_id, created_date, update_date, keyword, abstrack, sales, rate', 'safe', 'on'=>'search'),
+			array('id_product, code, name, description, category_id, sub_category_id, color, status, stock, spesification, weight, brand_id, price, views, likes, discount, created_id, update_id, created_date, update_date, keyword, abstrack, sales, rate', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -87,6 +87,7 @@ class Product extends CActiveRecord
 			'description' => 'Description',
 			'category_id' => 'Category',
 			'sub_category_id' => 'Sub Category',
+			'price' => 'Price',
 			'color' => 'Color',
 			'status' => 'Status',
 			'stock' => 'Stock',
@@ -131,6 +132,7 @@ class Product extends CActiveRecord
 		$criteria->compare('description',$this->description,true);
 		$criteria->compare('category_id',$this->category_id);
 		$criteria->compare('sub_category_id',$this->sub_category_id);
+		$criteria->compare('price',$this->price);
 		$criteria->compare('color',$this->color);
 		$criteria->compare('status',$this->status);
 		$criteria->compare('stock',$this->stock);
