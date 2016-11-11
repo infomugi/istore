@@ -28,9 +28,12 @@ $subtotal = $data->Product->price * $jumlahbeli;
   <!-- <small><a href="">Color : <?PHP echo Product::model()->color($data->Product->color); ?></a></small><br> -->
   <!-- <small><a href="">Size : <?PHP echo $data->size; ?></a></small></td> -->
   <td class="availability in-stock"><span class="label"><?PHP echo Product::model()->status($data->Product->status); ?></span></td>
-  <td class="price"><span><?PHP echo $data->Product->price; ?></span></td>
+  <td class="price"><span><?PHP echo Yii::app()->numberFormatter->format("Rp ###,###,###",$data->Product->price); ?></span></td>
   <td class="qty"><input class="form-control input-sm" type="text" disabled="true" value="<?php echo $jumlahbeli; ?>"></td>
-  <td class="price"><span><?PHP echo $subtotal; ?></span></td>
-  <td class="action"><a href=""><i class="icon-close"></i></a></td>
+  <td class="price"><span><?PHP echo Yii::app()->numberFormatter->format("Rp ###,###,###", $subtotal); ?></span></td>
+  <td class="action"><?php echo CHtml::link('<i class="fa fa-close"></i>', 
+    array('remove', 'id'=>$data->id_transaction_detail,
+    ),  array('title'=>'Hapus Product'));
+    ?></a></td>
 </tr>
 

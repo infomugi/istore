@@ -33,17 +33,17 @@ class OrderController extends Controller
 				'expression'=>'Yii::app()->user->record->level==3',
 				),
 			array('allow',
-				'actions'=>array('create','update','view','delete'),
+				'actions'=>array('create','update','view','delete','remove'),
 				'users'=>array('@'),
 				'expression'=>'Yii::app()->user->record->level==2',
 				),			
 			array('allow',
-				'actions'=>array('create','update','view','delete','admin','cart','checkout'),
+				'actions'=>array('create','update','view','delete','admin','cart','checkout','remove'),
 				'users'=>array('@'),
 				'expression'=>'Yii::app()->user->record->level==1',
 				),
 			array('deny',
-				'actions'=>array('create','update','view','delete','admin'),
+				'actions'=>array('create','update','view','delete','admin','remove'),
 				'users'=>array('*'),
 				),
 			);
@@ -140,6 +140,15 @@ class OrderController extends Controller
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+	}
+
+	public function actionRemove($id)
+	{
+		$this->loadModel($id)->delete();
+
+		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+		if(!isset($_GET['ajax']))
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('order/cart'));
 	}
 
 	/**

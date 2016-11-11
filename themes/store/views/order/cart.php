@@ -80,7 +80,18 @@ for ($i=0; $i < $beli; $i++) {
 									</tr>
 									<tr>
 										<td colspan="3"><strong>Total</strong></td>
-										<td colspan="2"><strong>RP. <?php echo $total; ?> </strong></td>
+										<td colspan="2"><strong>
+										<?php 
+											if ($total==null)
+										{
+											echo 0;
+										} 	
+											else {
+										?>
+										<?php
+										echo Yii::app()->numberFormatter->format("Rp ###,###,###",$total); 
+										}
+										?> </strong></td>
 									</tr>
 								</tfoot>
 							</table>
