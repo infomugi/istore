@@ -10,17 +10,36 @@ $this->pageTitle='Cart';
 
 //HITUNG JUMLAH BELI PRODAK
 $jumlahbeli = Yii::app()->db->createCommand('
-SELECT COUNT(id_transaction_detail) FROM transaction_detail WHERE customer_id=2 GROUP BY product_id
-  ')->queryScalar();
+	SELECT COUNT(id_transaction_detail) FROM transaction_detail WHERE customer_id=2 GROUP BY product_id
+	')->queryScalar();
 
-$total = Yii::app()->db->createCommand('
-SELECT SUM(orders.quantity*product.price) as Jumlah FROM transaction_detail as orders LEFT JOIN product ON orders.product_id=product.id_product WHERE orders.customer_id=2 AND product.id_product=4
-  ')->queryScalar();
+
+$criteria= new CDbCriteria();
+$criteria->distinct = true;
+$criteria->group = 'product_id';
+$criteria->order = 'product_id';
+$criteria->condition = 'customer_id='.YII::app()->user->id;
+
+$totalBeli=new CActiveDataProvider('Order', array(
+	'criteria'=>$criteria,
+	'pagination'=>false,
+	));
+
+$beli =  $totalBeli->totalItemCount;
+
+for ($i=0; $i < $beli; $i++) { 
+	echo $total = Yii::app()->db->createCommand('
+		SELECT SUM(orders.quantity*product.price) as Jumlah FROM transaction_detail as orders LEFT JOIN product ON orders.product_id=product.id_product WHERE orders.customer_id=2 AND product.id_product=5
+		')->queryScalar();
+	echo "<BR>";
+}
+
+
+
 
 ?>
 
 
-<?php echo $jumlahbeli; ?>
 
 <!-- Main Container -->
 <section class="main-container col1-layout">
@@ -78,13 +97,13 @@ SELECT SUM(orders.quantity*product.price) as Jumlah FROM transaction_detail as o
 
 
 <script>
-    function backAway(){
-        if(history.length === 1){
-            window.location = "http://localhost/kkstore/"
-        } else {
-            history.back();
-        }
-    }
+	function backAway(){
+		if(history.length === 1){
+			window.location = "http://localhost/kkstore/"
+		} else {
+			history.back();
+		}
+	}
 </script>
 
 

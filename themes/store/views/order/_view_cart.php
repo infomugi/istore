@@ -1,5 +1,5 @@
 <?php
-$count = Yii::app()->db->createCommand('
+$jumlahbeli = Yii::app()->db->createCommand('
   SELECT SUM(quantity) 
   FROM transaction_detail 
   WHERE STATUS = 0 
@@ -7,6 +7,17 @@ $count = Yii::app()->db->createCommand('
   AND product_id='.$data->product_id.' 
   GROUP by product_id
   ')->queryScalar();
+
+$count = Yii::app()->db->createCommand('
+  SELECT COUNT(*) 
+  FROM transaction_detail 
+  WHERE STATUS = 0 
+  AND customer_id='.YII::app()->user->id.' 
+  AND product_id='.$data->product_id.' 
+  GROUP by product_id
+  ')->queryScalar();
+
+$subtotal = $data->Product->price * $jumlahbeli;
 ?>
 
 <tr>
@@ -18,7 +29,8 @@ $count = Yii::app()->db->createCommand('
   <!-- <small><a href="">Size : <?PHP echo $data->size; ?></a></small></td> -->
   <td class="availability in-stock"><span class="label"><?PHP echo Product::model()->status($data->Product->status); ?></span></td>
   <td class="price"><span><?PHP echo $data->Product->price; ?></span></td>
-  <td class="qty"><input class="form-control input-sm" type="text" disabled="true" value="<?php echo $count; ?>"></td>
-  <td class="price"><span><?PHP echo $data->Product->price * $count; ?></span></td>
+  <td class="qty"><input class="form-control input-sm" type="text" disabled="true" value="<?php echo $jumlahbeli; ?>"></td>
+  <td class="price"><span><?PHP echo $subtotal; ?></span></td>
   <td class="action"><a href=""><i class="icon-close"></i></a></td>
 </tr>
+
