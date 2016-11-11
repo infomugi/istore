@@ -64,7 +64,7 @@ class ImageController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCreate($product)
 	{
 		$model=new Image;
 
@@ -74,8 +74,23 @@ class ImageController extends Controller
 		if(isset($_POST['Image']))
 		{
 			$model->attributes=$_POST['Image'];
+
+			$tmp;
+			if(strlen(trim(CUploadedFile::getInstance($model,'image'))) > 0) 
+			{ 
+				$tmp=CUploadedFile::getInstance($model,'image'); 
+				$model->image=Product::model()->seo($model->name).'.'.$tmp->extensionName; 
+			}
+
 			if($model->save())
+			{
+				if(strlen(trim($model->image)) > 0) {
+					$tmp->saveAs(Yii::getPathOfAlias('webroot').'/image/product/big/'.$model->image);
+				}
+
 				$this->redirect(array('view','id'=>$model->id_product_image));
+			}
+						
 		}
 
 		$this->render('create',array(

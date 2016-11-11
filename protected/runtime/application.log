@@ -2115,3 +2115,24 @@ Stack trace:
 REQUEST_URI=/kkstore/index.php?r=transaction/create
 HTTP_REFERER=http://localhost/kkstore/index.php?r=order/cart
 ---
+2016/11/11 16:00:48 [error] [exception.CHttpException.404] CHttpException: The requested page does not exist. in C:\xampp\htdocs\kkstore\protected\controllers\ProductController.php:255
+Stack trace:
+#0 C:\xampp\htdocs\kkstore\protected\controllers\ProductController.php(68): ProductController->loadModel('2')
+#1 [internal function]: ProductController->actionDetail('2')
+#2 C:\xampp\htdocs\yii\framework\web\actions\CAction.php(109): ReflectionMethod->invokeArgs(Object(ProductController), Array)
+#3 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(ProductController), Object(ReflectionMethod), Array)
+#4 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('detail')
+#13 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('product/detail')
+#14 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#15 C:\xampp\htdocs\kkstore\index.php(15): CApplication->run()
+#16 {main}
+REQUEST_URI=/kkstore/index.php?r=product/detail&id=2
+---
