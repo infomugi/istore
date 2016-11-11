@@ -226,6 +226,22 @@ class ProductController extends Controller
 			));
 	}
 
+	public function actionSale()
+	{
+		$dataProvider=new CActiveDataProvider('Product',array('criteria'=>'condition'));
+		$this->render('index',array(
+			'dataProvider'=>$dataProvider,
+			));
+	}	
+
+	public function actionPopular()
+	{
+		$dataProvider=new CActiveDataProvider('Product');
+		$this->render('index',array(
+			'dataProvider'=>$dataProvider,
+			));
+	}		
+
 	/**
 	 * Manages all models.
 	 */

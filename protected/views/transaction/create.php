@@ -7,7 +7,7 @@ $this->breadcrumbs=array(
 	'Add',
 	);
 
-	$this->pageTitle='Add Transaction';
+	$this->pageTitle='Checkout';
 	?>
 
 	<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

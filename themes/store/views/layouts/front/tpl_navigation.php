@@ -26,10 +26,16 @@
       							<!-- top links -->
       							<div class="headerlinkmenu col-lg-8 col-md-7 col-sm-8 col-xs-12">
       								<div class="links">
-      									<div class="myaccount">
+                      <?PHP if(!YII::app()->user->isGuest){ ?>
+                        <div class="myaccount">
                           <a title="My Account" href="<?php echo $url;?>/user/profile"><i class="fa fa-user"></i><span class="hidden-xs">My Account</span></a>
                         </div>
-                        <div class="login"><a href="<?php echo $url;?>/site/login"><i class="fa fa-unlock-alt"></i><span class="hidden-xs">Log In</span></a></div>
+                      <?PHP }else{ ?>
+                        <div class="login">
+                          <a href="<?php echo $url;?>/site/login"><i class="fa fa-unlock-alt"></i><span class="hidden-xs">Log In</span></a>
+                        </div>
+                        <?PHP } ?>
+
                       </div>
 
                     </div>
@@ -281,9 +287,6 @@
  </div>
 </div>
 </li>
-<li class="nosub"><a href="<?php echo $baseUrl;?>/"><i class="icon fa fa-gamepad fa-fw"></i> Game &amp; Video</a></li>
-<li class="nosub"><a href="<?php echo $baseUrl;?>/"><i class="glyphicon glyphicon-time"></i> Watches</a></li>
-<li class="nosub"><a href="<?php echo $baseUrl;?>/"><i class="icon fa fa-lightbulb-o fa-fw"></i> Lights &amp; Lighting</a></li>
 </ul>
 </div>
 </div>
@@ -293,19 +296,31 @@
  <div class="mtmegamenu">
   <ul>
    <li class="mt-root demo_custom_link_cms">
-    <div class="mt-root-item"><a href="<?php echo $baseUrl;?>/">
+    <div class="mt-root-item"><a href="<?php echo $url;?>/site/index">
      <div class="title title_font"><span class="title-text">Home</span></div>
    </a></div>
  </li>
 
+  <li class="mt-root">
+   <div class="mt-root-item"><a href="<?php echo $url;?>/product/top">
+   <div class="title title_font"><span class="title-text">Furnitur</span> </div>
+ </a></div>
+</li>
+
  <li class="mt-root">
-  <div class="mt-root-item"><a href="<?php echo $baseUrl;?>/">
-   <div class="title title_font"><span class="title-text">Contact Us</span> </div>
+   <div class="mt-root-item"><a href="<?php echo $url;?>/product/top">
+   <div class="title title_font"><span class="title-text">Sepatu</span> </div>
+ </a></div>
+</li>
+
+ <li class="mt-root">
+   <div class="mt-root-item"><a href="<?php echo $url;?>/product/top">
+   <div class="title title_font"><span class="title-text">Terpopuler</span> </div>
  </a></div>
 </li>
 <li class="mt-root">
-  <div class="mt-root-item"><a href="<?php echo $baseUrl;?>/about_us.html">
-   <div class="title title_font"><span class="title-text">about us</span></div>
+   <div class="mt-root-item"><a href="<?php echo $url;?>/product/new">
+   <div class="title title_font"><span class="title-text">Terbaru</span></div>
  </a></div>
 </li>
 <li class="mt-root">

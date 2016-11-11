@@ -66,6 +66,7 @@ class TransactionController extends Controller
 	 */
 	public function actionCreate()
 	{
+		$this->layout = "front_index";
 		$model=new Transaction;
 
 		// Uncomment the following line if AJAX validation is needed
