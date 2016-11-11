@@ -58,7 +58,7 @@ $total = Yii::app()->db->createCommand('SELECT SUM(quantity) FROM transaction_de
 								</tfoot>
 							</table>
 						</div>
-						<div class="cart_navigation"> <a class="continue-btn" href="#" onClick="backAway()"><i class="fa fa-arrow-left"> </i> Continue shopping</a> <a class="checkout-btn" href="<?php echo Yii::app()->baseUrl; ?>/index.php?r=order/checkout"><i class="fa fa-check"></i> Proceed to checkout</a> </div>
+						<div class="cart_navigation"> <a class="continue-btn" href="#" onClick="backAway()"><i class="fa fa-arrow-left"> </i> Continue Shopping</a> <a class="checkout-btn" href="<?php echo Yii::app()->baseUrl; ?>/index.php?r=order/checkout"><i class="fa fa-check"></i> Proceed to Checkout</a> </div>
 					</div>
 				</div>
 			</div>

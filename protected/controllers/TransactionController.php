@@ -148,6 +148,22 @@ class TransactionController extends Controller
 		));
 	}
 
+	public function actionNewIndex()
+	{
+		$dataProvider=new CActiveDataProvider('Transaction',array('criteria'=>array('condition'=>array('status=0'))));
+		$this->render('index',array(
+			'dataProvider'=>$dataProvider,
+		));
+	}
+
+	public function actionConfirmIndex()
+	{
+		$dataProvider=new CActiveDataProvider('Transaction',array('criteria'=>array('condition'=>array('status=0'))));
+		$this->render('index',array(
+			'dataProvider'=>$dataProvider,
+		));
+	}
+	
 	/**
 	 * Manages all models.
 	 */
