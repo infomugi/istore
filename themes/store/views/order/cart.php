@@ -8,9 +8,13 @@ $this->breadcrumbs=array(
 
 $this->pageTitle='Cart';
 
+$jumlahbeli = Yii::app()->db->createCommand('
+  SELECT SUM(quantity) 
+  FROM transaction_detail 
+  WHERE STATUS = 0 
+  GROUP by customer_id
+  ')->queryScalar();
 
-
-$total = Yii::app()->db->createCommand('SELECT SUM(quantity) FROM transaction_detail WHERE status = 1 AND customer_id='.YII::app()->user->id)->queryScalar();
 ?>
 
 <!-- Main Container -->
@@ -53,7 +57,7 @@ $total = Yii::app()->db->createCommand('SELECT SUM(quantity) FROM transaction_de
 									</tr>
 									<tr>
 										<td colspan="3"><strong>Total</strong></td>
-										<td colspan="2"><strong>$237.88 </strong></td>
+										<td colspan="2"><strong>$<?php echo $jumlahbeli; ?> </strong></td>
 									</tr>
 								</tfoot>
 							</table>

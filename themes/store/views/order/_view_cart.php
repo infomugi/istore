@@ -1,10 +1,11 @@
 <?php
 $count = Yii::app()->db->createCommand('
-  SELECT 
-  count(quantity) 
-  FROM transaction_detail
-  WHERE status=1 AND customer_id='.YII::app()->user->id.' 
-  GROUP BY product_id='.$data->product_id.'
+  SELECT SUM(quantity) 
+  FROM transaction_detail 
+  WHERE STATUS = 0 
+  AND customer_id='.YII::app()->user->id.' 
+  AND product_id='.$data->product_id.' 
+  GROUP by product_id
   ')->queryScalar();
 ?>
 
