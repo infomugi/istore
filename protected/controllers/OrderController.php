@@ -38,7 +38,7 @@ class OrderController extends Controller
 				'expression'=>'Yii::app()->user->record->level==2',
 				),			
 			array('allow',
-				'actions'=>array('create','update','view','delete','admin','cart'),
+				'actions'=>array('create','update','view','delete','admin','cart','checkout'),
 				'users'=>array('@'),
 				'expression'=>'Yii::app()->user->record->level==1',
 				),
@@ -97,6 +97,12 @@ class OrderController extends Controller
 			'dataProvider'=>$dataProvider,
 			));
 	}	
+
+	public function actionCheckout()
+	{
+		$this->redirect(array('transaction/create'));
+	}	
+
 
 	/**
 	 * Updates a particular model.

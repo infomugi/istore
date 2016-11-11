@@ -24,7 +24,7 @@
 
 						<div class="col-lg-8 col-md-9 col-xs-12">
 							<?php echo $form->error($model,'code'); ?>
-							<?php echo $form->textField($model,'code',array('size'=>25,'maxlength'=>25)),array('class'=>'form-control')); ?>
+							<?php echo $form->textField($model,'code',array('class'=>'form-control')); ?>
 						</div>
 		
 				</div>  
@@ -38,7 +38,7 @@
 
 						<div class="col-lg-8 col-md-9 col-xs-12">
 							<?php echo $form->error($model,'date_order'); ?>
-							<?php echo $form->textField($model,'date_order'),array('class'=>'form-control')); ?>
+							<?php echo $form->textField($model,'date_order',array('class'=>'form-control')); ?>
 						</div>
 		
 				</div>  
@@ -52,7 +52,7 @@
 
 						<div class="col-lg-8 col-md-9 col-xs-12">
 							<?php echo $form->error($model,'date_confirmation'); ?>
-							<?php echo $form->textField($model,'date_confirmation'),array('class'=>'form-control')); ?>
+							<?php echo $form->textField($model,'date_confirmation',array('class'=>'form-control')); ?>
 						</div>
 		
 				</div>  
@@ -66,7 +66,7 @@
 
 						<div class="col-lg-8 col-md-9 col-xs-12">
 							<?php echo $form->error($model,'date_verification'); ?>
-							<?php echo $form->textField($model,'date_verification'),array('class'=>'form-control')); ?>
+							<?php echo $form->textField($model,'date_verification',array('class'=>'form-control')); ?>
 						</div>
 		
 				</div>  
@@ -80,7 +80,7 @@
 
 						<div class="col-lg-8 col-md-9 col-xs-12">
 							<?php echo $form->error($model,'customer_id'); ?>
-							<?php echo $form->textField($model,'customer_id'),array('class'=>'form-control')); ?>
+							<?php echo $form->textField($model,'customer_id',array('class'=>'form-control')); ?>
 						</div>
 		
 				</div>  
@@ -94,7 +94,7 @@
 
 						<div class="col-lg-8 col-md-9 col-xs-12">
 							<?php echo $form->error($model,'confirmation_id'); ?>
-							<?php echo $form->textField($model,'confirmation_id'),array('class'=>'form-control')); ?>
+							<?php echo $form->textField($model,'confirmation_id',array('class'=>'form-control')); ?>
 						</div>
 		
 				</div>  
@@ -108,7 +108,7 @@
 
 						<div class="col-lg-8 col-md-9 col-xs-12">
 							<?php echo $form->error($model,'verification_id'); ?>
-							<?php echo $form->textField($model,'verification_id'),array('class'=>'form-control')); ?>
+							<?php echo $form->textField($model,'verification_id',array('class'=>'form-control')); ?>
 						</div>
 		
 				</div>  
@@ -122,7 +122,7 @@
 
 						<div class="col-lg-8 col-md-9 col-xs-12">
 							<?php echo $form->error($model,'payment_method'); ?>
-							<?php echo $form->textField($model,'payment_method'),array('class'=>'form-control')); ?>
+							<?php echo $form->textField($model,'payment_method',array('class'=>'form-control')); ?>
 						</div>
 		
 				</div>  
@@ -136,7 +136,7 @@
 
 						<div class="col-lg-8 col-md-9 col-xs-12">
 							<?php echo $form->error($model,'payment_total'); ?>
-							<?php echo $form->textField($model,'payment_total'),array('class'=>'form-control')); ?>
+							<?php echo $form->textField($model,'payment_total',array('class'=>'form-control')); ?>
 						</div>
 		
 				</div>  
@@ -150,7 +150,7 @@
 
 						<div class="col-lg-8 col-md-9 col-xs-12">
 							<?php echo $form->error($model,'payment_file'); ?>
-							<?php echo $form->textField($model,'payment_file',array('size'=>60,'maxlength'=>255)),array('class'=>'form-control')); ?>
+							<?php echo $form->textField($model,'payment_file',array('class'=>'form-control')); ?>
 						</div>
 		
 				</div>  
@@ -164,7 +164,7 @@
 
 						<div class="col-lg-8 col-md-9 col-xs-12">
 							<?php echo $form->error($model,'shipping_type'); ?>
-							<?php echo $form->textField($model,'shipping_type'),array('class'=>'form-control')); ?>
+							<?php echo $form->textField($model,'shipping_type',array('class'=>'form-control')); ?>
 						</div>
 		
 				</div>  
@@ -178,7 +178,7 @@
 
 						<div class="col-lg-8 col-md-9 col-xs-12">
 							<?php echo $form->error($model,'shipping_brand'); ?>
-							<?php echo $form->textField($model,'shipping_brand'),array('class'=>'form-control')); ?>
+							<?php echo $form->textField($model,'shipping_brand',array('class'=>'form-control')); ?>
 						</div>
 		
 				</div>  
@@ -192,7 +192,7 @@
 
 						<div class="col-lg-8 col-md-9 col-xs-12">
 							<?php echo $form->error($model,'shipping_code'); ?>
-							<?php echo $form->textField($model,'shipping_code'),array('class'=>'form-control')); ?>
+							<?php echo $form->textField($model,'shipping_code',array('class'=>'form-control')); ?>
 						</div>
 		
 				</div>  
@@ -206,7 +206,7 @@
 
 						<div class="col-lg-8 col-md-9 col-xs-12">
 							<?php echo $form->error($model,'status'); ?>
-							<?php echo $form->textField($model,'status'),array('class'=>'form-control')); ?>
+							<?php echo $form->textField($model,'status',array('class'=>'form-control')); ?>
 						</div>
 		
 				</div>  
