@@ -28,10 +28,9 @@ $totalBeli=new CActiveDataProvider('Order', array(
 $beli =  $totalBeli->totalItemCount;
 
 for ($i=0; $i < $beli; $i++) { 
-	echo $total = Yii::app()->db->createCommand('
-		SELECT SUM(orders.quantity*product.price) as Jumlah FROM transaction_detail as orders LEFT JOIN product ON orders.product_id=product.id_product WHERE orders.customer_id=2 AND product.id_product=5
-		')->queryScalar();
-	echo "<BR>";
+	$total = Yii::app()->db->createCommand('
+	SELECT SUM(orders.quantity*product.price) as Jumlah FROM transaction_detail as orders LEFT JOIN product ON orders.product_id=product.id_product WHERE orders.customer_id=2
+	')->queryScalar();
 }
 
 
