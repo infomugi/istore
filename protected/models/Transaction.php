@@ -38,7 +38,7 @@ class Transaction extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('code, date_order, date_confirmation, date_verification, customer_id, confirmation_id, verification_id, payment_method, payment_total, payment_file, shipping_type, shipping_brand, shipping_code, status', 'required'),
+			array('code, date_order, customer_id, confirmation_id, verification_id, payment_method, payment_total, payment_file, shipping_type, shipping_brand, shipping_code, status', 'required'),
 			array('customer_id, confirmation_id, verification_id, payment_method, payment_total, shipping_type, shipping_brand, shipping_code, status', 'numerical', 'integerOnly'=>true),
 			array('code', 'length', 'max'=>25),
 			array('payment_file', 'length', 'max'=>255),
@@ -56,6 +56,7 @@ class Transaction extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'Customer'=>array(self::BELONGS_TO,'User','customer_id'),
 			);
 	}
 
@@ -158,4 +159,24 @@ class Transaction extends CActiveRecord
 
 		return $total;
 	}
+
+	public function status($data){
+		if($data==1){
+			return "Sudah di Bayar";
+		}else if($data==2){
+			return "Sudah di Kirim";
+		}else{
+			return "Belum di Bayar";
+		}
+	}
+
+	public function method($data){
+		if($data==1){
+			return "Bank BCA";
+		}else if($data==2){
+			return "Bank Mandiri";
+		}else{
+			return "Bank BNI";
+		}
+	}	
 }

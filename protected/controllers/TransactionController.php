@@ -16,7 +16,7 @@ class TransactionController extends Controller
 		return array(
 			'accessControl', // perform access control for CRUD operations
 			// 'postOnly + delete', // we only allow deletion via POST request
-		);
+			);
 	}
 
 	/**
@@ -38,12 +38,11 @@ class TransactionController extends Controller
 				'expression'=>'Yii::app()->user->record->level==2',
 				),			
 			array('allow',
-				'actions'=>array('create','update','view','delete','admin'),
+				'actions'=>array('create','update','view','delete','admin','detail'),
 				'users'=>array('@'),
 				'expression'=>'Yii::app()->user->record->level==1',
 				),
 			array('deny',
-				'actions'=>array('create','update','view','delete','admin'),
 				'users'=>array('*'),
 				),
 			);
@@ -57,8 +56,16 @@ class TransactionController extends Controller
 	{
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
-		));
+			));
 	}
+
+	public function actionDetail($id)
+	{
+		$this->layout = "front_index";
+		$this->render('detail',array(
+			'model'=>$this->loadModel($id),
+			));
+	}	
 
 	/**
 	 * Creates a new model.
@@ -77,27 +84,53 @@ class TransactionController extends Controller
 			$model->attributes=$_POST['Transaction'];
 			$model->code = "T".date('dmY');
 			$model->date_order = date('Y-m-d h:i:s');
-			$model->date_confirmation = date('Y-m-d h:i:s');
-			$model->date_verification = date('Y-m-d h:i:s');
 			$model->customer_id = YII::app()->user->id;
-			$model->confirmation_id = 0;
-			$model->verification_id = 0;
-			$model->status = 0;
-			$model->payment_method = 0;
 			$model->payment_total = Transaction::model()->total();
+			
+			//Confirmation & Verification
+			$model->verification_id = 0;
+			$model->date_verification = NULL;
+			$model->confirmation_id = 0;
+			$model->date_confirmation = NULL;
+			
+			//Verification
+			$model->status = 0;
 			$model->payment_file = 0;
+			
+			//Shipping
 			$model->shipping_type = 0;
 			$model->shipping_brand = 0;
 			$model->shipping_code = 0;
 
 			if($model->save()){
-				$this->redirect(array('view','id'=>$model->id_transaction));
+				
+				$criteria= new CDbCriteria();
+				$criteria->distinct = true;
+				$criteria->group = 'product_id';
+				$criteria->order = 'product_id';
+				$criteria->condition = 'customer_id='.YII::app()->user->id;
+				$totalBeli=new CActiveDataProvider('Order', array(
+					'criteria'=>$criteria,
+					'pagination'=>false,
+					));
+
+				$beli =  $totalBeli->totalItemCount;
+
+				for ($i=0; $i < $beli; $i++) { 
+					$update=Order::model()->findByAttributes(array('customer_id'=>$model->customer_id));
+					$update->transaction_id = $model->id_transaction;
+					$update->status = 1;
+					$update->save();
+				}
+				
+
+				$this->redirect(array('detail','id'=>$model->id_transaction));
 			}
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
-		));
+			));
 	}
 
 	/**
@@ -121,8 +154,46 @@ class TransactionController extends Controller
 
 		$this->render('update',array(
 			'model'=>$model,
-		));
+			));
 	}
+
+	public function actionConfirmation($id)
+	{
+		$model=$this->loadModel($id);
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['Transaction']))
+		{
+			$model->attributes=$_POST['Transaction'];
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id_transaction));
+		}
+
+		$this->render('update',array(
+			'model'=>$model,
+			));
+	}	
+
+	public function actionVerification($id)
+	{
+		$model=$this->loadModel($id);
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['Transaction']))
+		{
+			$model->attributes=$_POST['Transaction'];
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id_transaction));
+		}
+
+		$this->render('update',array(
+			'model'=>$model,
+			));
+	}	
 
 	/**
 	 * Deletes a particular model.
@@ -146,7 +217,7 @@ class TransactionController extends Controller
 		$dataProvider=new CActiveDataProvider('Transaction');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
-		));
+			));
 	}
 
 	public function actionNewIndex()
@@ -154,7 +225,7 @@ class TransactionController extends Controller
 		$dataProvider=new CActiveDataProvider('Transaction',array('criteria'=>array('condition'=>array('status=0'))));
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
-		));
+			));
 	}
 
 	public function actionConfirmIndex()
@@ -162,7 +233,7 @@ class TransactionController extends Controller
 		$dataProvider=new CActiveDataProvider('Transaction',array('criteria'=>array('condition'=>array('status=0'))));
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
-		));
+			));
 	}
 	
 	/**
@@ -177,7 +248,7 @@ class TransactionController extends Controller
 
 		$this->render('admin',array(
 			'model'=>$model,
-		));
+			));
 	}
 
 	/**
