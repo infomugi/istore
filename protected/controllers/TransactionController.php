@@ -66,7 +66,7 @@ class TransactionController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$this->layout = "front_index";
+		$this->layout = "front_page";
 		$model=new Transaction;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -84,7 +84,7 @@ class TransactionController extends Controller
 			$model->verification_id = 0;
 			$model->status = 0;
 			$model->payment_method = 0;
-			$model->payment_total = 0;
+			$model->payment_total = Transaction::model()->total();
 			$model->payment_file = 0;
 			$model->shipping_type = 0;
 			$model->shipping_brand = 0;

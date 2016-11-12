@@ -7,28 +7,7 @@ $this->breadcrumbs=array(
 	);
 
 $this->pageTitle='Cart';
-
-$jumlahbeli = Yii::app()->db->createCommand('
-	SELECT COUNT(id_transaction_detail) FROM transaction_detail WHERE customer_id=2 GROUP BY product_id
-	')->queryScalar();
-
-$criteria= new CDbCriteria();
-$criteria->distinct = true;
-$criteria->group = 'product_id';
-$criteria->order = 'product_id';
-$criteria->condition = 'customer_id='.YII::app()->user->id;
-$totalBeli=new CActiveDataProvider('Order', array(
-	'criteria'=>$criteria,
-	'pagination'=>false,
-	));
-
-$beli =  $totalBeli->totalItemCount;
-
-for ($i=0; $i < $beli; $i++) { 
-	$total = Yii::app()->db->createCommand('
-		SELECT SUM(orders.quantity*product.price) as Jumlah FROM transaction_detail as orders LEFT JOIN product ON orders.product_id=product.id_product WHERE orders.customer_id=2
-		')->queryScalar();
-}
+$total = Transaction::model()->total();
 ?>
 
 
@@ -79,8 +58,6 @@ for ($i=0; $i < $beli; $i++) {
 												echo 0;
 											} 	
 											else {
-												?>
-												<?php
 												echo Yii::app()->numberFormatter->format("Rp ###,###,###",$total); 
 											}
 											?> </strong></td>

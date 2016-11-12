@@ -45,7 +45,7 @@ class Transaction extends CActiveRecord
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id_transaction, code, date_order, date_confirmation, date_verification, customer_id, confirmation_id, verification_id, payment_method, payment_total, payment_file, shipping_type, shipping_brand, shipping_code, status', 'safe', 'on'=>'search'),
-		);
+			);
 	}
 
 	/**
@@ -56,7 +56,7 @@ class Transaction extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-		);
+			);
 	}
 
 	/**
@@ -80,7 +80,7 @@ class Transaction extends CActiveRecord
 			'shipping_brand' => 'Shipping Brand',
 			'shipping_code' => 'Shipping Code',
 			'status' => 'Status',
-		);
+			);
 	}
 
 	/**
@@ -119,7 +119,7 @@ class Transaction extends CActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
-		));
+			));
 	}
 
 	/**
@@ -131,5 +131,31 @@ class Transaction extends CActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+
+	public function total(){
+		$jumlahbeli = Yii::app()->db->createCommand('
+			SELECT COUNT(id_transaction_detail) FROM transaction_detail WHERE customer_id=2 GROUP BY product_id
+			')->queryScalar();
+
+		$criteria= new CDbCriteria();
+		$criteria->distinct = true;
+		$criteria->group = 'product_id';
+		$criteria->order = 'product_id';
+		$criteria->condition = 'customer_id='.YII::app()->user->id;
+		$totalBeli=new CActiveDataProvider('Order', array(
+			'criteria'=>$criteria,
+			'pagination'=>false,
+			));
+
+		$beli =  $totalBeli->totalItemCount;
+
+		for ($i=0; $i < $beli; $i++) { 
+			$total = Yii::app()->db->createCommand('
+				SELECT SUM(orders.quantity*product.price) as Jumlah FROM transaction_detail as orders LEFT JOIN product ON orders.product_id=product.id_product WHERE orders.customer_id=2
+				')->queryScalar();
+		}
+
+		return $total;
 	}
 }
