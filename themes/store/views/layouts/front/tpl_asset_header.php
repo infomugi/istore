@@ -4,7 +4,7 @@
 
 	<?php
   $baseUrl = Yii::app()->theme->baseUrl; 
-	$url = Yii::app()->baseUrl; 
+	$url = Yii::app()->baseUrl."/index.php?r="; 
 	$cs = Yii::app()->getClientScript();
 	Yii::app()->clientScript->registerCoreScript('jquery');
 	?>

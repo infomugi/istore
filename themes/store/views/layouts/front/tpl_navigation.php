@@ -70,7 +70,7 @@
            <div class="col-lg-3 col-xs-3 top-cart">
              <div class="top-cart-contain">
               <div class="mini-cart">
-              <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle"> <a href="./order/cart">
+              <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle"> <a href="<?php echo $url; ?>order/cart">
                 <div class="cart-icon"><i class="fa fa-shopping-cart"></i></div>
                 <div class="shoppingcart-inner hidden-xs"><span class="cart-title">Shopping Cart</span> <span class="cart-total">4 Item(s): $520.00</span></div>
               </a></div>

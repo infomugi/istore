@@ -8,18 +8,15 @@ $this->breadcrumbs=array(
 
 $this->pageTitle='Cart';
 
-//HITUNG JUMLAH BELI PRODAK
 $jumlahbeli = Yii::app()->db->createCommand('
 	SELECT COUNT(id_transaction_detail) FROM transaction_detail WHERE customer_id=2 GROUP BY product_id
 	')->queryScalar();
-
 
 $criteria= new CDbCriteria();
 $criteria->distinct = true;
 $criteria->group = 'product_id';
 $criteria->order = 'product_id';
 $criteria->condition = 'customer_id='.YII::app()->user->id;
-
 $totalBeli=new CActiveDataProvider('Order', array(
 	'criteria'=>$criteria,
 	'pagination'=>false,
@@ -29,15 +26,10 @@ $beli =  $totalBeli->totalItemCount;
 
 for ($i=0; $i < $beli; $i++) { 
 	$total = Yii::app()->db->createCommand('
-	SELECT SUM(orders.quantity*product.price) as Jumlah FROM transaction_detail as orders LEFT JOIN product ON orders.product_id=product.id_product WHERE orders.customer_id=2
-	')->queryScalar();
+		SELECT SUM(orders.quantity*product.price) as Jumlah FROM transaction_detail as orders LEFT JOIN product ON orders.product_id=product.id_product WHERE orders.customer_id=2
+		')->queryScalar();
 }
-
-
-
-
 ?>
-
 
 
 <!-- Main Container -->
@@ -81,40 +73,40 @@ for ($i=0; $i < $beli; $i++) {
 									<tr>
 										<td colspan="3"><strong>Total</strong></td>
 										<td colspan="2"><strong>
-										<?php 
+											<?php 
 											if ($total==null)
-										{
-											echo 0;
-										} 	
+											{
+												echo 0;
+											} 	
 											else {
-										?>
-										<?php
-										echo Yii::app()->numberFormatter->format("Rp ###,###,###",$total); 
-										}
-										?> </strong></td>
-									</tr>
-								</tfoot>
-							</table>
+												?>
+												<?php
+												echo Yii::app()->numberFormatter->format("Rp ###,###,###",$total); 
+											}
+											?> </strong></td>
+										</tr>
+									</tfoot>
+								</table>
+							</div>
+							<div class="cart_navigation"> <a class="continue-btn" href="#" onClick="backAway()"><i class="fa fa-arrow-left"> </i> Continue Shopping</a> <a class="checkout-btn" href="<?php echo Yii::app()->baseUrl; ?>/index.php?r=order/checkout"><i class="fa fa-check"></i> Proceed to Checkout</a> </div>
 						</div>
-						<div class="cart_navigation"> <a class="continue-btn" href="#" onClick="backAway()"><i class="fa fa-arrow-left"> </i> Continue Shopping</a> <a class="checkout-btn" href="<?php echo Yii::app()->baseUrl; ?>/index.php?r=order/checkout"><i class="fa fa-check"></i> Proceed to Checkout</a> </div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</section>
-<!-- Footer -->
+	</section>
+	<!-- Footer -->
 
 
-<script>
-	function backAway(){
-		if(history.length === 1){
-			window.location = "http://localhost/kkstore/"
-		} else {
-			history.back();
+	<script>
+		function backAway(){
+			if(history.length === 1){
+				window.location = "http://localhost/kkstore/"
+			} else {
+				history.back();
+			}
 		}
-	}
-</script>
+	</script>
 
 
 

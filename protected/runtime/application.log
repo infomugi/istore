@@ -2916,3 +2916,14 @@ Stack trace:
 #14 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
 #15 C:\xampp\htdocs\kkstore\index.php(15): CWebApplication->run()
 REQUEST_URI=/kkstore/index.php?r=order/cart
+2016/11/12 10:51:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Sistem tidak bisa menemukan action "profile" seperti yang diminta.' in C:\xampp\htdocs\yii\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CController.php(270): CController->missingAction('profile')
+#1 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('profile')
+#2 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('/user/profile')
+#3 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\kkstore\index.php(15): CApplication->run()
+#5 {main}
+REQUEST_URI=/kkstore/index.php?r=/user/profile
+HTTP_REFERER=http://localhost/kkstore/index.php?r=site/
+---
