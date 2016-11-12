@@ -7,7 +7,6 @@ $this->breadcrumbs=array(
 	);
 
 $this->pageTitle='Cart';
-$total = Transaction::model()->total();
 ?>
 
 
@@ -53,13 +52,7 @@ $total = Transaction::model()->total();
 										<td colspan="3"><strong>Total</strong></td>
 										<td colspan="2"><strong>
 											<?php 
-											if ($total==null)
-											{
-												echo 0;
-											} 	
-											else {
-												echo Yii::app()->numberFormatter->format("Rp ###,###,###",$total); 
-											}
+												echo Yii::app()->numberFormatter->format("Rp ###,###,###",Transaction::model()->total()); 
 											?> </strong></td>
 										</tr>
 									</tfoot>

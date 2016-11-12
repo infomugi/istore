@@ -143,7 +143,7 @@ class Transaction extends CActiveRecord
 		$criteria->distinct = true;
 		$criteria->group = 'product_id';
 		$criteria->order = 'product_id';
-		$criteria->condition = 'customer_id='.YII::app()->user->id;
+		$criteria->condition = 'status=0 AND customer_id='.YII::app()->user->id;
 		$totalBeli=new CActiveDataProvider('Order', array(
 			'criteria'=>$criteria,
 			'pagination'=>false,
@@ -153,11 +153,16 @@ class Transaction extends CActiveRecord
 
 		for ($i=0; $i < $beli; $i++) { 
 			$total = Yii::app()->db->createCommand('
-				SELECT SUM(orders.quantity*product.price) as Jumlah FROM transaction_detail as orders LEFT JOIN product ON orders.product_id=product.id_product WHERE orders.customer_id=2
+				SELECT SUM(orders.quantity*product.price) as Jumlah FROM transaction_detail as orders LEFT JOIN product ON orders.product_id=product.id_product WHERE orders.customer_id='.YII::app()->user->id.'
 				')->queryScalar();
 		}
 
-		return $total;
+		if($total=null){
+			return $total;
+		}else{
+			return $total;
+		}
+
 	}
 
 	public function status($data){

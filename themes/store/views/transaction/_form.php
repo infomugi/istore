@@ -39,7 +39,7 @@
 				</div>  
 
 
-				<div class="form-group">
+<!-- 				<div class="form-group">
 
 					<div class="col-lg-4 col-md-3 col-xs-12 control-label">
 						<?php echo $form->labelEx($model,'payment_total'); ?>
@@ -50,7 +50,7 @@
 					</div>
 
 				</div>				
-
+ -->
 
 				<div class="form-group">
 					<div class="col-md-12">  

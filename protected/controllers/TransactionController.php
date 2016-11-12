@@ -38,7 +38,7 @@ class TransactionController extends Controller
 				'expression'=>'Yii::app()->user->record->level==2',
 				),			
 			array('allow',
-				'actions'=>array('create','update','view','delete','admin','detail'),
+				'actions'=>array('create','update','view','delete','admin','detail','confirmation','verification'),
 				'users'=>array('@'),
 				'expression'=>'Yii::app()->user->record->level==1',
 				),
@@ -103,7 +103,7 @@ class TransactionController extends Controller
 			$model->shipping_code = 0;
 
 			if($model->save()){
-				
+
 				$criteria= new CDbCriteria();
 				$criteria->distinct = true;
 				$criteria->group = 'product_id';
@@ -122,7 +122,7 @@ class TransactionController extends Controller
 					$update->status = 1;
 					$update->save();
 				}
-				
+
 
 				$this->redirect(array('detail','id'=>$model->id_transaction));
 			}
@@ -159,6 +159,7 @@ class TransactionController extends Controller
 
 	public function actionConfirmation($id)
 	{
+		$this->layout = "front_page";
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
@@ -167,8 +168,20 @@ class TransactionController extends Controller
 		if(isset($_POST['Transaction']))
 		{
 			$model->attributes=$_POST['Transaction'];
+			$tmp;
+			if(strlen(trim(CUploadedFile::getInstance($model,'payment_file'))) > 0) 
+			{ 
+				$tmp=CUploadedFile::getInstance($model,'payment_file'); 
+				$model->payment_file=$model->code.'.'.$tmp->extensionName; 
+			}
+
 			if($model->save())
+			{
+				if(strlen(trim($model->payment_file)) > 0) {
+					$tmp->saveAs(Yii::getPathOfAlias('webroot').'/image/transaction/big/'.$model->image);
+				}
 				$this->redirect(array('view','id'=>$model->id_transaction));
+			}
 		}
 
 		$this->render('update',array(

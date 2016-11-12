@@ -86,7 +86,7 @@ class OrderController extends Controller
 		$criteria->distinct = true;
 		$criteria->group = 'product_id';
 		$criteria->order = 'product_id';
-		$criteria->condition = 'customer_id='.YII::app()->user->id;
+		$criteria->condition = 'status = 0 AND customer_id='.YII::app()->user->id;
 
 		$dataProvider=new CActiveDataProvider('Order', array(
 			'criteria'=>$criteria,
