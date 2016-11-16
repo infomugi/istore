@@ -96,7 +96,12 @@ $this->breadcrumbs=array(
               </div>
               <div class="product-cart-option">
                 <ul>
-                  <li><a href="#"><i class="fa fa-heart"></i><span>Add to Wishlist</span></a></li>
+                  <li>
+                    <?php echo CHtml::link('<i class="fa fa-heart"><span>Add to Wishlist</span></i> ', 
+                      array('Product/likes', 'id'=>$model->id_product
+                      ));
+                    ?>
+                  </li>  
                   <li><a href="#"><i class="fa fa-retweet"></i><span>Add to Compare</span></a></li>
                 </ul>
            

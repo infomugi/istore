@@ -49,7 +49,8 @@ class Product extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('code, name, description, category_id, sub_category_id, color, status, stock, spesification, weight, brand_id, views, likes, discount, created_id, price, update_id, created_date, update_date, keyword, abstrack, sales, rate, image', 'required'),
-			array('category_id, sub_category_id, color, status, stock, weight, brand_id, views, likes, discount, created_id, update_id, sales, rate', 'numerical', 'integerOnly'=>true),
+			array('category_id, sub_category_id, color, status, stock, brand_id, views, likes, discount, created_id, update_id, sales, rate', 'numerical', 'integerOnly'=>true),
+			array('weight', 'numerical'),
 			array('code', 'length', 'max'=>50),
 			array('name, abstrack, image', 'length', 'max'=>255),
 			array('keyword', 'length', 'max'=>150),
@@ -131,6 +132,42 @@ class Product extends CActiveRecord
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('description',$this->description,true);
 		$criteria->compare('category_id',$this->category_id);
+		$criteria->compare('sub_category_id',$this->sub_category_id);
+		$criteria->compare('price',$this->price);
+		$criteria->compare('color',$this->color);
+		$criteria->compare('status',$this->status);
+		$criteria->compare('stock',$this->stock);
+		$criteria->compare('spesification',$this->spesification,true);
+		$criteria->compare('weight',$this->weight);
+		$criteria->compare('brand_id',$this->brand_id);
+		$criteria->compare('views',$this->views);
+		$criteria->compare('likes',$this->likes);
+		$criteria->compare('discount',$this->discount);
+		$criteria->compare('created_id',$this->created_id);
+		$criteria->compare('update_id',$this->update_id);
+		$criteria->compare('created_date',$this->created_date);
+		$criteria->compare('update_date',$this->update_date);
+		$criteria->compare('keyword',$this->keyword,true);
+		$criteria->compare('abstrack',$this->abstrack,true);
+		$criteria->compare('sales',$this->sales);
+		$criteria->compare('rate',$this->rate);
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}
+
+	public function getProduk($id)
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->compare('id_product',$this->id_product);
+		$criteria->compare('code',$this->code,true);
+		$criteria->compare('name',$this->name,true);
+		$criteria->compare('description',$this->description,true);
+		$criteria->compare('category_id',$id);
 		$criteria->compare('sub_category_id',$this->sub_category_id);
 		$criteria->compare('price',$this->price);
 		$criteria->compare('color',$this->color);

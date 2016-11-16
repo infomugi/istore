@@ -63,12 +63,12 @@ class CategoryController extends Controller
 	public function actionList($id)
 	{
 		$this->layout = "front_page";		
-		$Product=Product::model()->findAll();		
+		$Product=Product::model()->findAllByAttributes(array('category_id'=>$id));
 		$this->render('list',array(
 			'model'=>$this->loadModel($id),
 			'Product'=>$Product,
+		));	
 
-		));
 	}
 
 	/**

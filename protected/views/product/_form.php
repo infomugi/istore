@@ -213,7 +213,10 @@
 
 							<div class="col-lg-8 col-md-9 col-xs-12">
 								<?php echo $form->error($model,'weight'); ?>
+								<div class="input-group">
 								<?php echo $form->textField($model,'weight',array('class'=>'form-control','onkeyup'=>"validAngka(this)")); ?>
+								<span class="input-group-addon">Kg</span>
+								</div>
 							</div>
 
 						</div>  

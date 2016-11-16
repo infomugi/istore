@@ -44,7 +44,7 @@ $this->pageTitle='Manage Product';
 						array('name'=>'category_id','value'=>'$data->Category->name'),
 						array('name'=>'sub_category_id','value'=>'$data->Tag->name'),
 						array('name'=>'color','value'=>'Product::model()->color($data->color)'),
-											array('name'=>'status','value'=>'Product::model()->status($data->color)'),
+						array('name'=>'status','value'=>'Product::model()->status($data->status)'),
 						'stock',
 						// 'spesification',
 						// 'weight',

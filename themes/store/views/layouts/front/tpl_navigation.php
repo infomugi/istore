@@ -228,12 +228,12 @@
 </li>
 
  <li class="mt-root">
-   <div class="mt-root-item"><a href="<?php echo $url;?>/product/top">
+   <div class="mt-root-item"><a href="<?php echo $url;?>product/Popular">
    <div class="title title_font"><span class="title-text">Terpopuler</span> </div>
  </a></div>
 </li>
 <li class="mt-root">
-   <div class="mt-root-item"><a href="<?php echo $url;?>/product/new">
+   <div class="mt-root-item"><a href="<?php echo $url;?>product/new">
    <div class="title title_font"><span class="title-text">Terbaru</span></div>
  </a></div>
 </li>

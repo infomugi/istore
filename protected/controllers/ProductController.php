@@ -275,11 +275,23 @@ public function actionLikes($id)
 
 	public function actionPopular()
 	{
-		$dataProvider=new CActiveDataProvider('Product');
-		$this->render('index',array(
+		$this->layout = "front_page";		
+		$dataProvider=new CActiveDataProvider('Product', array('criteria'=>array(
+        'order'=>'likes DESC')));
+		$this->render('popular',array(
 			'dataProvider'=>$dataProvider,
 			));
-	}		
+	}	
+
+	public function actionNew()
+	{
+		$this->layout = "front_page";		
+		$dataProvider=new CActiveDataProvider('Product', array('criteria'=>array(
+        'order'=>'update_date DESC')));
+		$this->render('popular',array(
+			'dataProvider'=>$dataProvider,
+			));
+	}	
 
 	/**
 	 * Manages all models.

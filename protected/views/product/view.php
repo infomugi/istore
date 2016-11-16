@@ -80,7 +80,7 @@ $this->pageTitle='Detail Product - '.$model->name;
 	'htmlOptions'=>array("class"=>"table"),
 	'attributes'=>array(
 		array('name'=>'color','value'=>Product::model()->color($model->color)),
-		array('name'=>'status','value'=>Product::model()->status($model->color)),
+		array('name'=>'status','value'=>Product::model()->status($model->status)),
 		'stock',
 		'spesification',
 		'weight',
