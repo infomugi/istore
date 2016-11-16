@@ -157,7 +157,7 @@ class Transaction extends CActiveRecord
 				')->queryScalar();
 		}
 
-		if($total=null){
+		if($total==null){
 			return $total;
 		}else{
 			return $total;

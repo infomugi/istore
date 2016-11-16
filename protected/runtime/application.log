@@ -3283,3 +3283,96 @@ Stack trace:
 #11 {main}
 REQUEST_URI=/kkstore/index.php?r=transaction/
 ---
+2016/11/12 15:30:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Tidak bisa mengurai request "/index.php?r=category/list"' in F:\xampp\htdocs\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 F:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('/index.php?r=ca...')
+#1 F:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 F:\xampp\htdocs\kkstore\index.php(15): CApplication->run()
+#3 {main}
+REQUEST_URI=/kkstore/index.php?r=/index.php?r=category/list&id=2
+HTTP_REFERER=http://localhost/kkstore/
+---
+2016/11/12 15:31:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Tidak bisa mengurai request "/index.php?r=category/list"' in F:\xampp\htdocs\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 F:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('/index.php?r=ca...')
+#1 F:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 F:\xampp\htdocs\kkstore\index.php(15): CApplication->run()
+#3 {main}
+REQUEST_URI=/kkstore/index.php?r=/index.php?r=category/list&id=2
+HTTP_REFERER=http://localhost/kkstore/
+---
+2016/11/12 15:31:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Tidak bisa mengurai request "/index.php?r=category/list"' in F:\xampp\htdocs\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 F:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('/index.php?r=ca...')
+#1 F:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 F:\xampp\htdocs\kkstore\index.php(15): CApplication->run()
+#3 {main}
+REQUEST_URI=/kkstore/index.php?r=/index.php?r=category/list&id=2
+HTTP_REFERER=http://localhost/kkstore/
+---
+2016/11/12 15:32:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Sistem tidak bisa menemukan action "views" seperti yang diminta.' in F:\xampp\htdocs\yii\framework\web\CController.php:483
+Stack trace:
+#0 F:\xampp\htdocs\yii\framework\web\CController.php(270): CController->missingAction('views')
+#1 F:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('views')
+#2 F:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('Product/views')
+#3 F:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 F:\xampp\htdocs\kkstore\index.php(15): CApplication->run()
+#5 {main}
+REQUEST_URI=/kkstore/index.php?r=Product/views&id=4
+HTTP_REFERER=http://localhost/kkstore/index.php?r=category/list&id=2
+---
+2016/11/12 15:33:02 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Sistem tidak bisa menemukan action "details" seperti yang diminta.' in F:\xampp\htdocs\yii\framework\web\CController.php:483
+Stack trace:
+#0 F:\xampp\htdocs\yii\framework\web\CController.php(270): CController->missingAction('details')
+#1 F:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('details')
+#2 F:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('Product/details')
+#3 F:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 F:\xampp\htdocs\kkstore\index.php(15): CApplication->run()
+#5 {main}
+REQUEST_URI=/kkstore/index.php?r=Product/details&id=4
+---
+2016/11/12 15:39:59 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Tidak bisa mengurai request "/index.php?r=category/list"' in F:\xampp\htdocs\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 F:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('/index.php?r=ca...')
+#1 F:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 F:\xampp\htdocs\kkstore\index.php(15): CApplication->run()
+#3 {main}
+REQUEST_URI=/kkstore/index.php?r=/index.php?r=category/list&id=2
+HTTP_REFERER=http://localhost/kkstore/index.php?r=/site/index
+---
+2016/11/12 15:49:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Tidak bisa mengurai request "/index.php?r=category/list"' in F:\xampp\htdocs\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 F:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('/index.php?r=ca...')
+#1 F:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 F:\xampp\htdocs\kkstore\index.php(15): CApplication->run()
+#3 {main}
+REQUEST_URI=/kkstore/index.php?r=/index.php?r=category/list&id=1
+HTTP_REFERER=http://localhost/kkstore/index.php?r=transaction/detail&id=3
+---
+2016/11/12 15:50:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Tidak bisa mengurai request "/index.php?r=category/list"' in F:\xampp\htdocs\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 F:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('/index.php?r=ca...')
+#1 F:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 F:\xampp\htdocs\kkstore\index.php(15): CApplication->run()
+#3 {main}
+REQUEST_URI=/kkstore/index.php?r=/index.php?r=category/list&id=2
+HTTP_REFERER=http://localhost/kkstore/index.php?r=/site/index
+---
+2016/11/12 16:01:14 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Request anda tidak valid' in F:\xampp\htdocs\yii\framework\web\CController.php:336
+Stack trace:
+#0 F:\xampp\htdocs\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 F:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 F:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 F:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 F:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 F:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 F:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#7 F:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 F:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#9 F:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('tag/create')
+#10 F:\xampp\htdocs\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#11 F:\xampp\htdocs\kkstore\index.php(15): CApplication->run()
+#12 {main}
+REQUEST_URI=/kkstore/index.php?r=tag/create
+HTTP_REFERER=http://localhost/kkstore/index.php?r=category/admin
+---

@@ -215,6 +215,45 @@ class ProductController extends Controller
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}
 
+public function actionLikes($id)
+	{
+		$model= $this->loadModel($id);
+		if($model != null)
+		{
+
+			$model->likes += 1;		
+			$model->save();
+
+			if($model->save()){
+				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('Product/detail','id'=>$id));
+
+			}
+		}
+		else{
+			$this->actionIndex();
+		}
+	}	
+
+
+	public function actionViews($id)
+	{
+		$model= $this->loadModel($id);
+		if($model != null)
+		{
+
+			$model->views += 1;		
+			$model->save();
+
+			if($model->save()){
+				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('Product/detail','id'=>$id));
+
+			}
+		}
+		else{
+			$this->actionIndex();
+		}
+	}
+
 	/**
 	 * Lists all models.
 	 */

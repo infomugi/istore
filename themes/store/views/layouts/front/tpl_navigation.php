@@ -70,7 +70,7 @@
            <div class="col-lg-3 col-xs-3 top-cart">
              <div class="top-cart-contain">
               <div class="mini-cart">
-              <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle"> <a href="<?php echo $url; ?>order/cart">
+              <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle"> <a href="./order/cart">
                 <div class="cart-icon"><i class="fa fa-shopping-cart"></i></div>
                 <div class="shoppingcart-inner hidden-xs"><span class="cart-title">Shopping Cart</span> <span class="cart-total">4 Item(s): $520.00</span></div>
               </a></div>
@@ -117,48 +117,46 @@
     <div class="col-md-3 col-sm-4">
      <div class="mm-toggle-wrap">
       <div class="mm-toggle"> <i class="fa fa-align-justify"></i> </div>
-      <span class="mm-label">Categories</span> </div>
+      <span class="mm-label">Kategori</span> </div>
       <div class="mega-container visible-lg visible-md visible-sm">
        <div class="navleft-container">
         <div class="mega-menu-title">
-         <h3>Categories</h3>
+         <h3>Kategori</h3>
        </div>
        <div class="mega-menu-category">
          <ul class="nav">
-          <li> <a href="<?php echo $baseUrl;?>/#"><i class="icon fa fa-camera fa-fw"></i> Camera & Photo</a>
+          <li> <a href="<?php echo $baseUrl;?>/#"><i class="icon fa fa-bed fa-fw"></i> Furnitur</a>
            <div class="wrap-popup">
             <div class="popup">
              <div class="row">
-              <div class="col-md-4 col-sm-6">
+              <div class="col-md-8 col-sm-6">
+               <h3>Furniture</h3>
                <ul class="nav">
-                <li><a href="<?php echo $baseUrl;?>/"><span>Canon</span></a></li>
-                <li><a href="<?php echo $baseUrl;?>/"><span>Nikon</span></a></li>
-                <li><a href="<?php echo $baseUrl;?>/"><span>Olympus</span> </a></li>
-                <li><a href="<?php echo $baseUrl;?>/"><span>ALPA</span> </a></li>
-                <li> <a href="<?php echo $baseUrl;?>/"><span>Bolex</span></a></li>
-                <li><a href="<?php echo $baseUrl;?>/"><span>Samsung </span></a></li>
-                <li><a href="<?php echo $baseUrl;?>/"><span>Panasonic</span></a></li>
-                <li><a href="<?php echo $baseUrl;?>/"><span>Thomson </span></a></li>
-                <li><a href="<?php echo $baseUrl;?>/"><span>Bell & Howell</span></a></li>
+                  <?php
+                    $jmlh = Yii::app()->db->createCommand('
+                    SELECT COUNT(id_category_sub) 
+                    FROM category_sub')->queryScalar();
+
+                    for($a=0;$a<=$jmlh;$a++)
+                  {
+                    $tagfurnitur = Yii::app()->db->createCommand('
+                    SELECT name 
+                    FROM category_sub 
+                    WHERE category_id=1 AND id_category_sub='.$a.'
+                    GROUP BY id_category_sub ASC')->queryScalar();
+                  ?>
+                  <li><a href="<?php echo $baseUrl;?>/"><span><?php echo $tagfurnitur;?></span></a></li>
+                  <?php
+                  }
+                  ?>
               </ul>
             </div>
-            <div class="col-md-4 col-sm-6 has-sep">
-             <ul class="nav">
-              <li><a href="<?php echo $baseUrl;?>/"><span>Digital camera</span></a></li>
-              <li><a href="<?php echo $baseUrl;?>/"><span>High-speed</span></a></li>
-              <li><a href="<?php echo $baseUrl;?>/"><span>Camera phone</span> </a></li>
-              <li><a href="<?php echo $baseUrl;?>/"><span>Multiplane</span> </a></li>
-              <li> <a href="<?php echo $baseUrl;?>/"><span>Pocket camera</span></a></li>
-              <li><a href="<?php echo $baseUrl;?>/"><span>Video camera</span></a></li>
-              <li><a href="<?php echo $baseUrl;?>/"><span>Zenith camera</span></a></li>
-              <li><a href="<?php echo $baseUrl;?>/"><span>Single-lens reflex</span></a></li>
-              <li><a href="<?php echo $baseUrl;?>/"><span>Light-field</span></a></li>
-            </ul>
-          </div>
           <div class="col-md-4 has-sep hidden-sm">
            <div class="custom-menu-right">
             <div class="box-banner menu-banner">
-             <div class="add-right"><a href="<?php echo $baseUrl;?>/#"><img src="<?php echo $baseUrl;?>/frontend/images/menu-img4.jpg" alt=""></a></div>
+             <div class="add-right"><a href="<?php echo $baseUrl;?>/#"><img src="<?php echo $baseUrl;?>/frontend/images/<?php echo Yii::app()->db->createCommand('
+                    SELECT image 
+                    FROM category WHERE id_category=1')->queryScalar();?>" alt=""></a></div>
            </div>
          </div>
        </div>
@@ -166,128 +164,44 @@
    </div>
  </div>
 </li>
-<li> <a href="<?php echo $baseUrl;?>/#"><i class="icon fa fa-desktop fa-fw"></i> Computers</a>
+<li> <a href="<?php echo $baseUrl;?>/#"><i class="icon fa fa-heart fa-fw"></i> Sepatu</a>
  <div class="wrap-popup">
   <div class="popup">
    <div class="row">
-    <div class="col-md-4 col-sm-6">
-     <h3>Dell</h3>
-     <ul class="nav">
-      <li><a href="<?php echo $baseUrl;?>/">Dell Inspiron 3558</a></li>
-      <li><a href="<?php echo $baseUrl;?>/">Dell Adapter </a></li>
-      <li><a href="<?php echo $baseUrl;?>/">Optical USB Mouse</a></li>
-      <li><a href="<?php echo $baseUrl;?>/">Laptop Battery</a></li>
-    </ul>
-    <br>
-    <h3>Microsoft</h3>
-    <ul class="nav">
-      <li> <a href="<?php echo $baseUrl;?>/">Lumia 550 4G</a> </li>
-      <li> <a href="<?php echo $baseUrl;?>/">Surface Pro 4</a> </li>
-      <li> <a href="<?php echo $baseUrl;?>/">HTC Desire 620G</a> </li>
-      <li> <a href="<?php echo $baseUrl;?>/">DMG Flip Cover</a> </li>
-      <li> <a href="<?php echo $baseUrl;?>/">Silicone Keyboard</a> </li>
-    </ul>
-  </div>
-  <div class="col-md-4 col-sm-6 has-sep">
-   <h3>Apple</h3>
-   <ul class="nav">
-    <li> <a href="<?php echo $baseUrl;?>/">Apple Macbook Pro</a> </li>
-    <li> <a href="<?php echo $baseUrl;?>/">Newest Apple Macbook Pro</a> </li>
-    <li> <a href="<?php echo $baseUrl;?>/">Retina Display Laptop</a> </li>
-    <li> <a href="<?php echo $baseUrl;?>/">Silicone Keyboard</a> </li>
-  </ul>
-  <br>
-  <h3>Lenovo</h3>
-  <ul class="nav">
-    <li> <a href="<?php echo $baseUrl;?>/">Lenovo Yoga 300</a> </li>
-    <li> <a href="<?php echo $baseUrl;?>/">Lenovo IdeaPad</a> </li>
-    <li> <a href="<?php echo $baseUrl;?>/">Tab 3 A710F Tablet</a> </li>
-    <li> <a href="<?php echo $baseUrl;?>/">Channel Speakers</a> </li>
-    <li> <a href="<?php echo $baseUrl;?>/">Accessories</a> </li>
-  </ul>
-</div>
-<div class="col-md-4 has-sep hidden-sm">
- <div class="custom-menu-right">
-  <div class="box-banner media">
-   <div class="add-desc">
-    <h3>Computer <br>
-     Services </h3>
-     <div class="price-sale">2016</div>
-     <a href="<?php echo $baseUrl;?>/#">Shop Now</a> </div>
-     <div class="add-right"><a href="<?php echo $baseUrl;?>/#"><img src="<?php echo $baseUrl;?>/frontend/images/menu-img1.jpg" alt=""></a></div>
-   </div>
-   <div class="box-banner media">
-     <div class="add-desc">
-      <h3>Save up to</h3>
-      <div class="price-sale">75 <sup>%</sup><sub>off</sub></div>
-      <a href="<?php echo $baseUrl;?>/#">Shopping Now</a> </div>
-      <div class="add-right"><a href="<?php echo $baseUrl;?>/#"><img src="<?php echo $baseUrl;?>/frontend/images/menu-img2.jpg" alt=""></a></div>
-    </div>
-  </div>
-</div>
-</div>
+                  <div class="col-md-8 col-sm-6">
+               <h3>Shoes</h3>
+               <ul class="nav">
+                  <?php
+                    $jmlh = Yii::app()->db->createCommand('
+                    SELECT COUNT(id_category_sub) 
+                    FROM category_sub')->queryScalar();
+
+                    for($a=0;$a<=$jmlh;$a++)
+                  {
+                    $tagshoes = Yii::app()->db->createCommand('
+                    SELECT name 
+                    FROM category_sub 
+                    WHERE category_id=2 AND id_category_sub='.$a.'
+                    GROUP BY id_category_sub ASC')->queryScalar();
+                  ?>
+                  <li><a href="<?php echo $baseUrl;?>/"><span><?php echo $tagshoes;?></span></a></li>
+                  <?php
+                  }
+                  ?>
+              </ul>
+            </div>
+          <div class="col-md-4 has-sep hidden-sm">
+           <div class="custom-menu-right">
+            <div class="box-banner menu-banner">
+             <div class="add-right"><a href="<?php echo $baseUrl;?>/#"><img src="<?php echo $baseUrl;?>/frontend/images/<?php echo Yii::app()->db->createCommand('
+                    SELECT image 
+                    FROM category WHERE id_category=2')->queryScalar();?>" alt=""></a></div>
+           </div>
+         </div>
+       </div>
 </div>
 </div>
 </li>
-<li> <a href="<?php echo $baseUrl;?>/"><i class="icon fa fa-apple fa-fw"></i> Apple Store</a>
-  <div class="wrap-popup column2">
-   <div class="popup">
-    <div class="row">
-     <div class="col-sm-6">
-      <h3>iPhone</h3>
-      <ul class="nav">
-       <li> <a href="<?php echo $baseUrl;?>/"> iPhone SE </a> </li>
-       <li> <a href="<?php echo $baseUrl;?>/http://htmlmystore.justthemevalley.com/Version1/s"> iPhone 6s Plus </a> </li>
-       <li> <a href="<?php echo $baseUrl;?>/"> iPhone 3G </a> </li>
-       <li> <a href="<?php echo $baseUrl;?>/"> iPad Pro </a> </li>
-     </ul>
-   </div>
-   <div class="col-sm-6 has-sep">
-    <h3> Watch </h3>
-    <ul class="nav">
-     <li> <a href="<?php echo $baseUrl;?>/"> Quartz Watches </a> </li>
-     <li> <a href="<?php echo $baseUrl;?>/"> Lover's Watches</a> </li>
-     <li> <a href="<?php echo $baseUrl;?>/"> Digital Watches </a> </li>
-     <li> <a href="<?php echo $baseUrl;?>/"> Sport Watch </a> </li>
-   </ul>
- </div>
- <div class="col-sm-12"> <a class="ads1" href="<?php echo $baseUrl;?>/#"><img class="img-responsive" src="<?php echo $baseUrl;?>/frontend/images/menu-img3.jpg" alt=""></a> </div>
-</div>
-</div>
-</div>
-</li>
-<li class="nosub"><a href="<?php echo $baseUrl;?>/#"><i class="icon fa fa-location-arrow fa-fw"></i> Car Electronic</a></li>
-<li> <a href="<?php echo $baseUrl;?>/"><i class="icon fa fa-headphones fa-fw"></i> Headphones</a>
-  <div class="wrap-popup column1">
-   <div class="popup">
-    <ul class="nav">
-     <li><a href="<?php echo $baseUrl;?>/"><span>Envent Stereo</span></a></li>
-     <li><a href="<?php echo $baseUrl;?>/"><span>Sennheiser</span></a></li>
-     <li><a href="<?php echo $baseUrl;?>/"><span>Philips</span></a></li>
-     <li><a href="<?php echo $baseUrl;?>/"><span>Sony</span></a></li>
-     <li><a href="<?php echo $baseUrl;?>/"><span>Avantree</span></a></li>
-     <li><a href="<?php echo $baseUrl;?>/"><span>Bajaao</span></a></li>
-     <li><a href="<?php echo $baseUrl;?>/"><span>FiiO</span></a></li>
-     <li><a href="<?php echo $baseUrl;?>/"><span>Audio-Technica</span></a></li>
-     <li><a href="<?php echo $baseUrl;?>/"><span>LUXA2</span></a></li>
-     <li><a href="<?php echo $baseUrl;?>/"><span>Geekria</span></a></li>
-   </ul>
- </div>
-</div>
-</li>
-<li><a href="<?php echo $baseUrl;?>/#"><i class="icon fa fa-microphone fa-fw"></i> Accessories</a>
-  <div class="wrap-popup column1">
-   <div class="popup">
-    <ul class="nav">
-     <li> <a href="<?php echo $baseUrl;?>/"> Vacuum Cleaner </a> </li>
-     <li> <a href="<?php echo $baseUrl;?>/"> Memore Bluetooth</a> </li>
-     <li> <a href="<?php echo $baseUrl;?>/"> On-Ear Headphones </a> </li>
-     <li> <a href="<?php echo $baseUrl;?>/"> Digital MP3 Player </a> </li>
-   </ul>
- </div>
-</div>
-</li>
-</ul>
 </div>
 </div>
 </div>
@@ -302,13 +216,13 @@
  </li>
 
   <li class="mt-root">
-   <div class="mt-root-item"><a href="<?php echo $url;?>/product/top">
+   <div class="mt-root-item"><a href="<?php echo $url;?>category/list&id=1">
    <div class="title title_font"><span class="title-text">Furnitur</span> </div>
  </a></div>
 </li>
 
  <li class="mt-root">
-   <div class="mt-root-item"><a href="<?php echo $url;?>/product/top">
+   <div class="mt-root-item"><a href="<?php echo $url;?>category/list&id=2">
    <div class="title title_font"><span class="title-text">Sepatu</span> </div>
  </a></div>
 </li>

@@ -3,12 +3,12 @@
 /* @var $model Product */
 
 $this->breadcrumbs=array(
-	'Products'=>array('index'),
-	$model->name,
-	);
+  'Products'=>array('index'),
+  $model->name,
+  );
 
-	$this->pageTitle='Detail Product';
-	?>
+  $this->pageTitle='Detail Product';
+  ?>
 <div class="main-container col1-layout">
   <div class="container">
     <div class="row">
@@ -34,7 +34,7 @@ $this->breadcrumbs=array(
               </ul>
             </div> 
             -->
-            	
+              
             <!-- end: more-images --> 
             
           </div>
@@ -46,10 +46,13 @@ $this->breadcrumbs=array(
               <div class="price-box">
                 <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"><?php echo Yii::app()->numberFormatter->format("Rp ###,###,###",$model->price*$model->discount/100);?> </span> </p>
                 <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> <?php echo Yii::app()->numberFormatter->format("Rp ###,###,###",$model->price);?> </span> </p>
+                <i class="fa fa-heart pull-right"> <?php echo $model->likes; ?></i>
+                <i class="fa fa-eye pull-right"> <?php echo $model->views; ?> |</i>
               </div>
               <div class="ratings">
                 <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                <p class="rating-links"> <a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Your Review</a> </p>
+                <p class="rating-links"> <a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Your Review</a> </p> | 
+                
                 <p class="availability in-stock pull-right">Availability: <span><?php echo Product::model()->color($model->color); ?></span></p>
               </div>
               <div class="short-description">

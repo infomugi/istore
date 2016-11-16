@@ -28,7 +28,7 @@ class CategoryController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('view','index'),
+				'actions'=>array('view','index','list'),
 				'users'=>array('@'),
 				'expression'=>'Yii::app()->user->record->level==3',
 				),
@@ -57,6 +57,17 @@ class CategoryController extends Controller
 	{
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
+		));
+	}
+
+	public function actionList($id)
+	{
+		$this->layout = "front_page";		
+		$Product=Product::model()->findAll();		
+		$this->render('list',array(
+			'model'=>$this->loadModel($id),
+			'Product'=>$Product,
+
 		));
 	}
 
