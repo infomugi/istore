@@ -104,26 +104,7 @@ class TransactionController extends Controller
 
 			if($model->save()){
 
-				$criteria= new CDbCriteria();
-				$criteria->distinct = true;
-				$criteria->group = 'product_id';
-				$criteria->order = 'product_id';
-				$criteria->condition = 'customer_id='.YII::app()->user->id;
-				$totalBeli=new CActiveDataProvider('Order', array(
-					'criteria'=>$criteria,
-					'pagination'=>false,
-					));
-
-				$beli =  $totalBeli->totalItemCount;
-
-				for ($i=0; $i < $beli; $i++) { 
-					$update=Order::model()->findByAttributes(array('customer_id'=>$model->customer_id));
-					$update->transaction_id = $model->id_transaction;
-					$update->status = 1;
-					$update->save();
-				}
-
-
+				Order::model()->updateAll(array( 'status' => 1, 'transaction_id' => $model->id_transaction,'customer_id = '.$model->customer_id));
 				$this->redirect(array('detail','id'=>$model->id_transaction));
 			}
 		}

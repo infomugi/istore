@@ -135,10 +135,6 @@ class Transaction extends CActiveRecord
 	}
 
 	public function total(){
-		$jumlahbeli = Yii::app()->db->createCommand('
-			SELECT COUNT(id_transaction_detail) FROM transaction_detail WHERE customer_id=2 GROUP BY product_id
-			')->queryScalar();
-
 		$criteria= new CDbCriteria();
 		$criteria->distinct = true;
 		$criteria->group = 'product_id';
@@ -153,12 +149,12 @@ class Transaction extends CActiveRecord
 
 		for ($i=0; $i < $beli; $i++) { 
 			$total = Yii::app()->db->createCommand('
-				SELECT SUM(orders.quantity*product.price) as Jumlah FROM transaction_detail as orders LEFT JOIN product ON orders.product_id=product.id_product WHERE orders.customer_id='.YII::app()->user->id.'
+				SELECT SUM(orders.quantity*product.price) as Jumlah FROM transaction_detail as orders LEFT JOIN product ON orders.product_id=product.id_product WHERE orders.status=0 AND orders.customer_id='.YII::app()->user->id.'
 				')->queryScalar();
 		}
 
 		if($total==null){
-			return $total;
+			return "0";
 		}else{
 			return $total;
 		}

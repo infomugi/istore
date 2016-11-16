@@ -142,7 +142,37 @@
                                         </a>
                                     </li>                                
                                 </ul>
-                            </li>                                                          
+                            </li>     
+
+                            <li class="dropdown active show-on-hover">
+                                <a href="#" data-toggle="dropdown">
+                                    <i class="fa fa-cog"></i>
+                                    <span>Master</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="<?php echo $url;?>provinces/admin">
+                                            <span>Provinsi</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<?php echo $url;?>regencies/admin">
+                                            <span>Kabupaten / Kota</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<?php echo $url;?>districts/admin">
+                                            <span>Kecamatan</span>
+                                        </a>
+                                    </li>  
+
+                                    <li>
+                                        <a href="<?php echo $url;?>villages/admin">
+                                            <span>Desa / Kelurahan</span>
+                                        </a>
+                                    </li>                                          
+                                </ul>
+                            </li>                                                                                      
 
                             <li class="dropdown active show-on-hover">
                                 <a href="#" data-toggle="dropdown">
