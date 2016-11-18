@@ -9,7 +9,7 @@
 		<div class="box-header">
 			<h3 class="box-title">
 
-				<?php echo CHtml::link(CHtml::encode($data->id_transaction), array('view', 'id'=>$data->id_transaction)); ?>
+				Transaksi ID : <?php echo CHtml::link(CHtml::encode($data->code), array('view', 'id'=>$data->id_transaction)); ?>
 				<br />
 
 				

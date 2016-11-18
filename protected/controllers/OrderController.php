@@ -68,7 +68,7 @@ class OrderController extends Controller
 	{
 		$model=new Order;
 		$model->customer_id = YII::app()->user->id;
-		$model->transaction_id = 1;
+		$model->transaction_id = 0;
 		$model->product_id = $product;
 		$model->quantity = 1;
 		$model->color = 0;
@@ -100,7 +100,7 @@ class OrderController extends Controller
 
 	public function actionCheckout()
 	{
-		$this->redirect(array('transaction/create'));
+		$this->redirect(array('transaction/checkout'));
 	}	
 
 

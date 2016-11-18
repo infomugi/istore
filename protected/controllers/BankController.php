@@ -74,8 +74,14 @@ class BankController extends Controller
 		if(isset($_POST['Bank']))
 		{
 			$model->attributes=$_POST['Bank'];
-			if($model->save())
+			$model->user_id = YII::app()->user->id;
+			$model->verification_id = YII::app()->user->id;
+			$model->date_created = date('Y-m-d h:i:s');
+			$model->date_verification = date('Y-m-d h:i:s');
+			$model->status = 1;
+			if($model->save()){
 				$this->redirect(array('view','id'=>$model->id_bank));
+			}
 		}
 
 		$this->render('create',array(
@@ -98,8 +104,11 @@ class BankController extends Controller
 		if(isset($_POST['Bank']))
 		{
 			$model->attributes=$_POST['Bank'];
-			if($model->save())
+			$model->verification_id = YII::app()->user->id;
+			$model->date_verification = date('Y-m-d h:i:s');			
+			if($model->save()){
 				$this->redirect(array('view','id'=>$model->id_bank));
+			}
 		}
 
 		$this->render('update',array(

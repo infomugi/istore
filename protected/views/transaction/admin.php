@@ -7,59 +7,67 @@ $this->breadcrumbs=array(
 	'Manage',
 	);
 
-	$this->pageTitle='Manage Transaction';
-	?>
+$this->pageTitle='Manage Transaction';
+?>
 
-	<section class="col-xs-12">
+<section class="col-xs-12">
 
-		<?php echo CHtml::link('Add Transaction',
- array('create'),
- array('class' => 'btn btn-success'));
- ?>
-		<?php echo CHtml::link('List Transaction',
- array('index'),
- array('class' => 'btn btn-success'));
- ?>
+	<?php echo CHtml::link('Transaksi Terbaru',
+		array('listnew'),
+		array('class' => 'btn btn-default'));
+		?>
 
-		<HR>
+		<?php echo CHtml::link('Verifikasi Order',
+			array('listconfirmation'),
+			array('class' => 'btn btn-primary'));
+			?>
 
-			<?php $this->widget('zii.widgets.grid.CGridView', array(
-			'id'=>'transaction-grid',
-			'dataProvider'=>$model->search(),
-			'filter'=>$model,
-			'itemsCssClass' => 'table-responsive table table-striped table-hover table-vcenter',
-			'columns'=>array(
+			<?php echo CHtml::link('Verifikasi Pembayaran',
+				array('listverification'),
+				array('class' => 'btn btn-info'));
+				?>
 
-			array(
-			'header'=>'No',
-			'value'=>'$this->grid->dataProvider->pagination->currentPage*$this->grid->dataProvider->pagination->pageSize + $row+1',
-			'htmlOptions'=>array('width'=>'10px', 
-			'style' => 'text-align: center;')),
+				<?php echo CHtml::link('Pengiriman Barang',
+					array('listshipping'),
+					array('class' => 'btn btn-danger'));
+					?>
 
-					'id_transaction',
-		'code',
-		'date_order',
-		'date_confirmation',
-		'date_verification',
-		'customer_id',
-		/*
-		'confirmation_id',
-		'verification_id',
-		'payment_method',
-		'payment_total',
-		'payment_file',
-		'shipping_type',
-		'shipping_brand',
-		'shipping_code',
-		'status',
-		*/
-			array(
-			'header'=>'Action',
-			'class'=>'CButtonColumn',
-			'htmlOptions'=>array('width'=>'100px', 
-			'style' => 'text-align: center;'),
-			),
-			),
-			)); ?>
-			
-		</section>
+					<?php echo CHtml::link('Transaksi Berhasil',
+						array('listsuccess'),
+						array('class' => 'btn btn-success'));
+						?>
+
+						<HR>
+
+							<?php $this->widget('zii.widgets.grid.CGridView', array(
+								'id'=>'transaction-grid',
+								'dataProvider'=>$model->search(),
+								'filter'=>$model,
+								'itemsCssClass' => 'table-responsive table table-striped table-hover table-vcenter',
+								'columns'=>array(
+
+									array(
+										'header'=>'No',
+										'value'=>'$this->grid->dataProvider->pagination->currentPage*$this->grid->dataProvider->pagination->pageSize + $row+1',
+										'htmlOptions'=>array('width'=>'10px', 
+											'style' => 'text-align: center;')),
+
+									'code',
+									'date_order',
+
+									array('name'=>'customer_id','value'=>'$data->Customer->fullname'),
+									array('name'=>'payment_total','value'=>'Yii::app()->numberFormatter->format("Rp ###,###,###",$data->payment_total)'),
+									array('name'=>'payment_method','value'=>'Transaction::model()->method($data->status)'),
+									array('name'=>'status','value'=>'Transaction::model()->status($data->status)'),
+
+									array(
+										'header'=>'Action',
+										'class'=>'CButtonColumn',
+										'htmlOptions'=>array('width'=>'100px', 
+											'style' => 'text-align: center;'),
+										),
+
+									),
+									)); ?>
+
+								</section>

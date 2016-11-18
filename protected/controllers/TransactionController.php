@@ -33,12 +33,12 @@ class TransactionController extends Controller
 				'expression'=>'Yii::app()->user->record->level==3',
 				),
 			array('allow',
-				'actions'=>array('create','update','view','delete'),
+				'actions'=>array('checkout','update','view','delete'),
 				'users'=>array('@'),
 				'expression'=>'Yii::app()->user->record->level==2',
 				),			
 			array('allow',
-				'actions'=>array('create','update','view','delete','admin','detail','confirmation','verification'),
+				'actions'=>array('checkout','update','view','delete','admin','detail','confirmation','verification', 'listnew','listshipping','listverification','listconfirmation','listsuccess'),
 				'users'=>array('@'),
 				'expression'=>'Yii::app()->user->record->level==1',
 				),
@@ -54,9 +54,23 @@ class TransactionController extends Controller
 	 */
 	public function actionView($id)
 	{
-		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+		$model=$this->loadModel($id);
+		$criteria= new CDbCriteria();
+		$criteria->distinct = true;
+		$criteria->group = 'product_id';
+		$criteria->order = 'product_id';
+		$criteria->condition = 'transaction_id = '.$model->id_transaction;
+
+		$dataProvider=new CActiveDataProvider('Order', array(
+			'criteria'=>$criteria,
+			'pagination'=>false,
 			));
+
+		$this->render('view',array(
+			'model'=>$model,
+			'dataProvider'=>$dataProvider,
+			));
+					
 	}
 
 	public function actionDetail($id)
@@ -71,10 +85,11 @@ class TransactionController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCheckout()
 	{
 		$this->layout = "front_page";
 		$model=new Transaction;
+		$model->setScenario('checkout');
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -103,8 +118,8 @@ class TransactionController extends Controller
 			$model->shipping_code = 0;
 
 			if($model->save()){
-
-				Order::model()->updateAll(array( 'status' => 1, 'transaction_id' => $model->id_transaction,'customer_id = '.$model->customer_id));
+				Order::model()->updateAll(array('transaction_id' => $model->id_transaction), 'status = 0 AND customer_id = '.$model->customer_id.'');
+				Order::model()->updateAll(array('status' => 1), 'transaction_id = '.$model->id_transaction.'');
 				$this->redirect(array('detail','id'=>$model->id_transaction));
 			}
 		}
@@ -142,6 +157,7 @@ class TransactionController extends Controller
 	{
 		$this->layout = "front_page";
 		$model=$this->loadModel($id);
+		$model->setScenario('confirmation');
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -149,6 +165,9 @@ class TransactionController extends Controller
 		if(isset($_POST['Transaction']))
 		{
 			$model->attributes=$_POST['Transaction'];
+			$model->confirmation_id = YII::app()->user->id;
+			$model->date_confirmation = date('Y-m-d h:i:s');
+			$model->status = 1;
 			$tmp;
 			if(strlen(trim(CUploadedFile::getInstance($model,'payment_file'))) > 0) 
 			{ 
@@ -159,13 +178,13 @@ class TransactionController extends Controller
 			if($model->save())
 			{
 				if(strlen(trim($model->payment_file)) > 0) {
-					$tmp->saveAs(Yii::getPathOfAlias('webroot').'/image/transaction/big/'.$model->image);
+					$tmp->saveAs(Yii::getPathOfAlias('webroot').'/image/transaction/big/'.$model->payment_file);
 				}
-				$this->redirect(array('view','id'=>$model->id_transaction));
+				$this->redirect(array('detail','id'=>$model->id_transaction));
 			}
 		}
 
-		$this->render('update',array(
+		$this->render('confirmation',array(
 			'model'=>$model,
 			));
 	}	
@@ -214,21 +233,45 @@ class TransactionController extends Controller
 			));
 	}
 
-	public function actionNewIndex()
+	public function actionListNew()
 	{
-		$dataProvider=new CActiveDataProvider('Transaction',array('criteria'=>array('condition'=>array('status=0'))));
+		$dataProvider=new CActiveDataProvider('Transaction',array('criteria'=>array('condition'=>'status=0')));
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 			));
 	}
 
-	public function actionConfirmIndex()
+	public function actionListConfirmation()
 	{
-		$dataProvider=new CActiveDataProvider('Transaction',array('criteria'=>array('condition'=>array('status=0'))));
+		$dataProvider=new CActiveDataProvider('Transaction',array('criteria'=>array('condition'=>'status=1')));
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 			));
 	}
+
+	public function actionListVerification()
+	{
+		$dataProvider=new CActiveDataProvider('Transaction',array('criteria'=>array('condition'=>'status=2')));
+		$this->render('index',array(
+			'dataProvider'=>$dataProvider,
+			));
+	}	
+
+	public function actionListShipping()
+	{
+		$dataProvider=new CActiveDataProvider('Transaction',array('criteria'=>array('condition'=>'status=3')));
+		$this->render('index',array(
+			'dataProvider'=>$dataProvider,
+			));
+	}	
+
+	public function actionListSuccess()
+	{
+		$dataProvider=new CActiveDataProvider('Transaction',array('criteria'=>array('condition'=>'status=4')));
+		$this->render('index',array(
+			'dataProvider'=>$dataProvider,
+			));
+	}			
 	
 	/**
 	 * Manages all models.

@@ -66,22 +66,32 @@
                             <li class="dropdown active show-on-hover">
                                 <a href="#" data-toggle="dropdown">
                                     <i class="fa fa-dollar"></i>
-                                    <span>Transaction</span>
+                                    <span>Transaksi</span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="<?php echo $url;?>user/create">
-                                            <span>New</span>
+                                        <a href="<?php echo $url;?>transaction/listnew">
+                                            <span>Terbaru</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="<?php echo $url;?>user/admin">
-                                            <span>Pay</span>
+                                        <a href="<?php echo $url;?>transaction/listconfirmation">
+                                            <span>Verifikasi Order</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="<?php echo $url;?>user/admin">
-                                            <span>Send</span>
+                                        <a href="<?php echo $url;?>transaction/listverification">
+                                            <span>Verifikasi Pembayaran</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<?php echo $url;?>transaction/listshipping">
+                                            <span>Pengiriman Barang</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<?php echo $url;?>transaction/listsuccess">
+                                            <span>Berhasil</span>
                                         </a>
                                     </li>                                    
                                 </ul>

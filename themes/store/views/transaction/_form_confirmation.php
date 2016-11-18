@@ -20,49 +20,26 @@
 
 
 			<?php echo $form->errorSummary($model, null, null, array('class' => 'alert alert-warning')); ?>
-			
+
+
 			<div class="form-group">
-				
+
 				<div class="col-lg-4 col-md-3 col-xs-12 control-label">
-					<?php echo $form->labelEx($model,'payment_method'); ?>
+					<?php echo $form->labelEx($model,'payment_file'); ?>
 				</div>   
 
 				<div class="col-lg-8 col-md-9 col-xs-12">
-					<?php echo $form->error($model,'payment_method'); ?>
-					<?php
-					echo $form->radioButtonList($model,'payment_method',
-						array('1'=>'BCA','2'=>'Mandiri','3'=>'BNI'),
-						array(
-							'template'=>'{input}{label}',
-							'separator'=>'',
-							'labelOptions'=>array(
-								'style'=>'padding-right:20px;margin-left:15px'),
+					<?php echo $form->error($model,'payment_file'); ?>
+					<?php echo $form->fileField($model,'payment_file',array('class'=>'btn btn-info')); ?>
+				</div>
 
-							)                              
-						);
-						?>
-					</div>
-
-				</div>  
-
-
-				<div class="form-group">
-
-					<div class="col-lg-4 col-md-3 col-xs-12 control-label">
-						<?php echo $form->labelEx($model,'payment_total'); ?>
-					</div>   
-
-					<div class="col-lg-8 col-md-9 col-xs-12">
-						<p> <?php echo Yii::app()->numberFormatter->format("Rp ###,###,###",Transaction::model()->total()); ?>
-					</div>
-
-				</div>				
+			</div>  			
 
 
 				<div class="form-group">
 					<div class="col-md-12">  
 					</br></br>
-					<?php echo CHtml::submitButton($model->isNewRecord ? 'Submit' : 'Edit', array('class' => 'btn btn-info pull-right')); ?>
+					<?php echo CHtml::submitButton($model->isNewRecord ? 'Submit' : 'Upload', array('class' => 'btn btn-info pull-right')); ?>
 				</div>
 			</div>
 
