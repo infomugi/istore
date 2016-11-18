@@ -32,7 +32,7 @@ $this->pageTitle='Manage Provinces';
 						'htmlOptions'=>array('width'=>'10px', 
 							'style' => 'text-align: center;')),
 
-					'id',
+					// 'id',
 					'name',
 					array(
 						'header'=>'Action',

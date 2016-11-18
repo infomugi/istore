@@ -32,8 +32,8 @@ $this->pageTitle='Manage Districts';
 						'htmlOptions'=>array('width'=>'10px', 
 							'style' => 'text-align: center;')),
 
-					'id',
-					'regency_id',
+					// 'id',
+					// 'regency_id',
 					'name',
 					
 					array(

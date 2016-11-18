@@ -32,8 +32,8 @@ $this->pageTitle='Manage Villages';
 						'htmlOptions'=>array('width'=>'10px', 
 							'style' => 'text-align: center;')),
 
-					'id',
-					'district_id',
+					// 'id',
+					// 'district_id',
 					'name',
 					array(
 						'header'=>'Action',

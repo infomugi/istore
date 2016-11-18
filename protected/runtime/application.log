@@ -5187,3 +5187,30 @@ Stack trace:
 #25 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
 #26 C:\xampp\htdocs\kkstore\index.php(15): CWebApplication->run()
 REQUEST_URI=/kkstore/index.php?r=transaction/view&id=1
+2016/11/18 20:26:51 [error] [exception.CHttpException.404] CHttpException: Tidak bisa mengurai request "regencies/admin" in C:\xampp\htdocs\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('regencies/admin')
+#1 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\kkstore\index.php(15): CApplication->run()
+#3 {main}
+REQUEST_URI=/kkstore/index.php?r=regencies/admin
+HTTP_REFERER=http://localhost/kkstore/index.php?r=provinces/admin
+---
+2016/11/18 20:31:10 [error] [exception.CHttpException.400] CHttpException: Request anda tidak valid in C:\xampp\htdocs\yii\framework\web\CController.php:336
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 C:\xampp\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#4 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#5 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#6 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#7 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#8 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('create')
+#9 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('tag/create')
+#10 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#11 C:\xampp\htdocs\kkstore\index.php(15): CApplication->run()
+#12 {main}
+REQUEST_URI=/kkstore/index.php?r=tag/create
+HTTP_REFERER=http://localhost/kkstore/index.php?r=category/create
+---

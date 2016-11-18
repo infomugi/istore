@@ -38,8 +38,8 @@ $this->pageTitle='Manage Category';
 
 						// 'id_category',
 						'name',
-						'icon',
-						'image',
+						// 'icon',
+						// 'image',
 						// 'status',
 						array(
 							'header'=>'Action',
