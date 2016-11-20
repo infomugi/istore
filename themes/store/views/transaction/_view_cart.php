@@ -16,7 +16,7 @@ $subtotal = $data->Product->price * $jumlahbeli;
 <td class="cart_product">
   <a href=""><img src="<?php echo YII::app()->baseUrl."/image/product/big/".$data->Product->image; ?>"/></a>
 </td>
-<td class="cart_description"><p class="product-name"><a href=""><?PHP echo $data->Product->name; ?></a></p>
+<td class="cart_description"><p class="product-name"><?PHP echo $data->Product->name; ?></p>
   <!-- <small><a href="">Color : <?PHP echo Product::model()->color($data->Product->color); ?></a></small><br> -->
   <!-- <small><a href="">Size : <?PHP echo $data->size; ?></a></small></td> -->
   <td class="availability in-stock"><span class="label label-info"><?PHP echo Product::model()->status($data->Product->status); ?></span></td>

@@ -70,28 +70,23 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="<?php echo $url;?>transaction/listnew">
-                                            <span>Terbaru</span>
-                                        </a>
-                                    </li>
-                                    <li>
                                         <a href="<?php echo $url;?>transaction/listconfirmation">
-                                            <span>Verifikasi Order</span>
+                                            <span>Konfirmasi Order</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="<?php echo $url;?>transaction/listverification">
-                                            <span>Verifikasi Pembayaran</span>
+                                            <span>Verifikasi Order</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="<?php echo $url;?>transaction/listshipping">
-                                            <span>Pengiriman Barang</span>
+                                            <span>Shipping</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="<?php echo $url;?>transaction/listsuccess">
-                                            <span>Berhasil</span>
+                                            <span>Order Terkirim</span>
                                         </a>
                                     </li>                                    
                                 </ul>

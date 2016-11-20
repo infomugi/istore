@@ -39,7 +39,7 @@ $this->pageTitle='Manage Bank';
 						'name',
 						'code',
 						'branch',
-						'status',
+						// 'status',
 						
 						array(
 							'header'=>'Action',

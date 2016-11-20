@@ -27,8 +27,8 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
-			$this->layout = "front_page";
-			$this->render('index');
+		$this->layout = "front_page";
+		$this->render('index');
 	}
 
 	public function actionDashboard()
@@ -36,8 +36,21 @@ class SiteController extends Controller
 		if(YII::app()->user->isGuest){
 			$this->actionLogin();
 		}else{
+
 			$this->layout = "back_page";
-			$this->render('dashboard');
+			$dataProvider1=new CActiveDataProvider('Transaction',array('criteria'=>array('condition'=>'status=0 AND month(date_order)='.date('m').'','order'=>'date_order DESC')));
+			$dataProvider2=new CActiveDataProvider('Transaction',array('criteria'=>array('condition'=>'status=1 AND month(date_order)='.date('m').'','order'=>'date_order DESC')));
+			$dataProvider3=new CActiveDataProvider('Transaction',array('criteria'=>array('condition'=>'status=2 AND month(date_order)='.date('m').'','order'=>'date_order DESC')));
+			$dataProvider4=new CActiveDataProvider('Transaction',array('criteria'=>array('condition'=>'status=3 AND month(date_order)='.date('m').'','order'=>'date_order DESC')));
+			$dataProvider5=new CActiveDataProvider('Transaction',array('criteria'=>array('condition'=>'status=4 AND month(date_order)='.date('m').'','order'=>'date_order DESC')));
+
+			$this->render('dashboard',array(
+				'dataProvider1'=>$dataProvider1,
+				'dataProvider2'=>$dataProvider2,
+				'dataProvider3'=>$dataProvider3,
+				'dataProvider4'=>$dataProvider4,
+				'dataProvider5'=>$dataProvider5,
+				));
 		}
 	}
 
@@ -46,6 +59,7 @@ class SiteController extends Controller
 	 */
 	public function actionError()
 	{
+		$this->layout = "error";
 		if($error=Yii::app()->errorHandler->error)
 		{
 			if(Yii::app()->request->isAjaxRequest)
@@ -132,4 +146,9 @@ class SiteController extends Controller
 		Yii::app()->user->logout();
 		$this->redirect('index.php?r=site/login');
 	}
+
+	public function actionView($id)
+	{
+		$this->redirect(array('transaction/view','id'=>$id));
+	}	
 }

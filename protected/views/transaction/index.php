@@ -18,7 +18,7 @@ $this->pageTitle='List Transaction';
 
 		<?php echo CHtml::link('Verifikasi Order',
 			array('listconfirmation'),
-			array('class' => 'btn btn-primary'));
+			array('class' => 'btn btn-warning'));
 			?>
 
 			<?php echo CHtml::link('Verifikasi Pembayaran',
@@ -28,12 +28,12 @@ $this->pageTitle='List Transaction';
 
 				<?php echo CHtml::link('Pengiriman Barang',
 					array('listshipping'),
-					array('class' => 'btn btn-danger'));
+					array('class' => 'btn btn-success'));
 					?>
 
 					<?php echo CHtml::link('Transaksi Berhasil',
 						array('listsuccess'),
-						array('class' => 'btn btn-success'));
+						array('class' => 'btn btn-primary'));
 						?>
 
 						<HR>
@@ -54,13 +54,14 @@ $this->pageTitle='List Transaction';
 									'date_order',
 
 									array('name'=>'customer_id','value'=>'$data->Customer->fullname'),
-									array('name'=>'payment_total','value'=>'Yii::app()->numberFormatter->format("Rp ###,###,###",$data->payment_total)'),
-									array('name'=>'payment_method','value'=>'Transaction::model()->method($data->status)'),
+									// array('name'=>'payment_method','value'=>'Transaction::model()->method($data->status)'),
 									array('name'=>'status','value'=>'Transaction::model()->status($data->status)'),
+									array('name'=>'payment_total','value'=>'Yii::app()->numberFormatter->format("Rp ###,###,###",$data->payment_total)'),
 
 									array(
-										'header'=>'Action',
+										'header'=>'Detail',
 										'class'=>'CButtonColumn',
+										'template'=>'{view}',
 										'htmlOptions'=>array('width'=>'100px', 
 											'style' => 'text-align: center;'),
 										),

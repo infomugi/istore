@@ -83,7 +83,6 @@ $this->pageTitle='Detail Product - '.$model->name;
 		array('name'=>'status','value'=>Product::model()->status($model->status)),
 		'stock',
 		'spesification',
-		'weight',
 		array('name'=>'weight','value'=>$model->weight . " KG"),
 		array('name'=>'brand_id','value'=>$model->Brand->name),
 		),

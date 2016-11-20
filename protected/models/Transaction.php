@@ -12,9 +12,17 @@
  * @property integer $customer_id
  * @property integer $confirmation_id
  * @property integer $verification_id
+ * @property integer $verification_status
  * @property integer $payment_method
  * @property integer $payment_total
  * @property string $payment_file
+ * @property integer $payment_bank_id
+ * @property integer $payment_bank_name
+ * @property integer $payment_bank_code
+ * @property integer $payment_bank_branch
+ * @property integer $payment_bank_pay
+ * @property integer $shipping_id
+ * @property string $shipping_date
  * @property integer $shipping_type
  * @property integer $shipping_brand
  * @property integer $shipping_code
@@ -39,11 +47,15 @@ class Transaction extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('code, date_order, customer_id, confirmation_id, verification_id, payment_method, payment_total, payment_file, shipping_type, shipping_brand, shipping_code, status', 'required','on'=>'create'),
-			array('confirmation_id, payment_file, date_confirmation', 'required','on'=>'confirmation'),
+			array('confirmation_id, payment_file, date_confirmation, payment_bank_id, payment_bank_name, payment_bank_code, payment_bank_branch, payment_bank_pay', 'required','on'=>'confirmation'),
 			array('payment_method, payment_total, date_order', 'required','on'=>'checkout'),
-			array('customer_id, confirmation_id, verification_id, payment_method, payment_total, shipping_type, shipping_brand, shipping_code, status', 'numerical', 'integerOnly'=>true),
+			array('verification_id, date_verification, verification_status', 'required','on'=>'verification'),
+			array('shipping_id, shipping_date, shipping_type, shipping_brand, shipping_code', 'required','on'=>'shipping'),
+			array('customer_id, confirmation_id, verification_id, payment_method, payment_total, shipping_type, shipping_brand, status, payment_bank_id, verification_status', 'numerical', 'integerOnly'=>true),
 			array('code', 'length', 'max'=>25),
-			array('payment_file', 'length', 'max'=>255),
+			array('shipping_code', 'length', 'max'=>35),
+			array('payment_bank_code, payment_bank_branch', 'length', 'max'=>50),
+			array('payment_file, token', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id_transaction, code, date_order, date_confirmation, date_verification, customer_id, confirmation_id, verification_id, payment_method, payment_total, payment_file, shipping_type, shipping_brand, shipping_code, status', 'safe', 'on'=>'search'),
@@ -61,6 +73,8 @@ class Transaction extends CActiveRecord
 			'Customer'=>array(self::BELONGS_TO,'User','customer_id'),
 			'Confirmation'=>array(self::BELONGS_TO,'User','confirmation_id'),
 			'Verification'=>array(self::BELONGS_TO,'User','verification_id'),
+			'Receiver'=>array(self::BELONGS_TO,'Bank','payment_bank_id'),
+			'Sender'=>array(self::BELONGS_TO,'Bank','payment_bank_name'),
 			);
 	}
 
@@ -71,20 +85,29 @@ class Transaction extends CActiveRecord
 	{
 		return array(
 			'id_transaction' => 'Id Transaction',
-			'code' => 'Code',
+			'code' => 'Kode Transaksi',
 			'date_order' => 'Tanggal Order',
 			'date_confirmation' => 'Tanggal Konfirmasi Pembayaran',
 			'date_verification' => 'Tanggal Verifikasi Transaksi',
 			'customer_id' => 'Pelanggan',
 			'confirmation_id' => 'Dikonfirmasi Oleh',
 			'verification_id' => 'Diverifikasi Oleh',
+			'verification_status' => 'Status Pembayaran',
 			'payment_method' => 'Metode Pembayaran',
 			'payment_total' => 'Total Tagihan',
 			'payment_file' => 'Bukti Transfer',
+			'payment_bank_id' => 'Tujuan Bank',
+			'payment_bank_name' => 'Bank Pengirim',
+			'payment_bank_code' => 'Nomor Rekening',
+			'payment_bank_branch' => 'Cabang Bank',
+			'payment_bank_pay' => 'Jumlah Transfer',
+			'shipping_date' => 'Tanggal Pengiriman',
 			'shipping_type' => 'Metode Pengiriman',
 			'shipping_brand' => 'Kurir Pengiriman',
 			'shipping_code' => 'NO Resi Pengiriman',
 			'status' => 'Status Transaksi',
+			'receiver' => 'Informasi Penerima',
+			'sender' => 'Informasi Pengirim',
 			);
 	}
 
@@ -194,7 +217,7 @@ class Transaction extends CActiveRecord
 
 	public function status($data){
 		if($data==0){
-			return "Belum di Transfer";
+			return "Unpaid";
 		}else if($data==1){
 			return "Telah di Transfer";
 		}else if($data==2){
@@ -210,6 +233,14 @@ class Transaction extends CActiveRecord
 
 	public function method($data){
 		if($data==1){
+			return "Transfer via Bank";
+		}else{
+			return "Cash on Delivery";
+		}
+	}
+
+	public function bank($data){
+		if($data==1){
 			return "Bank BCA";
 		}else if($data==2){
 			return "Bank Mandiri";
@@ -217,4 +248,67 @@ class Transaction extends CActiveRecord
 			return "Bank BNI";
 		}
 	}	
+
+
+	public function color($data){
+		if($data==1){
+			return "warning";
+		}else if($data==2){
+			return "info";
+		}else if($data==3){
+			return "success";
+		}else{
+			return "danger";
+		}
+	}	
+
+	public function verification($data){
+		if($data==1){
+			return "Valid";
+		}else{
+			return "Tidak Valid";
+		}
+	}	
+
+	public function coureer($data){
+		if($data==1){
+			return "JNE";
+		}else if($data==2){
+			return "TIKI";
+		}else if($data==3){
+			return "POS-Indonesia";
+		}else{
+			return "Belum di Kirim";
+		}
+	}	
+
+	public function yearReport($data){
+		$nilai = Yii::app()->db->createCommand('
+		SELECT sum(payment_total) FROM (transaction) WHERE status=3 AND (Month(date_order)='.$data.') AND (YEAR(date_order)='.date('Y').') GROUP BY (Month(date_order)='.$data.')
+		')->queryScalar();
+
+		if($nilai==""){
+			return "0";
+		}else{
+			return $nilai;
+		}
+	}
+
+	public function monthReport($data){
+		$nilai = Yii::app()->db->createCommand('
+		SELECT sum(transaction_detail.quantity) FROM (transaction_detail) 
+		LEFT JOIN transaction 
+		ON transaction_detail.transaction_id = transaction.id_transaction
+		WHERE transaction.status=3 
+		AND (Month(transaction.date_order)='.$data.') 
+		AND (YEAR(transaction.date_order)='.date('Y').') 
+		GROUP BY (Month(transaction.date_order)='.$data.')
+		')->queryScalar();
+
+		if($nilai==""){
+			return "0";
+		}else{
+			return $nilai;
+		}
+	}				
 }

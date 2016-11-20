@@ -21,6 +21,7 @@
 
 			<?php echo $form->errorSummary($model, null, null, array('class' => 'alert alert-warning')); ?>
 			
+
 			<div class="form-group">
 				
 				<div class="col-lg-4 col-md-3 col-xs-12 control-label">
@@ -31,7 +32,7 @@
 					<?php echo $form->error($model,'payment_method'); ?>
 					<?php
 					echo $form->radioButtonList($model,'payment_method',
-						array('1'=>'BCA','2'=>'Mandiri','3'=>'BNI'),
+						array('1'=>'Transfer'),
 						array(
 							'template'=>'{input}{label}',
 							'separator'=>'',

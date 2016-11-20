@@ -1,7 +1,7 @@
             <header class="header header-fixed navbar">
                 <div class="brand">
-                    <a href="<?php echo $baseUrl;?>/backend/javascript:;" class="fa fa-bars off-left visible-xs" data-toggle="off-canvas" data-move="ltr"></a>
-                    <a href="<?php echo $baseUrl;?>/backend/index.html" class="navbar-brand text-white">
+                    <a href="<?php echo $url;?>site/javascript:;" class="fa fa-bars off-left visible-xs" data-toggle="off-canvas" data-move="ltr"></a>
+                    <a href="<?php echo $url;?>site/dashboard" class="navbar-brand text-white">
                         <i class="fa fa-stop mg-r-sm"></i>
                         <span class="heading-font">
                            <?php echo CHtml::encode(Yii::app()->name); ?>
@@ -15,7 +15,7 @@
                         </a>
                     </li>
                     <li class="notifications dropdown hidden-xs">
-                        <a href="<?php echo $baseUrl;?>/backend/javascript:;" data-toggle="dropdown">
+                        <a href="<?php echo $url;?>site/dashboard/javascript:;" data-toggle="dropdown">
                             <i class="fa fa-bell"></i>
                             <div class="badge badge-top bg-danger animated flash">3</div>
                         </a>
@@ -26,15 +26,15 @@
                                         <b>Notifications</b>
                                     </small>
                                     <small class="pull-right">
-                                        <a href="<?php echo $baseUrl;?>/backend/javascript:;" class="mg-r-xs">mark as read</a>&#8226;
-                                        <a href="<?php echo $baseUrl;?>/backend/javascript:;" class="fa fa-cog mg-l-xs"></a>
+                                        <a href="<?php echo $url;?>site/dashboard/javascript:;" class="mg-r-xs">mark as read</a>&#8226;
+                                        <a href="<?php echo $url;?>site/dashboard/javascript:;" class="fa fa-cog mg-l-xs"></a>
                                     </small>
                                 </div>
                                 <ul class="list-group">
                                     <li class="list-group-item">
                                         <a href="#;">
                                             <span class="pull-left mg-t-xs mg-r-md">
-                                                <img src="<?php echo $baseUrl;?>/backend/img/face4.jpg" class="avatar avatar-sm img-circle" alt="">
+                                                <img src="<?php echo $url;?>site/dashboard/img/face4.jpg" class="avatar avatar-sm img-circle" alt="">
                                             </span>
                                             <div class="m-body show pd-t-xs">
                                                 <span>Dean Winchester</span>
@@ -44,9 +44,9 @@
                                         </a>
                                     </li>
                                     <li class="list-group-item">
-                                        <a href="<?php echo $baseUrl;?>/backend/javascript:;">
+                                        <a href="<?php echo $url;?>site/dashboard/javascript:;">
                                             <span class="pull-left mg-t-xs mg-r-md">
-                                                <img src="<?php echo $baseUrl;?>/backend/img/face3.jpg" class="avatar avatar-sm img-circle" alt="">
+                                                <img src="<?php echo $url;?>site/dashboard/img/face3.jpg" class="avatar avatar-sm img-circle" alt="">
                                             </span>
                                             <div class="m-body show pd-t-xs">
                                                 <span>Application</span>
@@ -57,19 +57,19 @@
                                     </li>
                                 </ul>
                                 <div class="panel-footer no-border">
-                                    <a href="<?php echo $baseUrl;?>/backend/javascript:;">See all notifications</a>
+                                    <a href="<?php echo $url;?>site/dashboard/javascript:;">See all notifications</a>
                                 </div>
                             </div>
                         </div>
                     </li>
                     <li class="quickmenu">
-                        <a href="<?php echo $baseUrl;?>/backend/javascript:;" data-toggle="dropdown">
-                            <img src="<?php echo $baseUrl;?>/backend/img/avatar.jpg" class="avatar pull-left img-circle" alt="user" title="user">
+                        <a href="<?php echo $url;?>site/dashboard/javascript:;" data-toggle="dropdown">
+                            <img src="<?php echo $url;?>site/dashboard/img/avatar.jpg" class="avatar pull-left img-circle" alt="user" title="user">
                             <i class="caret mg-l-xs hidden-xs no-margin"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-right mg-r-xs">
                             <li>
-                                <a href="<?php echo $baseUrl;?>/backend/javascript:;">
+                                <a href="<?php echo $url;?>site/dashboard/javascript:;">
                                     <div class="pd-t-sm">
                                         <?PHP echo CHtml::encode(YII::app()->user->record->email); ?>
                                         <br>
@@ -82,11 +82,11 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="<?php echo $baseUrl;?>/backend/profile.html">Settings</a>
+                                <a href="<?php echo $url;?>site/setting">Settings</a>
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="<?php echo $baseUrl;?>/backend/signin.html">Logout</a>
+                                <a href="<?php echo $url;?>site/logout">Logout</a>
                             </li>
                         </ul>
                     </li>

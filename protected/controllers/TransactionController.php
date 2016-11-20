@@ -38,7 +38,7 @@ class TransactionController extends Controller
 				'expression'=>'Yii::app()->user->record->level==2',
 				),			
 			array('allow',
-				'actions'=>array('checkout','update','view','delete','admin','detail','confirmation','verification', 'listnew','listshipping','listverification','listconfirmation','listsuccess'),
+				'actions'=>array('checkout','update','view','delete','admin','detail','confirmation','verification', 'shipping','listnew','listshipping','listverification','listconfirmation','listsuccess'),
 				'users'=>array('@'),
 				'expression'=>'Yii::app()->user->record->level==1',
 				),
@@ -76,8 +76,21 @@ class TransactionController extends Controller
 	public function actionDetail($id)
 	{
 		$this->layout = "front_index";
+		$model=$this->loadToken($id);
+		$criteria= new CDbCriteria();
+		$criteria->distinct = true;
+		$criteria->group = 'product_id';
+		$criteria->order = 'product_id';
+		$criteria->condition = 'transaction_id = '.$model->id_transaction;
+
+		$dataProvider=new CActiveDataProvider('Order', array(
+			'criteria'=>$criteria,
+			'pagination'=>false,
+			));
+
 		$this->render('detail',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$model,
+			'dataProvider'=>$dataProvider,
 			));
 	}	
 
@@ -97,7 +110,7 @@ class TransactionController extends Controller
 		if(isset($_POST['Transaction']))
 		{
 			$model->attributes=$_POST['Transaction'];
-			$model->code = "T".date('dmY');
+			$model->code = "T".date('dmYhis');
 			$model->date_order = date('Y-m-d h:i:s');
 			$model->customer_id = YII::app()->user->id;
 			$model->payment_total = Transaction::model()->total();
@@ -113,14 +126,18 @@ class TransactionController extends Controller
 			$model->payment_file = 0;
 			
 			//Shipping
-			$model->shipping_type = 0;
-			$model->shipping_brand = 0;
-			$model->shipping_code = 0;
+			$model->shipping_type = NULL;
+			$model->shipping_brand = NULL;
+			$model->shipping_code = NULL;
+
+			//Token
+			$model->token = md5($model->date_order.$model->code);
 
 			if($model->save()){
 				Order::model()->updateAll(array('transaction_id' => $model->id_transaction), 'status = 0 AND customer_id = '.$model->customer_id.'');
 				Order::model()->updateAll(array('status' => 1), 'transaction_id = '.$model->id_transaction.'');
-				$this->redirect(array('detail','id'=>$model->id_transaction));
+				$this->redirect(array('detail','id'=>$model->token));
+
 			}
 		}
 
@@ -156,7 +173,7 @@ class TransactionController extends Controller
 	public function actionConfirmation($id)
 	{
 		$this->layout = "front_page";
-		$model=$this->loadModel($id);
+		$model=$this->loadToken($id);
 		$model->setScenario('confirmation');
 
 		// Uncomment the following line if AJAX validation is needed
@@ -180,7 +197,7 @@ class TransactionController extends Controller
 				if(strlen(trim($model->payment_file)) > 0) {
 					$tmp->saveAs(Yii::getPathOfAlias('webroot').'/image/transaction/big/'.$model->payment_file);
 				}
-				$this->redirect(array('detail','id'=>$model->id_transaction));
+				$this->redirect(array('detail','id'=>$model->token));
 			}
 		}
 
@@ -192,6 +209,7 @@ class TransactionController extends Controller
 	public function actionVerification($id)
 	{
 		$model=$this->loadModel($id);
+		$model->setScenario('verification');
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -199,14 +217,41 @@ class TransactionController extends Controller
 		if(isset($_POST['Transaction']))
 		{
 			$model->attributes=$_POST['Transaction'];
+			$model->verification_id = YII::app()->user->id;
+			$model->date_verification = date('Y-m-d h:i:s');			
+			$model->status = 2;
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id_transaction));
 		}
 
-		$this->render('update',array(
+		$this->render('verification',array(
 			'model'=>$model,
 			));
 	}	
+
+
+	public function actionShipping($id)
+	{
+		$model=$this->loadModel($id);
+		$model->setScenario('shipping');
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['Transaction']))
+		{
+			$model->attributes=$_POST['Transaction'];
+			$model->shipping_id = YII::app()->user->id;
+			$model->shipping_date = date('Y-m-d h:i:s');			
+			$model->status = 3;
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id_transaction));
+		}
+
+		$this->render('shipping',array(
+			'model'=>$model,
+			));
+	}		
 
 	/**
 	 * Deletes a particular model.
@@ -235,7 +280,7 @@ class TransactionController extends Controller
 
 	public function actionListNew()
 	{
-		$dataProvider=new CActiveDataProvider('Transaction',array('criteria'=>array('condition'=>'status=0')));
+		$dataProvider=new CActiveDataProvider('Transaction',array('criteria'=>array('condition'=>'status=0','order'=>'date_order DESC')));
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 			));
@@ -243,7 +288,7 @@ class TransactionController extends Controller
 
 	public function actionListConfirmation()
 	{
-		$dataProvider=new CActiveDataProvider('Transaction',array('criteria'=>array('condition'=>'status=1')));
+		$dataProvider=new CActiveDataProvider('Transaction',array('criteria'=>array('condition'=>'status=1','order'=>'date_order DESC')));
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 			));
@@ -251,7 +296,7 @@ class TransactionController extends Controller
 
 	public function actionListVerification()
 	{
-		$dataProvider=new CActiveDataProvider('Transaction',array('criteria'=>array('condition'=>'status=2')));
+		$dataProvider=new CActiveDataProvider('Transaction',array('criteria'=>array('condition'=>'status=2','order'=>'date_order DESC')));
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 			));
@@ -259,7 +304,7 @@ class TransactionController extends Controller
 
 	public function actionListShipping()
 	{
-		$dataProvider=new CActiveDataProvider('Transaction',array('criteria'=>array('condition'=>'status=3')));
+		$dataProvider=new CActiveDataProvider('Transaction',array('criteria'=>array('condition'=>'status=3','order'=>'date_order DESC')));
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 			));
@@ -267,7 +312,7 @@ class TransactionController extends Controller
 
 	public function actionListSuccess()
 	{
-		$dataProvider=new CActiveDataProvider('Transaction',array('criteria'=>array('condition'=>'status=4')));
+		$dataProvider=new CActiveDataProvider('Transaction',array('criteria'=>array('condition'=>'status=4','order'=>'date_order DESC')));
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 			));
@@ -302,6 +347,14 @@ class TransactionController extends Controller
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
+
+	public function loadToken($id)
+	{
+		$model=Transaction::model()->findByAttributes(array('token'=>$id));
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+		return $model;
+	}	
 
 	/**
 	 * Performs the AJAX validation.
